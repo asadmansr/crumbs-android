@@ -32,6 +32,9 @@ dependencies {
     implementation Libs.Core.appcompat
     implementation Libs.Core.coreKtx
     implementation Libs.Core.constraintlayout
+
+    implementation Libs.Navigation.fragmentKtx
+    implementation Libs.Navigation.uiKtx
 }
 
 dependencies {
@@ -41,4 +44,12 @@ dependencies {
 dependencies {
     androidTestImplementation Libs.AndroidTest.junit
     androidTestImplementation Libs.AndroidTest.espresso
+}
+
+dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:+'
+}
+
+dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:+'
 }

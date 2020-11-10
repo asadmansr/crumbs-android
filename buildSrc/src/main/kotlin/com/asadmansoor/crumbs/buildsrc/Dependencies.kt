@@ -20,6 +20,12 @@ object Libs {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
     }
 
+    object Navigation {
+        private const val version = "2.3.1"
+        const val fragmentKtx = "androidx.navigation:navigation-fragment-ktx:$version"
+        const val uiKtx = "androidx.navigation:navigation-ui-ktx:$version"
+    }
+
     object Test {
         const val junit = "junit:junit:4.12"
     }

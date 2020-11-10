@@ -1,7 +1,8 @@
-package com.asadmansoor.crumbs
+package com.asadmansoor.crumbs.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.asadmansoor.crumbs.R
 
 class MainActivity : AppCompatActivity() {
 
