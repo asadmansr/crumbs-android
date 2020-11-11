@@ -31,7 +31,10 @@ dependencies {
     implementation Libs.Kotlin.stdlib
     implementation Libs.Core.appcompat
     implementation Libs.Core.coreKtx
-    implementation Libs.Core.constraintlayout
+    implementation Libs.Core.legacySupport
+
+    implementation Libs.View.constraintlayout
+    implementation Libs.View.viewPager
 
     implementation Libs.Navigation.fragmentKtx
     implementation Libs.Navigation.uiKtx
@@ -44,12 +47,4 @@ dependencies {
 dependencies {
     androidTestImplementation Libs.AndroidTest.junit
     androidTestImplementation Libs.AndroidTest.espresso
-}
-
-dependencies {
-    implementation 'androidx.legacy:legacy-support-v4:+'
-}
-
-dependencies {
-    implementation 'androidx.legacy:legacy-support-v4:+'
 }

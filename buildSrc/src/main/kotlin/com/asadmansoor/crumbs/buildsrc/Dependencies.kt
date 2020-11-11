@@ -2,7 +2,7 @@ package com.asadmansoor.crumbs.buildsrc
 
 object Build {
     const val compileSdkVersion = 29
-    const val minSdkVersion = 15
+    const val minSdkVersion = 16
     const val targetSdkVersion = 29
 }
 
@@ -11,7 +11,12 @@ object Libs {
         const val androidGradlePlugin = "com.android.tools.build:gradle:3.6.3"
         const val appcompat = "androidx.appcompat:appcompat:1.2.0"
         const val coreKtx = "androidx.core:core-ktx:1.3.2"
+        const val legacySupport = "androidx.legacy:legacy-support-v4:1.0.0"
+    }
+
+    object View {
         const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.0.4"
+        const val viewPager = "androidx.viewpager2:viewpager2:1.0.0"
     }
 
     object Kotlin {

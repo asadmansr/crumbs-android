@@ -2,4 +2,11 @@
     <string name="app_name">Crumbs</string>
     <string name="app_title">Crumbs</string>
     <string name="app_description">Tackling new challenge everyday</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="btn_back">Back</string>
+    <string name="btn_next">Next</string>
+    <string name="btn_finish">Finish</string>
 </resources>

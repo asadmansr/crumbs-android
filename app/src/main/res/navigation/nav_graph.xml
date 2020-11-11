@@ -12,12 +12,25 @@
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
-            android:id="@+id/action_splashFragment_to_onboardFragment"
-            app:destination="@id/onboardFragment" />
+            android:id="@+id/action_splashFragment_to_tutorialViewPagerFragment"
+            app:destination="@id/tutorialViewPagerFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/onboardFragment"
-        android:name="com.asadmansoor.crumbs.ui.onboard.OnboardFragment"
-        android:label="fragment_onboard"
-        tools:layout="@layout/fragment_onboard" />
+        android:id="@+id/tutorialViewPagerFragment"
+        android:name="com.asadmansoor.crumbs.ui.tutorial.TutorialViewPagerFragment"
+        android:label="fragment_tutorial_view_pager"
+        tools:layout="@layout/fragment_tutorial_view_pager" >
+        <action
+            android:id="@+id/action_tutorialViewPagerFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/tutorialViewPagerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.asadmansoor.crumbs.ui.dashboard.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
 </navigation>

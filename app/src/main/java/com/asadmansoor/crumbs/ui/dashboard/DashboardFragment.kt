@@ -1,4 +1,4 @@
-package com.asadmansoor.crumbs.ui.onboard
+package com.asadmansoor.crumbs.ui.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment
 import com.asadmansoor.crumbs.R
 
 
-class OnboardFragment : Fragment() {
+class DashboardFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_onboard, container, false)
+        return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 }

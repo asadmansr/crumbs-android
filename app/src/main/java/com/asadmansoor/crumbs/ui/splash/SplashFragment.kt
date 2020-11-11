@@ -40,6 +40,6 @@ class SplashFragment : Fragment() {
     }
 
     private fun navigateToOnboard() {
-        requireView().findNavController().navigate(R.id.action_splashFragment_to_onboardFragment)
+        requireView().findNavController().navigate(R.id.action_splashFragment_to_tutorialViewPagerFragment)
     }
 }
