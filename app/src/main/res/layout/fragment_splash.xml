@@ -5,21 +5,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context=".ui.splash.SplashFragment">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Splash" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_splash_description"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:text="Next"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:gravity="center"
+        android:text="@string/app_description"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
+        app:fontFamily="@font/nunito"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_splash_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="@string/app_title"
+        android:textColor="@color/colorWhite"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/nunito"
+        app:layout_constraintBottom_toTopOf="@id/tv_splash_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
