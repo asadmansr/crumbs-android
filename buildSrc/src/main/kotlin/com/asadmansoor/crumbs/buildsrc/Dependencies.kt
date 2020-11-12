@@ -25,10 +25,35 @@ object Libs {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
     }
 
+    object Lifecycle {
+        private const val version = "2.2.0"
+        const val extensions = "androidx.lifecycle:lifecycle-extensions:$version"
+        const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
+        const val compiler = "androidx.lifecycle:lifecycle-compiler:$version"
+    }
+
+    object Coroutines {
+        private const val version = "1.3.4"
+        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
+        const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
+    }
+
+    object Kodein {
+        private const val version = "5.2.0"
+        const val generic = "org.kodein.di:kodein-di-generic-jvm:$version"
+        const val android = "org.kodein.di:kodein-di-framework-android-x:$version"
+    }
+
     object Navigation {
         private const val version = "2.3.1"
         const val fragmentKtx = "androidx.navigation:navigation-fragment-ktx:$version"
         const val uiKtx = "androidx.navigation:navigation-ui-ktx:$version"
+    }
+
+    object Room {
+        private const val version = "2.2.5"
+        const val runtime = "androidx.room:room-runtime:$version"
+        const val compiler = "androidx.room:room-compiler:$version"
     }
 
     object Test {

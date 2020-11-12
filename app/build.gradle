@@ -4,6 +4,7 @@ import com.asadmansoor.crumbs.buildsrc.Build
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion Build.compileSdkVersion
@@ -38,6 +39,19 @@ dependencies {
 
     implementation Libs.Navigation.fragmentKtx
     implementation Libs.Navigation.uiKtx
+
+    implementation Libs.Room.runtime
+    kapt Libs.Room.compiler
+
+    implementation Libs.Lifecycle.extensions
+    implementation Libs.Lifecycle.viewmodel
+    kapt Libs.Lifecycle.compiler
+
+    implementation Libs.Coroutines.core
+    implementation Libs.Coroutines.android
+
+    implementation Libs.Kodein.generic
+    implementation Libs.Kodein.android
 }
 
 dependencies {
