@@ -13,3 +13,7 @@ build/
 /captures
 .externalNativeBuild
 .cxx
+app/release
+assets/
+keystore/
+report.xml
