@@ -2,8 +2,11 @@ package com.asadmansoor.crumbs
 
 import android.app.Application
 import com.asadmansoor.crumbs.data.db.CrumbsDatabase
-import com.asadmansoor.crumbs.data.repository.UserRepository
-import com.asadmansoor.crumbs.data.repository.UserRepositoryImpl
+import com.asadmansoor.crumbs.data.repository.current_tasks.CurrentTasksRepository
+import com.asadmansoor.crumbs.data.repository.current_tasks.CurrentTasksRepositoryImpl
+import com.asadmansoor.crumbs.data.repository.user.UserRepository
+import com.asadmansoor.crumbs.data.repository.user.UserRepositoryImpl
+import com.asadmansoor.crumbs.ui.dashboard.DashboardViewModelFactory
 import com.asadmansoor.crumbs.ui.splash.SplashViewModelFactory
 import com.asadmansoor.crumbs.ui.tutorial.TertiaryTutorialViewModelFactory
 import org.kodein.di.Kodein
@@ -21,8 +24,21 @@ class CrumbsApplication : Application(), KodeinAware {
 
         bind() from singleton { CrumbsDatabase(instance()) }
         bind() from singleton { instance<CrumbsDatabase>().userDao() }
-        bind<UserRepository>() with singleton { UserRepositoryImpl(instance()) }
+        bind() from singleton { instance<CrumbsDatabase>().currentTasksDao() }
+
+        bind<UserRepository>() with singleton {
+            UserRepositoryImpl(
+                instance()
+            )
+        }
         bind() from provider { SplashViewModelFactory(instance()) }
         bind() from provider { TertiaryTutorialViewModelFactory(instance()) }
+
+        bind<CurrentTasksRepository>() with singleton {
+            CurrentTasksRepositoryImpl(
+                instance()
+            )
+        }
+        bind() from provider { DashboardViewModelFactory(instance()) }
     }
 }

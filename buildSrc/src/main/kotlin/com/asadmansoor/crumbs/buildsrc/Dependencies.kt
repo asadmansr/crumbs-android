@@ -44,6 +44,12 @@ object Libs {
         const val android = "org.kodein.di:kodein-di-framework-android-x:$version"
     }
 
+    object Groupie {
+        private const val version = "2.8.1"
+        const val groupie = "com.xwray:groupie:$version"
+        const val androidExtension = "com.xwray:groupie-kotlin-android-extensions:$version"
+    }
+
     object Navigation {
         private const val version = "2.3.1"
         const val fragmentKtx = "androidx.navigation:navigation-fragment-ktx:$version"

@@ -1,8 +1,9 @@
-package com.asadmansoor.crumbs.data.repository
+package com.asadmansoor.crumbs.data.repository.user
 
 import androidx.lifecycle.LiveData
 import com.asadmansoor.crumbs.data.db.dao.UserDao
 import com.asadmansoor.crumbs.data.db.entity.UserEntity
+import com.asadmansoor.crumbs.data.repository.user.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

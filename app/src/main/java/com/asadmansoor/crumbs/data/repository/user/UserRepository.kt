@@ -1,4 +1,4 @@
-package com.asadmansoor.crumbs.data.repository
+package com.asadmansoor.crumbs.data.repository.user
 
 import androidx.lifecycle.LiveData
 import com.asadmansoor.crumbs.data.db.entity.UserEntity

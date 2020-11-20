@@ -2,7 +2,7 @@ package com.asadmansoor.crumbs.ui.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.asadmansoor.crumbs.data.repository.UserRepository
+import com.asadmansoor.crumbs.data.repository.user.UserRepository
 
 class SplashViewModelFactory(
     private val userRepository: UserRepository

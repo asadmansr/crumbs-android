@@ -4,13 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.asadmansoor.crumbs.data.db.dao.CurrentTasksDao
 import com.asadmansoor.crumbs.data.db.dao.UserDao
+import com.asadmansoor.crumbs.data.db.entity.CurrentTaskEntity
 import com.asadmansoor.crumbs.data.db.entity.UserEntity
 
-@Database(entities = [UserEntity::class], version = 1)
+@Database(entities = [UserEntity::class, CurrentTaskEntity::class], version = 1)
 abstract class CrumbsDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
+    abstract fun currentTasksDao(): CurrentTasksDao
 
     companion object {
         @Volatile

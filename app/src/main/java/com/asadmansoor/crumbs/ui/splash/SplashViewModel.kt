@@ -1,7 +1,7 @@
 package com.asadmansoor.crumbs.ui.splash
 
 import androidx.lifecycle.ViewModel
-import com.asadmansoor.crumbs.data.repository.UserRepository
+import com.asadmansoor.crumbs.data.repository.user.UserRepository
 import com.asadmansoor.crumbs.internal.lazyDeferred
 
 class SplashViewModel(
