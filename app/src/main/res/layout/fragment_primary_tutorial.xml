@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".ui.tutorial.PrimaryTutorialFragment">
+    tools:context=".ui.tutorial.view.PrimaryTutorialFragment">
 
     <TextView
         android:id="@+id/tv_discover_title"

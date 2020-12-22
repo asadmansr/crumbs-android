@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.asadmansoor.crumbs.R
-import com.asadmansoor.crumbs.data.db.entity.CurrentTaskEntity
+import com.asadmansoor.crumbs.data.db.entity.CurrentEpicEntity
 import com.asadmansoor.crumbs.ui.base.ScopedFragment
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
@@ -44,7 +44,7 @@ class DashboardFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun getTasks() = launch {
-        val userData: LiveData<List<CurrentTaskEntity>> = viewModel.tasks.await()
+        val userData: LiveData<List<CurrentEpicEntity>> = viewModel.epics.await()
         userData.observe(viewLifecycleOwner, Observer { tasks ->
             Log.d("myapp", "$tasks")
             initRecyclerView(listOf("1","2","3").toCurrentItem())

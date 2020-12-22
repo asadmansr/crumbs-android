@@ -1,4 +1,4 @@
-package com.asadmansoor.crumbs.ui.tutorial
+package com.asadmansoor.crumbs.ui.tutorial.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.asadmansoor.crumbs.R
+import com.asadmansoor.crumbs.ui.tutorial.viewmodel.TertiaryTutorialViewModel
+import com.asadmansoor.crumbs.ui.tutorial.viewmodel.TertiaryTutorialViewModelFactory
 import kotlinx.android.synthetic.main.fragment_tertiary_tutorial.view.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware

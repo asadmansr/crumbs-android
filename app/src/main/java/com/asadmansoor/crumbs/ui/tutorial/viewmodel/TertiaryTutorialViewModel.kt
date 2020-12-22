@@ -1,4 +1,4 @@
-package com.asadmansoor.crumbs.ui.tutorial
+package com.asadmansoor.crumbs.ui.tutorial.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.asadmansoor.crumbs.data.repository.user.UserRepository

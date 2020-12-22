@@ -1,4 +1,4 @@
-package com.asadmansoor.crumbs.ui
+package com.asadmansoor.crumbs.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

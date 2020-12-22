@@ -1,4 +1,4 @@
-package com.asadmansoor.crumbs.ui.tutorial
+package com.asadmansoor.crumbs.ui.tutorial.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,26 +7,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.asadmansoor.crumbs.R
-import kotlinx.android.synthetic.main.fragment_secondary_tutorial.view.*
+import kotlinx.android.synthetic.main.fragment_primary_tutorial.view.*
 
 
-class SecondaryTutorialFragment : Fragment() {
+class PrimaryTutorialFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.fragment_secondary_tutorial, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_primary_tutorial, container, false)
 
         val viewPager: ViewPager2? = activity?.findViewById<ViewPager2>(R.id.viewPager)
 
-        view.btn_secondary_back.setOnClickListener {
-            viewPager?.currentItem = 0
-        }
-
-        view.btn_secondary_next.setOnClickListener {
-            viewPager?.currentItem = 2
+        view.btn_primary_next.setOnClickListener {
+            viewPager?.currentItem = 1
         }
 
         return view

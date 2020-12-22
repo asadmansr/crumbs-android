@@ -1,4 +1,4 @@
-package com.asadmansoor.crumbs.ui.splash
+package com.asadmansoor.crumbs.ui.splash.view
 
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +12,8 @@ import androidx.navigation.findNavController
 import com.asadmansoor.crumbs.R
 import com.asadmansoor.crumbs.data.db.entity.UserEntity
 import com.asadmansoor.crumbs.ui.base.ScopedFragment
+import com.asadmansoor.crumbs.ui.splash.viewmodel.SplashViewModel
+import com.asadmansoor.crumbs.ui.splash.viewmodel.SplashViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

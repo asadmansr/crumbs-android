@@ -4,16 +4,22 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.asadmansoor.crumbs.data.db.dao.CurrentTasksDao
+import com.asadmansoor.crumbs.data.db.dao.CompletedEpicDao
+import com.asadmansoor.crumbs.data.db.dao.CurrentEpicDao
 import com.asadmansoor.crumbs.data.db.dao.UserDao
-import com.asadmansoor.crumbs.data.db.entity.CurrentTaskEntity
+import com.asadmansoor.crumbs.data.db.entity.CompletedEpicEntity
+import com.asadmansoor.crumbs.data.db.entity.CurrentEpicEntity
 import com.asadmansoor.crumbs.data.db.entity.UserEntity
 
-@Database(entities = [UserEntity::class, CurrentTaskEntity::class], version = 1)
+@Database(
+    entities = [UserEntity::class, CurrentEpicEntity::class, CompletedEpicEntity::class],
+    version = 1
+)
 abstract class CrumbsDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
-    abstract fun currentTasksDao(): CurrentTasksDao
+    abstract fun currentEpicDao(): CurrentEpicDao
+    abstract fun completedEpicDao(): CompletedEpicDao
 
     companion object {
         @Volatile
@@ -24,11 +30,14 @@ abstract class CrumbsDatabase : RoomDatabase() {
             instance ?: buildDatabase(context).also { instance = it }
         }
 
-        private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(
+        private fun buildDatabase(context: Context): CrumbsDatabase {
+            val databaseName = "crumbs_database"
+
+            return Room.databaseBuilder(
                 context.applicationContext,
                 CrumbsDatabase::class.java,
-                "crumbs_database"
+                databaseName
             ).build()
+        }
     }
 }

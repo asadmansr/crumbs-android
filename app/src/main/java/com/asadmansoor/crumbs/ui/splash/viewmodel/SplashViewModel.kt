@@ -1,4 +1,4 @@
-package com.asadmansoor.crumbs.ui.splash
+package com.asadmansoor.crumbs.ui.splash.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.asadmansoor.crumbs.data.repository.user.UserRepository

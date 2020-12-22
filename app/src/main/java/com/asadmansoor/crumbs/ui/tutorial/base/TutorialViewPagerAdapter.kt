@@ -1,4 +1,4 @@
-package com.asadmansoor.crumbs.ui.tutorial
+package com.asadmansoor.crumbs.ui.tutorial.base
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

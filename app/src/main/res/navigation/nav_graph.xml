@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.asadmansoor.crumbs.ui.splash.SplashFragment"
+        android:name="com.asadmansoor.crumbs.ui.splash.view.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/tutorialViewPagerFragment"
-        android:name="com.asadmansoor.crumbs.ui.tutorial.TutorialViewPagerFragment"
+        android:name="com.asadmansoor.crumbs.ui.tutorial.base.TutorialViewPagerFragment"
         android:label="fragment_tutorial_view_pager"
         tools:layout="@layout/fragment_tutorial_view_pager" >
         <action

@@ -1,4 +1,4 @@
-package com.asadmansoor.crumbs.ui.tutorial
+package com.asadmansoor.crumbs.ui.tutorial.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.asadmansoor.crumbs.R
+import com.asadmansoor.crumbs.ui.tutorial.view.PrimaryTutorialFragment
+import com.asadmansoor.crumbs.ui.tutorial.view.SecondaryTutorialFragment
+import com.asadmansoor.crumbs.ui.tutorial.view.TertiaryTutorialFragment
 import kotlinx.android.synthetic.main.fragment_tutorial_view_pager.view.*
 
 
@@ -24,14 +27,14 @@ class TutorialViewPagerFragment : Fragment() {
             TertiaryTutorialFragment()
         )
 
-        val adapter: TutorialViewPagerAdapter = TutorialViewPagerAdapter(
-            fragmentList,
-            requireActivity().supportFragmentManager,
-            lifecycle
-        )
+        val adapter: TutorialViewPagerAdapter =
+            TutorialViewPagerAdapter(
+                fragmentList,
+                requireActivity().supportFragmentManager,
+                lifecycle
+            )
 
         view.viewPager.adapter = adapter
         return view
     }
-
 }
