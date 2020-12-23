@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.asadmansoor.crumbs.R
 import com.asadmansoor.crumbs.data.db.entity.CurrentEpicEntity
@@ -41,6 +42,10 @@ class DashboardFragment : ScopedFragment(), KodeinAware {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(DashboardViewModel::class.java)
         getTasks()
+
+        floatingActionButton.setOnClickListener {
+            view.findNavController().navigate(R.id.action_dashboardFragment_to_epicFragment)
+        }
     }
 
     private fun getTasks() = launch {

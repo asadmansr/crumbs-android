@@ -37,5 +37,14 @@
         android:id="@+id/dashboardFragment"
         android:name="com.asadmansoor.crumbs.ui.dashboard.DashboardFragment"
         android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_epicFragment"
+            app:destination="@id/epicFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/epicFragment"
+        android:name="com.asadmansoor.crumbs.ui.epic.EpicFragment"
+        android:label="fragment_epic"
+        tools:layout="@layout/fragment_epic" />
 </navigation>

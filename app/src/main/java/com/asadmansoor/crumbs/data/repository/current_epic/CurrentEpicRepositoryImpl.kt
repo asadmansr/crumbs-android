@@ -1,4 +1,4 @@
-package com.asadmansoor.crumbs.data.repository.current_tasks
+package com.asadmansoor.crumbs.data.repository.current_epic
 
 import androidx.lifecycle.LiveData
 import com.asadmansoor.crumbs.data.db.dao.CurrentEpicDao
@@ -18,8 +18,14 @@ class CurrentEpicRepositoryImpl(
         }
     }
 
-    override fun saveEpic(task: String) {
-        val currentTaskEntity = CurrentEpicEntity(createdAt = 0L, lastUpdated = 0L, title = "", description = "", status = "")
+    override fun saveEpic(name: String, description: String) {
+        val currentTaskEntity = CurrentEpicEntity(
+            createdAt = 0L,
+            lastUpdated = 0L,
+            title = name,
+            description = description,
+            status = ""
+        )
         GlobalScope.launch(Dispatchers.IO){
             currentEpicDao.insert(currentEpic = currentTaskEntity)
         }

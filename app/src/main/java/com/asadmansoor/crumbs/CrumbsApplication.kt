@@ -2,11 +2,12 @@ package com.asadmansoor.crumbs
 
 import android.app.Application
 import com.asadmansoor.crumbs.data.db.CrumbsDatabase
-import com.asadmansoor.crumbs.data.repository.current_tasks.CurrentEpicRepository
-import com.asadmansoor.crumbs.data.repository.current_tasks.CurrentEpicRepositoryImpl
+import com.asadmansoor.crumbs.data.repository.current_epic.CurrentEpicRepository
+import com.asadmansoor.crumbs.data.repository.current_epic.CurrentEpicRepositoryImpl
 import com.asadmansoor.crumbs.data.repository.user.UserRepository
 import com.asadmansoor.crumbs.data.repository.user.UserRepositoryImpl
 import com.asadmansoor.crumbs.ui.dashboard.DashboardViewModelFactory
+import com.asadmansoor.crumbs.ui.epic.EpicViewModelFactory
 import com.asadmansoor.crumbs.ui.splash.viewmodel.SplashViewModelFactory
 import com.asadmansoor.crumbs.ui.tutorial.viewmodel.TertiaryTutorialViewModelFactory
 import org.kodein.di.Kodein
@@ -31,11 +32,13 @@ class CrumbsApplication : Application(), KodeinAware {
                 instance()
             )
         }
+
         bind() from provider {
             SplashViewModelFactory(
                 instance()
             )
         }
+
         bind() from provider {
             TertiaryTutorialViewModelFactory(
                 instance()
@@ -47,6 +50,9 @@ class CrumbsApplication : Application(), KodeinAware {
                 instance()
             )
         }
+
         bind() from provider { DashboardViewModelFactory(instance()) }
+
+        bind() from provider { EpicViewModelFactory(instance()) }
     }
 }
