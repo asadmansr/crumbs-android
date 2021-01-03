@@ -50,6 +50,7 @@ dependencies {
     implementation Libs.Navigation.uiKtx
 
     implementation Libs.Room.runtime
+    implementation Libs.Room.roomKtx
     kapt Libs.Room.compiler
 
     implementation Libs.Lifecycle.extensions
@@ -68,9 +69,17 @@ dependencies {
 
 dependencies {
     testImplementation Libs.Test.junit
+    testImplementation Libs.Test.androidXJunit
+    testImplementation Libs.Test.mockito
+    testImplementation Libs.Test.core
+    testImplementation Libs.Test.coreKtx
 }
 
 dependencies {
     androidTestImplementation Libs.AndroidTest.junit
     androidTestImplementation Libs.AndroidTest.espresso
+    androidTestImplementation Libs.AndroidTest.core
+    androidTestImplementation Libs.AndroidTest.mockito
+    androidTestImplementation Libs.AndroidTest.dexMockito
+    androidTestImplementation Libs.AndroidTest.room
 }

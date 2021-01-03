@@ -1,28 +1,14 @@
 package com.asadmansoor.crumbs.data.repository.user
 
-import androidx.lifecycle.LiveData
-import com.asadmansoor.crumbs.data.db.dao.UserDao
 import com.asadmansoor.crumbs.data.db.entity.UserEntity
-import com.asadmansoor.crumbs.data.repository.user.UserRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.asadmansoor.crumbs.data.source.user.LocalUserDataSource
 
 class UserRepositoryImpl(
-    private val userDao: UserDao
+    private val localUserDataSource: LocalUserDataSource
 ) : UserRepository {
 
-    override suspend fun getUser(): LiveData<UserEntity> {
-        return withContext(Dispatchers.IO) {
-            return@withContext userDao.getUser()
-        }
-    }
+    override suspend fun loadUser(): UserEntity = localUserDataSource.loadUser()
 
-    override fun saveUser(doneTutorial: Boolean) {
-        val userEntity = UserEntity(doneTutorial = doneTutorial)
-        GlobalScope.launch(Dispatchers.IO) {
-            userDao.upsert(userEntity = userEntity)
-        }
-    }
+    override suspend fun saveUser(doneTutorial: Boolean) =
+        localUserDataSource.saveUser(doneTutorial)
 }

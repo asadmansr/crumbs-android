@@ -1,10 +1,12 @@
 package com.asadmansoor.crumbs.ui.tutorial.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
@@ -34,7 +36,8 @@ class TertiaryTutorialFragment : Fragment(), KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(TertiaryTutorialViewModel::class.java)
+        viewModel =
+            ViewModelProvider(this, viewModelFactory).get(TertiaryTutorialViewModel::class.java)
 
         val viewPager: ViewPager2? = activity?.findViewById<ViewPager2>(R.id.viewPager)
 
@@ -43,9 +46,22 @@ class TertiaryTutorialFragment : Fragment(), KodeinAware {
         }
 
         view.btn_tertiary_finish.setOnClickListener {
-            viewModel.doneUserTutorial()
-            it.findNavController()
-                .navigate(R.id.action_tutorialViewPagerFragment_to_dashboardFragment)
+            completeUserTutorial()
         }
+    }
+
+    private fun completeUserTutorial() {
+        viewModel.doneUserTutorial()
+        viewModel.user.observe(viewLifecycleOwner, Observer { user ->
+            Log.d("myapp_tutorial", "$user")
+            if ((user != null) && (user.doneTutorial)) {
+                navigateToDashboard()
+            }
+        })
+    }
+
+    private fun navigateToDashboard() {
+        requireView().findNavController()
+            .navigate(R.id.action_tutorialViewPagerFragment_to_dashboardFragment)
     }
 }

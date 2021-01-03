@@ -60,14 +60,23 @@ object Libs {
         private const val version = "2.2.5"
         const val runtime = "androidx.room:room-runtime:$version"
         const val compiler = "androidx.room:room-compiler:$version"
+        const val roomKtx = "androidx.room:room-ktx:$version"
     }
 
     object Test {
         const val junit = "junit:junit:4.12"
+        const val androidXJunit = "androidx.test.ext:junit:1.1.2"
+        const val core = "androidx.arch.core:core-testing:2.1.0"
+        const val coreKtx = "androidx.test:core-ktx:1.3.0"
+        const val mockito = "org.mockito:mockito-inline:2.8.47"
     }
 
     object AndroidTest {
         const val junit = "androidx.test.ext:junit:1.1.2"
         const val espresso = "androidx.test.espresso:espresso-core:3.3.0"
+        const val core = "androidx.arch.core:core-testing:2.1.0"
+        const val room = "android.arch.persistence.room:testing:2.2.5"
+        const val mockito = "org.mockito:mockito-core:3.2.4"
+        const val dexMockito = "com.linkedin.dexmaker:dexmaker-mockito:2.12.1"
     }
 }

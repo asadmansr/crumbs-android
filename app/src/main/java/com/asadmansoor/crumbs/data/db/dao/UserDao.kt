@@ -10,9 +10,10 @@ import com.asadmansoor.crumbs.data.db.entity.UserEntity
 
 @Dao
 interface UserDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun upsert(userEntity: UserEntity)
+    suspend fun insertUser(userEntity: UserEntity)
 
     @Query("select * from user_table where id = $SINGLE_USER_ID")
-    fun getUser(): LiveData<UserEntity>
+    suspend fun loadUser(): UserEntity
 }

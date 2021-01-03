@@ -1,14 +1,19 @@
 package com.asadmansoor.crumbs.ui.splash.viewmodel
 
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
+import com.asadmansoor.crumbs.data.db.entity.UserEntity
 import com.asadmansoor.crumbs.data.repository.user.UserRepository
-import com.asadmansoor.crumbs.internal.lazyDeferred
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class SplashViewModel(
     private val userRepository: UserRepository
 ) : ViewModel() {
 
-    val user by lazyDeferred {
-        userRepository.getUser()
+    val user = MediatorLiveData<UserEntity>().apply {
+        GlobalScope.launch {
+            postValue(userRepository.loadUser())
+        }
     }
 }

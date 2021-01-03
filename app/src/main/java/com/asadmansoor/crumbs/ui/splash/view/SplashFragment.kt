@@ -1,28 +1,22 @@
 package com.asadmansoor.crumbs.ui.splash.view
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.asadmansoor.crumbs.R
-import com.asadmansoor.crumbs.data.db.entity.UserEntity
 import com.asadmansoor.crumbs.ui.base.ScopedFragment
 import com.asadmansoor.crumbs.ui.splash.viewmodel.SplashViewModel
 import com.asadmansoor.crumbs.ui.splash.viewmodel.SplashViewModelFactory
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import java.util.*
-import kotlin.concurrent.schedule
 
 
 class SplashFragment : ScopedFragment(), KodeinAware {
@@ -48,16 +42,13 @@ class SplashFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun processInitialStartup() {
-        Timer().schedule(splashDelay) {
-            GlobalScope.launch(Dispatchers.Main) {
-                validateUser()
-            }
-        }
+        Handler().postDelayed({
+            loadUserData()
+        }, splashDelay)
     }
 
-    private fun validateUser() = launch {
-        val userData: LiveData<UserEntity> = viewModel.user.await()
-        userData.observe(viewLifecycleOwner, Observer { user ->
+    private fun loadUserData() {
+        viewModel.user.observe(viewLifecycleOwner, Observer { user ->
             Log.d("myapp", "$user")
             if ((user != null) && (user.doneTutorial)) {
                 navigateToDashboard()

@@ -13,7 +13,8 @@ import com.asadmansoor.crumbs.data.db.entity.UserEntity
 
 @Database(
     entities = [UserEntity::class, CurrentEpicEntity::class, CompletedEpicEntity::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class CrumbsDatabase : RoomDatabase() {
 
