@@ -6,6 +6,8 @@ import com.asadmansoor.crumbs.data.repository.current_epic.CurrentEpicRepository
 import com.asadmansoor.crumbs.data.repository.current_epic.CurrentEpicRepositoryImpl
 import com.asadmansoor.crumbs.data.repository.user.UserRepository
 import com.asadmansoor.crumbs.data.repository.user.UserRepositoryImpl
+import com.asadmansoor.crumbs.data.source.current_epic.LocalCurrentEpicDataSource
+import com.asadmansoor.crumbs.data.source.current_epic.LocalCurrentEpicDataSourceImpl
 import com.asadmansoor.crumbs.ui.dashboard.DashboardViewModelFactory
 import com.asadmansoor.crumbs.ui.epic.EpicViewModelFactory
 import com.asadmansoor.crumbs.ui.splash.viewmodel.SplashViewModelFactory
@@ -26,6 +28,8 @@ class CrumbsApplication : Application(), KodeinAware {
         bind() from singleton { CrumbsDatabase(instance()) }
         bind() from singleton { instance<CrumbsDatabase>().userDao() }
         bind() from singleton { instance<CrumbsDatabase>().currentEpicDao() }
+
+        bind<LocalCurrentEpicDataSource>() with singleton { LocalCurrentEpicDataSourceImpl(instance()) }
 
         bind<UserRepository>() with singleton {
             UserRepositoryImpl(

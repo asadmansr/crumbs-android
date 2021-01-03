@@ -1,33 +1,20 @@
 package com.asadmansoor.crumbs.data.repository.current_epic
 
 import androidx.lifecycle.LiveData
-import com.asadmansoor.crumbs.data.db.dao.CurrentEpicDao
 import com.asadmansoor.crumbs.data.db.entity.CurrentEpicEntity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.asadmansoor.crumbs.data.source.current_epic.LocalCurrentEpicDataSource
+import com.asadmansoor.crumbs.internal.Result
 
 class CurrentEpicRepositoryImpl(
-    private val currentEpicDao: CurrentEpicDao
+    private val localCurrentEpicDataSource: LocalCurrentEpicDataSource
 ) : CurrentEpicRepository {
 
     override suspend fun getCurrentEpic(): LiveData<List<CurrentEpicEntity>> {
-        return withContext(Dispatchers.IO) {
-            return@withContext currentEpicDao.getCurrentTasks()
-        }
+        return localCurrentEpicDataSource.getCurrentEpics()
     }
 
-    override fun saveEpic(name: String, description: String) {
-        val currentTaskEntity = CurrentEpicEntity(
-            createdAt = 0L,
-            lastUpdated = 0L,
-            title = name,
-            description = description,
-            status = ""
-        )
-        GlobalScope.launch(Dispatchers.IO){
-            currentEpicDao.insert(currentEpic = currentTaskEntity)
-        }
+    override suspend fun saveEpic(name: String, description: String): LiveData<Result<Any>> {
+        localCurrentEpicDataSource.createEpic(name, description)
+        return localCurrentEpicDataSource.createEpicResult
     }
 }

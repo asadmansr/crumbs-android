@@ -1,16 +1,22 @@
 package com.asadmansoor.crumbs.ui.epic
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.asadmansoor.crumbs.R
+import com.asadmansoor.crumbs.internal.Result
 import com.asadmansoor.crumbs.ui.base.ScopedFragment
+import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -60,14 +66,47 @@ class EpicFragment : ScopedFragment(), KodeinAware, View.OnClickListener {
                 createEpic()
             }
             R.id.btn_navigate_back -> {
-                view.findNavController().navigateUp()
+                navigateBack()
             }
         }
     }
 
-    private fun createEpic() {
+    private fun navigateBack() {
+        requireView().findNavController().navigateUp()
+    }
+
+    private fun createEpic() = launch {
         val name = nameEditText.text.toString()
         val description = descriptionEditText.text.toString()
-        viewModel.createEpic(name = name, description = description)
+
+        val resultObs: LiveData<Result<Any>> = viewModel.createEpic(name, description)
+        resultObs.observe(viewLifecycleOwner, Observer { result ->
+            Log.d("myapp", "$result")
+
+            when (result) {
+                is Result.Success -> {
+                    Log.d("myapp", "here")
+                    navigateBack()
+                }
+                is Result.Error -> {
+                    showAlertDialog("Invalid input", result.exception.message!!)
+                }
+                is Result.InProgress -> {
+
+                }
+            }
+        })
+    }
+
+    private fun showAlertDialog(title: String, message: String) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(title)
+        builder.setMessage(message)
+
+        builder.setPositiveButton(R.string.dialog_ok) { dialog, _ ->
+            dialog.cancel()
+        }
+
+        builder.show()
     }
 }

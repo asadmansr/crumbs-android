@@ -18,4 +18,6 @@
     <string name="todo">TODO</string>
     <string name="complete_the_adventures_of_reading_the_book">Complete the adventures of reading the book...</string>
     <string name="e_g_finish_reading_book">E.g. Finish reading book</string>
+
+    <string name="dialog_ok">OK</string>
 </resources>
