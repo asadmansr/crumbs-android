@@ -1,20 +1,18 @@
 package com.asadmansoor.crumbs.data.repository.current_epic
 
-import androidx.lifecycle.LiveData
 import com.asadmansoor.crumbs.data.db.entity.CurrentEpicEntity
 import com.asadmansoor.crumbs.data.source.current_epic.LocalCurrentEpicDataSource
-import com.asadmansoor.crumbs.internal.Result
 
 class CurrentEpicRepositoryImpl(
     private val localCurrentEpicDataSource: LocalCurrentEpicDataSource
 ) : CurrentEpicRepository {
 
-    override suspend fun getCurrentEpic(): LiveData<List<CurrentEpicEntity>> {
-        return localCurrentEpicDataSource.getCurrentEpics()
-    }
+    override suspend fun getCurrentEpics(): List<CurrentEpicEntity> =
+        localCurrentEpicDataSource.getCurrentEpics()
 
-    override suspend fun saveEpic(name: String, description: String): LiveData<Result<Any>> {
+    override suspend fun createEpic(name: String, description: String) =
         localCurrentEpicDataSource.createEpic(name, description)
-        return localCurrentEpicDataSource.createEpicResult
-    }
+
+    override suspend fun getCreatedEpic(): CurrentEpicEntity =
+        localCurrentEpicDataSource.getCreatedEpic()
 }

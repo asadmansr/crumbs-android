@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/epicFragment"
-        android:name="com.asadmansoor.crumbs.ui.epic.EpicFragment"
+        android:name="com.asadmansoor.crumbs.ui.epic.view.EpicFragment"
         android:label="fragment_epic"
         tools:layout="@layout/fragment_epic" />
 </navigation>

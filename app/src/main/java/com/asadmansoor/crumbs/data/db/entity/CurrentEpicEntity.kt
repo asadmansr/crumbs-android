@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class CurrentEpicEntity(
     val createdAt: Long,
     val lastUpdated: Long,
+    val key: Long,
     val title: String,
     val description: String,
     val status: String

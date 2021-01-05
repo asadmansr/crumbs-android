@@ -1,7 +1,6 @@
 package com.asadmansoor.crumbs
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -16,11 +15,10 @@ import com.asadmansoor.crumbs.data.source.current_epic.LocalCurrentEpicDataSourc
 import com.asadmansoor.crumbs.data.source.user.LocalUserDataSource
 import com.asadmansoor.crumbs.data.source.user.LocalUserDataSourceImpl
 import com.asadmansoor.crumbs.ui.dashboard.DashboardViewModelFactory
-import com.asadmansoor.crumbs.ui.epic.EpicViewModelFactory
+import com.asadmansoor.crumbs.ui.epic.viewmodel.EpicViewModelFactory
 import com.asadmansoor.crumbs.ui.splash.viewmodel.SplashViewModel
 import com.asadmansoor.crumbs.ui.splash.viewmodel.SplashViewModelFactory
 import com.asadmansoor.crumbs.ui.tutorial.viewmodel.TertiaryTutorialViewModelFactory
-import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -79,7 +77,11 @@ class SplashViewModelTest: KodeinAware {
             )
         }
         bind() from provider { DashboardViewModelFactory(instance()) }
-        bind() from provider { EpicViewModelFactory(instance()) }
+        bind() from provider {
+            EpicViewModelFactory(
+                instance()
+            )
+        }
     }
 
     private val repository: UserRepository by instance()

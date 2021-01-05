@@ -49,17 +49,17 @@ class DashboardFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun getTasks() = launch {
-        val userData: LiveData<List<CurrentEpicEntity>> = viewModel.epics.await()
-        userData.observe(viewLifecycleOwner, Observer { tasks ->
-            Log.d("myapp", "$tasks")
-            initRecyclerView(listOf("1","2","3").toCurrentItem())
-            if ((tasks != null) && (tasks.isNotEmpty())) {
-                tv_discover_title.visibility = View.GONE
-
-            } else {
-                tv_discover_title.visibility = View.VISIBLE
-            }
-        })
+//        val userData: LiveData<List<CurrentEpicEntity>> = viewModel.epics.await()
+//        userData.observe(viewLifecycleOwner, Observer { tasks ->
+//            Log.d("myapp", "$tasks")
+//            initRecyclerView(listOf("1","2","3").toCurrentItem())
+//            if ((tasks != null) && (tasks.isNotEmpty())) {
+//                tv_discover_title.visibility = View.GONE
+//
+//            } else {
+//                tv_discover_title.visibility = View.VISIBLE
+//            }
+//        })
     }
 
     private fun List<String>.toCurrentItem() : List<CurrentTaskItem> {

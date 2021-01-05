@@ -9,6 +9,6 @@ class DashboardViewModel(
 ) : ViewModel() {
 
     val epics by lazyDeferred {
-        currentEpicRepository.getCurrentEpic()
+        //currentEpicRepository.getCurrentEpic()
     }
 }
