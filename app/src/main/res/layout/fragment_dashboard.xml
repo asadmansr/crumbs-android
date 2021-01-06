@@ -42,16 +42,68 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/ll_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_splash_title">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:text="All" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/colorWhite"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:text="Not started" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/colorWhite"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:text="Paused" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/colorWhite"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:text="Ongoing" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_splash_title" />
+        app:layout_constraintTop_toBottomOf="@+id/ll_filter" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -64,7 +116,8 @@
         android:focusable="true"
         android:src="@drawable/round_add_white_36"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="TODO" />
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -76,6 +129,7 @@
         android:background="@drawable/outline_beenhere_white_24"
         app:layout_constraintBottom_toBottomOf="@+id/tv_splash_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="TODO" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,13 +13,16 @@ class LocalCurrentEpicDataSourceImpl(
         currentEpicDao.getCurrentTasks()
 
     override suspend fun createEpic(name: String, description: String) {
+
+        val timestamp = generateTimestamp()
+
         val epicEntity = CurrentEpicEntity(
-            createdAt = 0L,
-            lastUpdated = 0L,
+            createdAt = timestamp,
+            lastUpdated = timestamp,
             key = generateKey(),
             title = name,
             description = description,
-            status = ""
+            status = "not_started"
         )
         currentEpicDao.insert(epicEntity)
     }
@@ -31,5 +34,9 @@ class LocalCurrentEpicDataSourceImpl(
         val sdf = SimpleDateFormat("yyyyMMddhhmmss", Locale.CANADA)
         val currentDate = sdf.format(Date())
         return currentDate.toLong()
+    }
+
+    private fun generateTimestamp(): Long {
+        return System.currentTimeMillis() / 1000
     }
 }

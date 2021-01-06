@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.asadmansoor.crumbs.R
 import com.asadmansoor.crumbs.data.db.entity.CurrentEpicEntity
+import com.asadmansoor.crumbs.data.db.entity.UserEntity
 import com.asadmansoor.crumbs.ui.base.ScopedFragment
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
@@ -41,28 +42,34 @@ class DashboardFragment : ScopedFragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(DashboardViewModel::class.java)
-        getTasks()
+        getEpics()
 
         floatingActionButton.setOnClickListener {
             view.findNavController().navigate(R.id.action_dashboardFragment_to_epicFragment)
         }
     }
 
-    private fun getTasks() = launch {
-//        val userData: LiveData<List<CurrentEpicEntity>> = viewModel.epics.await()
-//        userData.observe(viewLifecycleOwner, Observer { tasks ->
-//            Log.d("myapp", "$tasks")
-//            initRecyclerView(listOf("1","2","3").toCurrentItem())
-//            if ((tasks != null) && (tasks.isNotEmpty())) {
-//                tv_discover_title.visibility = View.GONE
-//
-//            } else {
-//                tv_discover_title.visibility = View.VISIBLE
-//            }
-//        })
+    private fun getEpics() {
+        viewModel.epics.observe(viewLifecycleOwner, Observer { epics ->
+            Log.d("myapp", "$epics")
+
+            val mList = ArrayList<CurrentEpicEntity>()
+            for (i in epics){
+                mList.add(i)
+            }
+
+            initRecyclerView(mList.toCurrentItem())
+
+            if ((epics != null) && (epics.isNotEmpty())) {
+                tv_discover_title.visibility = View.GONE
+
+            } else {
+                tv_discover_title.visibility = View.VISIBLE
+            }
+        })
     }
 
-    private fun List<String>.toCurrentItem() : List<CurrentTaskItem> {
+    private fun List<CurrentEpicEntity>.toCurrentItem() : List<CurrentTaskItem> {
         return this.map {
             CurrentTaskItem(it)
         }
