@@ -41,10 +41,22 @@
         <action
             android:id="@+id/action_dashboardFragment_to_epicFragment"
             app:destination="@id/epicFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_epicDetailFragment"
+            app:destination="@id/epicDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/epicFragment"
         android:name="com.asadmansoor.crumbs.ui.epic.view.EpicFragment"
         android:label="fragment_epic"
         tools:layout="@layout/fragment_epic" />
+    <fragment
+        android:id="@+id/epicDetailFragment"
+        android:name="com.asadmansoor.crumbs.ui.epic.view.EpicDetailFragment"
+        android:label="fragment_epic_detail"
+        tools:layout="@layout/fragment_epic_detail" >
+        <argument
+            android:name="epicKey"
+            app:argType="long" />
+    </fragment>
 </navigation>

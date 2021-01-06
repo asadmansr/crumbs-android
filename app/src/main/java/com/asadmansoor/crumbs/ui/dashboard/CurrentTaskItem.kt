@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.item_current_tasks.*
 
 
 class CurrentTaskItem(
-    private val epicItem: CurrentEpic
+    val epicItem: CurrentEpic
 ) : Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {

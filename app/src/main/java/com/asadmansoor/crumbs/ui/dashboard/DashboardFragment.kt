@@ -11,10 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.asadmansoor.crumbs.R
-import com.asadmansoor.crumbs.data.db.entity.CurrentEpicEntity
 import com.asadmansoor.crumbs.data.domain.CurrentEpic
 import com.asadmansoor.crumbs.ui.base.ScopedFragment
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Item
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import org.kodein.di.Kodein
@@ -85,6 +85,10 @@ class DashboardFragment : ScopedFragment(), KodeinAware {
 
         groupAdapter.setOnItemClickListener { item, view ->
             Toast.makeText(this@DashboardFragment.context, "clicked", Toast.LENGTH_SHORT).show()
+
+            val key = (item as CurrentTaskItem).epicItem.key
+            val action = DashboardFragmentDirections.actionDashboardFragmentToEpicDetailFragment(key)
+            requireView().findNavController().navigate(action)
         }
     }
 }

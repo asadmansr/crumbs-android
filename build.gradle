@@ -10,6 +10,7 @@ buildscript {
     dependencies {
         classpath Libs.Core.androidGradlePlugin
         classpath Libs.Kotlin.gradlePlugin
+        classpath Libs.Navigation.safeArgs
     }
 }
 

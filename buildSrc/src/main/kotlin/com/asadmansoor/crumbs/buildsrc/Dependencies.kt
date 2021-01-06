@@ -54,6 +54,7 @@ object Libs {
         private const val version = "2.3.1"
         const val fragmentKtx = "androidx.navigation:navigation-fragment-ktx:$version"
         const val uiKtx = "androidx.navigation:navigation-ui-ktx:$version"
+        const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:$version"
     }
 
     object Room {
