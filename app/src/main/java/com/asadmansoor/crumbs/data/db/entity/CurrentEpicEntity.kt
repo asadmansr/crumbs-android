@@ -10,7 +10,7 @@ data class CurrentEpicEntity(
     val key: Long,
     val title: String,
     val description: String,
-    val status: String
+    val status: Int
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

@@ -6,19 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.asadmansoor.crumbs.R
 import com.asadmansoor.crumbs.data.db.entity.CurrentEpicEntity
-import com.asadmansoor.crumbs.data.db.entity.UserEntity
+import com.asadmansoor.crumbs.data.domain.CurrentEpic
 import com.asadmansoor.crumbs.ui.base.ScopedFragment
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_dashboard.*
-import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -53,8 +51,8 @@ class DashboardFragment : ScopedFragment(), KodeinAware {
         viewModel.epics.observe(viewLifecycleOwner, Observer { epics ->
             Log.d("myapp", "$epics")
 
-            val mList = ArrayList<CurrentEpicEntity>()
-            for (i in epics){
+            val mList = ArrayList<CurrentEpic>()
+            for (i in epics) {
                 mList.add(i)
             }
 
@@ -69,7 +67,7 @@ class DashboardFragment : ScopedFragment(), KodeinAware {
         })
     }
 
-    private fun List<CurrentEpicEntity>.toCurrentItem() : List<CurrentTaskItem> {
+    private fun List<CurrentEpic>.toCurrentItem(): List<CurrentTaskItem> {
         return this.map {
             CurrentTaskItem(it)
         }

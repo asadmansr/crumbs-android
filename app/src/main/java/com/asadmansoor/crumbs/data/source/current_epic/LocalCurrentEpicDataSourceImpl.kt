@@ -2,6 +2,7 @@ package com.asadmansoor.crumbs.data.source.current_epic
 
 import com.asadmansoor.crumbs.data.db.dao.CurrentEpicDao
 import com.asadmansoor.crumbs.data.db.entity.CurrentEpicEntity
+import com.asadmansoor.crumbs.data.domain.CurrentEpic
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -9,8 +10,21 @@ class LocalCurrentEpicDataSourceImpl(
     private val currentEpicDao: CurrentEpicDao
 ) : LocalCurrentEpicDataSource {
 
-    override suspend fun getCurrentEpics(): List<CurrentEpicEntity> =
-        currentEpicDao.getCurrentTasks()
+    override suspend fun getCurrentEpics(): List<CurrentEpic> =
+        currentEpicDao.getCurrentTasks().map {
+            CurrentEpic(
+                id = it.id,
+                createdAt = it.createdAt,
+                createdAtString = getDateTime(it.createdAt),
+                lastUpdated = it.lastUpdated,
+                lastUpdatedString = getDateTime(it.lastUpdated),
+                key = it.key,
+                title = it.title,
+                description = it.description,
+                status = it.status,
+                statusString = getStatusString(it.status)
+            )
+        }
 
     override suspend fun createEpic(name: String, description: String) {
 
@@ -22,7 +36,7 @@ class LocalCurrentEpicDataSourceImpl(
             key = generateKey(),
             title = name,
             description = description,
-            status = "not_started"
+            status = 0
         )
         currentEpicDao.insert(epicEntity)
     }
@@ -38,5 +52,20 @@ class LocalCurrentEpicDataSourceImpl(
 
     private fun generateTimestamp(): Long {
         return System.currentTimeMillis() / 1000
+    }
+
+    private fun getDateTime(timestamp: Long): String {
+        val sdf = SimpleDateFormat("MMM d, yyyy", Locale.CANADA)
+        val date = (timestamp * 1000)
+        return sdf.format(date)
+    }
+
+    private fun getStatusString(status: Int): String {
+        return when(status) {
+            0 -> "Not Started"
+            1 -> "Paused"
+            2 -> "In Progress"
+            else -> "Unknown"
+        }
     }
 }
