@@ -57,6 +57,6 @@
         tools:layout="@layout/fragment_epic_detail" >
         <argument
             android:name="epicKey"
-            app:argType="long" />
+            app:argType="integer" />
     </fragment>
 </navigation>

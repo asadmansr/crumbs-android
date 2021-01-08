@@ -44,6 +44,22 @@ class LocalCurrentEpicDataSourceImpl(
     override suspend fun getCreatedEpic(): CurrentEpicEntity =
         currentEpicDao.getCreatedEpic(generateKey())
 
+    override suspend fun getEpicById(id: Int): CurrentEpic  {
+        val epic = currentEpicDao.getEpicById(id)
+        return CurrentEpic(
+            id = epic.id,
+            createdAt = epic.createdAt,
+            createdAtString = getDateTime(epic.createdAt),
+            lastUpdated = epic.lastUpdated,
+            lastUpdatedString = getDateTime(epic.lastUpdated),
+            key = epic.key,
+            title = epic.title,
+            description = epic.description,
+            status = epic.status,
+            statusString = getStatusString(epic.status)
+        )
+    }
+
     private fun generateKey(): Long {
         val sdf = SimpleDateFormat("yyyyMMddhhmmss", Locale.CANADA)
         val currentDate = sdf.format(Date())

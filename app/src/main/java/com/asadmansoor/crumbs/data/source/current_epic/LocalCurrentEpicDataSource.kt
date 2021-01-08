@@ -10,4 +10,6 @@ interface LocalCurrentEpicDataSource {
     suspend fun createEpic(name: String, description: String)
 
     suspend fun getCreatedEpic(): CurrentEpicEntity
+
+    suspend fun getEpicById(id: Int): CurrentEpic
 }

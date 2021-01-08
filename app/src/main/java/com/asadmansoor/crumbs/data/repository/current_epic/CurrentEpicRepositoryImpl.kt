@@ -12,8 +12,11 @@ class CurrentEpicRepositoryImpl(
         localCurrentEpicDataSource.getCurrentEpics()
 
     override suspend fun createEpic(name: String, description: String) =
-        localCurrentEpicDataSource.createEpic(name, description)
+        localCurrentEpicDataSource.createEpic(name = name, description = description)
 
     override suspend fun getCreatedEpic(): CurrentEpicEntity =
         localCurrentEpicDataSource.getCreatedEpic()
+
+    override suspend fun getEpicById(id: Int): CurrentEpic =
+        localCurrentEpicDataSource.getEpicById(id = id)
 }

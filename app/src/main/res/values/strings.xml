@@ -20,4 +20,9 @@
     <string name="e_g_finish_reading_book">E.g. Finish reading book</string>
 
     <string name="dialog_ok">OK</string>
+    <string name="title_detail">Detail</string>
+    <string name="title_created">Created</string>
+    <string name="title_updated">Last Updated</string>
+    <string name="title_status">Status</string>
+    <string name="title_change_status">Change Status</string>
 </resources>

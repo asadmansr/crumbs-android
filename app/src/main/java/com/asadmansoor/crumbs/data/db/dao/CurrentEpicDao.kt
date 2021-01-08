@@ -17,4 +17,7 @@ interface CurrentEpicDao {
 
     @Query("select * from current_epic_table where key = :key")
     fun getCreatedEpic(key: Long): CurrentEpicEntity
+
+    @Query("select * from current_epic_table where id = :id")
+    fun getEpicById(id: Int): CurrentEpicEntity
 }

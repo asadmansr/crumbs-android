@@ -86,7 +86,7 @@ class DashboardFragment : ScopedFragment(), KodeinAware {
         groupAdapter.setOnItemClickListener { item, view ->
             Toast.makeText(this@DashboardFragment.context, "clicked", Toast.LENGTH_SHORT).show()
 
-            val key = (item as CurrentTaskItem).epicItem.key
+            val key = (item as CurrentTaskItem).epicItem.id
             val action = DashboardFragmentDirections.actionDashboardFragmentToEpicDetailFragment(key)
             requireView().findNavController().navigate(action)
         }
