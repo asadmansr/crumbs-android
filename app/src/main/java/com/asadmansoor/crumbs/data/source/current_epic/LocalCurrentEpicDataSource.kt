@@ -12,4 +12,8 @@ interface LocalCurrentEpicDataSource {
     suspend fun getCreatedEpic(): CurrentEpicEntity
 
     suspend fun getEpicById(id: Int): CurrentEpic
+
+    suspend fun updateEpicStatus(id: Int, status: Int)
+
+    suspend fun deleteEpic(id: Int)
 }

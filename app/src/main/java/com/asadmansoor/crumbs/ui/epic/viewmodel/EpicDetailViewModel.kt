@@ -18,4 +18,11 @@ class EpicDetailViewModel(
             epic.postValue(currentEpicRepository.getEpicById(id = id))
         }
     }
+
+    fun deleteEpic(id: Int) {
+        GlobalScope.launch {
+            currentEpicRepository.deleteEpic(id)
+            epic.postValue(currentEpicRepository.getEpicById(id))
+        }
+    }
 }

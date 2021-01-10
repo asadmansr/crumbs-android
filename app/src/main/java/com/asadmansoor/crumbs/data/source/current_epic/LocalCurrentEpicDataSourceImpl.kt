@@ -1,5 +1,6 @@
 package com.asadmansoor.crumbs.data.source.current_epic
 
+import android.util.Log
 import com.asadmansoor.crumbs.data.db.dao.CurrentEpicDao
 import com.asadmansoor.crumbs.data.db.entity.CurrentEpicEntity
 import com.asadmansoor.crumbs.data.domain.CurrentEpic
@@ -46,19 +47,43 @@ class LocalCurrentEpicDataSourceImpl(
 
     override suspend fun getEpicById(id: Int): CurrentEpic  {
         val epic = currentEpicDao.getEpicById(id)
-        return CurrentEpic(
-            id = epic.id,
-            createdAt = epic.createdAt,
-            createdAtString = getDateTime(epic.createdAt),
-            lastUpdated = epic.lastUpdated,
-            lastUpdatedString = getDateTime(epic.lastUpdated),
-            key = epic.key,
-            title = epic.title,
-            description = epic.description,
-            status = epic.status,
-            statusString = getStatusString(epic.status)
-        )
+        val currentEpic: CurrentEpic
+        if (epic != null){
+            currentEpic = CurrentEpic(
+                id = epic.id,
+                createdAt = epic.createdAt,
+                createdAtString = getDateTime(epic.createdAt),
+                lastUpdated = epic.lastUpdated,
+                lastUpdatedString = getDateTime(epic.lastUpdated),
+                key = epic.key,
+                title = epic.title,
+                description = epic.description,
+                status = epic.status,
+                statusString = getStatusString(epic.status)
+            )
+        } else {
+            currentEpic = CurrentEpic(
+                id = -1,
+                createdAt = -1,
+                createdAtString = "",
+                lastUpdated = -1,
+                lastUpdatedString = "",
+                key = -1,
+                title = "",
+                description = "",
+                status = -1,
+                statusString = ""
+            )
+        }
+
+        return currentEpic
     }
+
+    override suspend fun updateEpicStatus(id: Int, status: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun deleteEpic(id: Int) = currentEpicDao.deleteEpic(id)
 
     private fun generateKey(): Long {
         val sdf = SimpleDateFormat("yyyyMMddhhmmss", Locale.CANADA)
@@ -71,6 +96,7 @@ class LocalCurrentEpicDataSourceImpl(
     }
 
     private fun getDateTime(timestamp: Long): String {
+        if (timestamp == -1L) return ""
         val sdf = SimpleDateFormat("MMM d, yyyy", Locale.CANADA)
         val date = (timestamp * 1000)
         return sdf.format(date)

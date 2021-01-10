@@ -19,4 +19,10 @@ class CurrentEpicRepositoryImpl(
 
     override suspend fun getEpicById(id: Int): CurrentEpic =
         localCurrentEpicDataSource.getEpicById(id = id)
+
+    override suspend fun updateEpicStatus(id: Int, status: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun deleteEpic(id: Int) = localCurrentEpicDataSource.deleteEpic(id = id)
 }

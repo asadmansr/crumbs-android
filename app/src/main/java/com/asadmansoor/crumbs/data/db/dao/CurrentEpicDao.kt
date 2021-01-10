@@ -20,4 +20,10 @@ interface CurrentEpicDao {
 
     @Query("select * from current_epic_table where id = :id")
     fun getEpicById(id: Int): CurrentEpicEntity
+
+    @Query("DELETE FROM current_epic_table WHERE id = :id")
+    fun deleteEpic(id: Int)
+
+    @Query("UPDATE current_epic_table SET status = :status WHERE id = :id")
+    fun updateStatus(id: Int, status: Int)
 }

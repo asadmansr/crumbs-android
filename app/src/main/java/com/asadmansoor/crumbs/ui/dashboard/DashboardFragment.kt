@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -34,6 +37,7 @@ class DashboardFragment : ScopedFragment(), KodeinAware {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("myapp_state", "onCreateView")
         return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 
@@ -41,6 +45,7 @@ class DashboardFragment : ScopedFragment(), KodeinAware {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(DashboardViewModel::class.java)
         getEpics()
+        Log.d("myapp_state", "onviewcreated")
 
         floatingActionButton.setOnClickListener {
             view.findNavController().navigate(R.id.action_dashboardFragment_to_epicFragment)

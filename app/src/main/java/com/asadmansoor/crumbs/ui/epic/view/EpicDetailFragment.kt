@@ -57,7 +57,7 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
                 navigateBack()
             }
             R.id.btn_delete -> {
-                navigateBack()
+                deleteEpic(args.epicKey)
             }
         }
     }
@@ -72,13 +72,23 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
         viewModel.epic.observe(viewLifecycleOwner, Observer { epic ->
             Log.d("myapp_epic_detail", "$epic")
             if (epic != null) {
-                binding.tvEpicTitle.text = epic.title
-                binding.tvEpicDescription.text = epic.description
-                binding.tvCreatedValue.text = epic.createdAtString
-                binding.tvUpdatedValue.text = epic.lastUpdatedString
-                binding.tvStatusValue.text = epic.statusString
+                if (epic.key == -1L){
+                    navigateBack()
+                } else {
+                    binding.tvEpicTitle.text = epic.title
+                    binding.tvEpicDescription.text = epic.description
+                    binding.tvCreatedValue.text = epic.createdAtString
+                    binding.tvUpdatedValue.text = epic.lastUpdatedString
+                    binding.tvStatusValue.text = epic.statusString
+                }
+            } else {
+                navigateBack()
             }
         })
+    }
+
+    private fun deleteEpic(id: Int) {
+        viewModel.deleteEpic(id)
     }
 
     private fun navigateBack() {
