@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.asadmansoor.crumbs.ui.epic.viewmodel.EpicDetailViewModel" />
@@ -217,10 +218,10 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_change_status_title">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btn_status_paused"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Not Yet Started"
+                android:text="Paused"
                 android:layout_weight="1"
                 android:textAllCaps="false"
                 android:textSize="12sp"
@@ -228,7 +229,7 @@
                 android:backgroundTint="@color/colorPrimary" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btn_status_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="In Progress"
@@ -239,7 +240,7 @@
                 android:backgroundTint="@color/colorPrimary" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/btn_status_done"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Done"
@@ -260,6 +261,7 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/round_check_white_36"
+            android:visibility="@{viewModel.epic.status == 3 ? View.VISIBLE : View.GONE}"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:contentDescription="TODO" />

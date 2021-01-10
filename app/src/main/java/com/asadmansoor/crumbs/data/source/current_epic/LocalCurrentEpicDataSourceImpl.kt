@@ -1,6 +1,5 @@
 package com.asadmansoor.crumbs.data.source.current_epic
 
-import android.util.Log
 import com.asadmansoor.crumbs.data.db.dao.CurrentEpicDao
 import com.asadmansoor.crumbs.data.db.entity.CurrentEpicEntity
 import com.asadmansoor.crumbs.data.domain.CurrentEpic
@@ -45,10 +44,10 @@ class LocalCurrentEpicDataSourceImpl(
     override suspend fun getCreatedEpic(): CurrentEpicEntity =
         currentEpicDao.getCreatedEpic(generateKey())
 
-    override suspend fun getEpicById(id: Int): CurrentEpic  {
+    override suspend fun getEpicById(id: Int): CurrentEpic {
         val epic = currentEpicDao.getEpicById(id)
         val currentEpic: CurrentEpic
-        if (epic != null){
+        if (epic != null) {
             currentEpic = CurrentEpic(
                 id = epic.id,
                 createdAt = epic.createdAt,
@@ -79,9 +78,8 @@ class LocalCurrentEpicDataSourceImpl(
         return currentEpic
     }
 
-    override suspend fun updateEpicStatus(id: Int, status: Int) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun updateEpicStatus(id: Int, status: Int) =
+        currentEpicDao.updateStatus(id = id, status = status)
 
     override suspend fun deleteEpic(id: Int) = currentEpicDao.deleteEpic(id)
 
@@ -103,10 +101,11 @@ class LocalCurrentEpicDataSourceImpl(
     }
 
     private fun getStatusString(status: Int): String {
-        return when(status) {
+        return when (status) {
             0 -> "Not Started"
             1 -> "Paused"
             2 -> "In Progress"
+            3 -> "Done"
             else -> "Unknown"
         }
     }

@@ -59,12 +59,24 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
             R.id.btn_delete -> {
                 deleteEpic(args.epicKey)
             }
+            R.id.btn_status_paused -> {
+                updateStatus(args.epicKey, 1)
+            }
+            R.id.btn_status_progress -> {
+                updateStatus(args.epicKey, 2)
+            }
+            R.id.btn_status_done -> {
+                updateStatus(args.epicKey, 3)
+            }
         }
     }
 
     private fun bindUI() {
         binding.btnNavigateBack.setOnClickListener(this)
         binding.btnDelete.setOnClickListener(this)
+        binding.btnStatusProgress.setOnClickListener(this)
+        binding.btnStatusPaused.setOnClickListener(this)
+        binding.btnStatusDone.setOnClickListener(this)
     }
 
     private fun loadData(id: Int) {
@@ -89,6 +101,10 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
 
     private fun deleteEpic(id: Int) {
         viewModel.deleteEpic(id)
+    }
+
+    private fun updateStatus(id: Int, status: Int) {
+        viewModel.updateStatus(id, status)
     }
 
     private fun navigateBack() {

@@ -25,4 +25,11 @@ class EpicDetailViewModel(
             epic.postValue(currentEpicRepository.getEpicById(id))
         }
     }
+
+    fun updateStatus(id: Int, status: Int) {
+        GlobalScope.launch {
+            currentEpicRepository.updateEpicStatus(id = id, status = status)
+            epic.postValue(currentEpicRepository.getEpicById(id))
+        }
+    }
 }
