@@ -53,6 +53,7 @@ class DashboardFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun getEpics() {
+        viewModel.getEpics()
         viewModel.epics.observe(viewLifecycleOwner, Observer { epics ->
             Log.d("myapp", "$epics")
 
