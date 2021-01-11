@@ -2,10 +2,12 @@ package com.asadmansoor.crumbs.data.repository.current_epic
 
 import com.asadmansoor.crumbs.data.db.entity.CurrentEpicEntity
 import com.asadmansoor.crumbs.data.domain.CurrentEpic
+import com.asadmansoor.crumbs.data.source.completed_epic.LocalCompletedEpicDataSource
 import com.asadmansoor.crumbs.data.source.current_epic.LocalCurrentEpicDataSource
 
 class CurrentEpicRepositoryImpl(
-    private val localCurrentEpicDataSource: LocalCurrentEpicDataSource
+    private val localCurrentEpicDataSource: LocalCurrentEpicDataSource,
+    private val localCompletedEpicDataSource: LocalCompletedEpicDataSource
 ) : CurrentEpicRepository {
 
     override suspend fun getCurrentEpics(): List<CurrentEpic> =
@@ -24,4 +26,9 @@ class CurrentEpicRepositoryImpl(
         localCurrentEpicDataSource.updateEpicStatus(id = id, status = status)
 
     override suspend fun deleteEpic(id: Int) = localCurrentEpicDataSource.deleteEpic(id = id)
+
+    override suspend fun completeEpic(id: Int, epic: CurrentEpic) {
+        localCompletedEpicDataSource.completeEpic(epic = epic)
+        localCurrentEpicDataSource.deleteEpic(id = id)
+    }
 }

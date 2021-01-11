@@ -16,4 +16,6 @@ interface LocalCurrentEpicDataSource {
     suspend fun updateEpicStatus(id: Int, status: Int)
 
     suspend fun deleteEpic(id: Int)
+
+    suspend fun completeEpic(id: Int)
 }

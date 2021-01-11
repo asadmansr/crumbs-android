@@ -40,7 +40,11 @@ class CrumbsApplication : Application(), KodeinAware {
 
         bind<LocalUserDataSource>() with singleton { LocalUserDataSourceImpl(instance()) }
         bind<LocalCurrentEpicDataSource>() with singleton { LocalCurrentEpicDataSourceImpl(instance()) }
-        bind<LocalCompletedEpicDataSource>() with singleton { LocalCompletedEpicDataSourceImpl(instance()) }
+        bind<LocalCompletedEpicDataSource>() with singleton {
+            LocalCompletedEpicDataSourceImpl(
+                instance()
+            )
+        }
 
         bind<UserRepository>() with singleton {
             UserRepositoryImpl(
@@ -50,6 +54,7 @@ class CrumbsApplication : Application(), KodeinAware {
 
         bind<CurrentEpicRepository>() with singleton {
             CurrentEpicRepositoryImpl(
+                instance(),
                 instance()
             )
         }

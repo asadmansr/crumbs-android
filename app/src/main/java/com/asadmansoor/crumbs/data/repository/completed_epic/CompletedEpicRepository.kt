@@ -6,7 +6,5 @@ interface CompletedEpicRepository {
 
     suspend fun getCompletedEpics(): List<CompletedEpic>
 
-    suspend fun completedEpic(epic: CompletedEpic)
-
     suspend fun deleteCompletedEpic(id: Int)
 }

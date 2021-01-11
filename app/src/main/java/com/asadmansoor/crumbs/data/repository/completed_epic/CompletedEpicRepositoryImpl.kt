@@ -9,7 +9,5 @@ class CompletedEpicRepositoryImpl(
 
     override suspend fun getCompletedEpics(): List<CompletedEpic> = localCompletedEpicDataSource.getCompletedEpics()
 
-    override suspend fun completedEpic(epic: CompletedEpic) = localCompletedEpicDataSource.completedEpic(epic)
-
     override suspend fun deleteCompletedEpic(id: Int) = localCompletedEpicDataSource.deleteCompletedEpic(id)
 }

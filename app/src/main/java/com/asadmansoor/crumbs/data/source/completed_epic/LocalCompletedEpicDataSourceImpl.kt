@@ -1,7 +1,9 @@
 package com.asadmansoor.crumbs.data.source.completed_epic
 
 import com.asadmansoor.crumbs.data.db.dao.CompletedEpicDao
+import com.asadmansoor.crumbs.data.db.entity.CompletedEpicEntity
 import com.asadmansoor.crumbs.data.domain.CompletedEpic
+import com.asadmansoor.crumbs.data.domain.CurrentEpic
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -25,13 +27,21 @@ class LocalCompletedEpicDataSourceImpl(
             )
         }
 
-    override suspend fun completedEpic(epic: CompletedEpic) {
-        TODO("Not yet implemented")
+    override suspend fun completeEpic(epic: CurrentEpic) {
+        val epicEntity = CompletedEpicEntity(
+            createdAt = epic.createdAt,
+            lastUpdated = epic.lastUpdated,
+            key = epic.key,
+            title = epic.title,
+            description = epic.description,
+            status = 3,
+            completedAt = generateTimestamp()
+        )
+        completedEpicDao.insert(epicEntity)
     }
 
-    override suspend fun deleteCompletedEpic(id: Int) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun deleteCompletedEpic(id: Int) =
+        completedEpicDao.deleteCompletedEpic(id = id)
 
     private fun getDateTime(timestamp: Long): String {
         if (timestamp == -1L) return ""
@@ -48,5 +58,9 @@ class LocalCompletedEpicDataSourceImpl(
             3 -> "Done"
             else -> "Unknown"
         }
+    }
+
+    private fun generateTimestamp(): Long {
+        return System.currentTimeMillis() / 1000
     }
 }

@@ -83,6 +83,10 @@ class LocalCurrentEpicDataSourceImpl(
 
     override suspend fun deleteEpic(id: Int) = currentEpicDao.deleteEpic(id)
 
+    override suspend fun completeEpic(id: Int) {
+        currentEpicDao.deleteEpic(id = id)
+    }
+
     private fun generateKey(): Long {
         val sdf = SimpleDateFormat("yyyyMMddhhmmss", Locale.CANADA)
         val currentDate = sdf.format(Date())

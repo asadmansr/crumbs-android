@@ -12,10 +12,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.asadmansoor.crumbs.R
+import com.asadmansoor.crumbs.data.domain.CurrentEpic
 import com.asadmansoor.crumbs.databinding.FragmentEpicDetailBinding
 import com.asadmansoor.crumbs.ui.epic.viewmodel.EpicDetailViewModel
 import com.asadmansoor.crumbs.ui.epic.viewmodel.EpicDetailViewModelFactory
-import kotlinx.android.synthetic.main.fragment_epic_detail.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -30,6 +30,8 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
     private val args: EpicDetailFragmentArgs by navArgs()
     private lateinit var viewModel: EpicDetailViewModel
     private lateinit var binding: FragmentEpicDetailBinding
+
+    private lateinit var currentEpic: CurrentEpic
 
 
     override fun onCreateView(
@@ -68,6 +70,9 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
             R.id.btn_status_done -> {
                 updateStatus(args.epicKey, 3)
             }
+            R.id.btn_complete_epic -> {
+                completeEpic()
+            }
         }
     }
 
@@ -77,6 +82,7 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
         binding.btnStatusProgress.setOnClickListener(this)
         binding.btnStatusPaused.setOnClickListener(this)
         binding.btnStatusDone.setOnClickListener(this)
+        binding.btnCompleteEpic.setOnClickListener(this)
     }
 
     private fun loadData(id: Int) {
@@ -84,9 +90,10 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
         viewModel.epic.observe(viewLifecycleOwner, Observer { epic ->
             Log.d("myapp_epic_detail", "$epic")
             if (epic != null) {
-                if (epic.key == -1L){
+                if (epic.key == -1L) {
                     navigateBack()
                 } else {
+                    currentEpic = epic
                     binding.tvEpicTitle.text = epic.title
                     binding.tvEpicDescription.text = epic.description
                     binding.tvCreatedValue.text = epic.createdAtString
@@ -105,6 +112,10 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
 
     private fun updateStatus(id: Int, status: Int) {
         viewModel.updateStatus(id, status)
+    }
+
+    private fun completeEpic() {
+        viewModel.completeEpic(args.epicKey, currentEpic)
     }
 
     private fun navigateBack() {
