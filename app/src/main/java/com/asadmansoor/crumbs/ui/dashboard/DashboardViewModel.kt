@@ -12,11 +12,6 @@ class DashboardViewModel(
 ) : ViewModel() {
 
     val epics = MediatorLiveData<List<CurrentEpic>>()
-//        .apply {
-//        GlobalScope.launch {
-//            postValue(currentEpicRepository.getCurrentEpics())
-//        }
-//    }
 
     fun getEpics() {
         GlobalScope.launch {

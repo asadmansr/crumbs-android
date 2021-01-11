@@ -50,6 +50,10 @@ class DashboardFragment : ScopedFragment(), KodeinAware {
         floatingActionButton.setOnClickListener {
             view.findNavController().navigate(R.id.action_dashboardFragment_to_epicFragment)
         }
+
+        btn_completed_epics.setOnClickListener {
+            view.findNavController().navigate(R.id.action_dashboardFragment_to_completedEpicFragment)
+        }
     }
 
     private fun getEpics() {

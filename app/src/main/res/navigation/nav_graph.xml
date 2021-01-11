@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_epicDetailFragment"
             app:destination="@id/epicDetailFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_completedEpicFragment"
+            app:destination="@id/completedEpicFragment" />
     </fragment>
     <fragment
         android:id="@+id/epicFragment"
@@ -59,4 +62,18 @@
             android:name="epicKey"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/completedEpicFragment"
+        android:name="com.asadmansoor.crumbs.ui.completed.list.view.CompletedEpicFragment"
+        android:label="fragment_completed_epic"
+        tools:layout="@layout/fragment_completed_epic" >
+        <action
+            android:id="@+id/action_completedEpicFragment_to_completedEpicDetailFragment"
+            app:destination="@id/completedEpicDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/completedEpicDetailFragment"
+        android:name="com.asadmansoor.crumbs.ui.completed.detail.view.CompletedEpicDetailFragment"
+        android:label="fragment_completed_epic_detail"
+        tools:layout="@layout/fragment_completed_epic_detail" />
 </navigation>

@@ -1,6 +1,5 @@
 package com.asadmansoor.crumbs.data.db.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -13,5 +12,8 @@ interface CompletedEpicDao {
     fun insert(currentEpic: CompletedEpicEntity)
 
     @Query("select * from completed_epic_table")
-    fun getCompletedEpic(): LiveData<List<CompletedEpicEntity>>
+    fun getCompletedEpic(): List<CompletedEpicEntity>
+
+    @Query("DELETE FROM completed_epic_table WHERE id = :id")
+    fun deleteCompletedEpic(id: Int)
 }

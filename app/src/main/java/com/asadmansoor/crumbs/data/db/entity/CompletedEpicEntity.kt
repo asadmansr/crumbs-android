@@ -8,8 +8,10 @@ data class CompletedEpicEntity(
     val createdAt: Long,
     val lastUpdated: Long,
     val completedAt: Long,
+    val key: Long,
     val title: String,
-    val description: String
+    val description: String,
+    val status: Int
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

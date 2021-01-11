@@ -2,14 +2,19 @@ package com.asadmansoor.crumbs
 
 import android.app.Application
 import com.asadmansoor.crumbs.data.db.CrumbsDatabase
+import com.asadmansoor.crumbs.data.repository.completed_epic.CompletedEpicRepository
+import com.asadmansoor.crumbs.data.repository.completed_epic.CompletedEpicRepositoryImpl
 import com.asadmansoor.crumbs.data.repository.current_epic.CurrentEpicRepository
 import com.asadmansoor.crumbs.data.repository.current_epic.CurrentEpicRepositoryImpl
 import com.asadmansoor.crumbs.data.repository.user.UserRepository
 import com.asadmansoor.crumbs.data.repository.user.UserRepositoryImpl
+import com.asadmansoor.crumbs.data.source.completed_epic.LocalCompletedEpicDataSource
+import com.asadmansoor.crumbs.data.source.completed_epic.LocalCompletedEpicDataSourceImpl
 import com.asadmansoor.crumbs.data.source.current_epic.LocalCurrentEpicDataSource
 import com.asadmansoor.crumbs.data.source.current_epic.LocalCurrentEpicDataSourceImpl
 import com.asadmansoor.crumbs.data.source.user.LocalUserDataSource
 import com.asadmansoor.crumbs.data.source.user.LocalUserDataSourceImpl
+import com.asadmansoor.crumbs.ui.completed.list.viewmodel.CompletedEpicViewModelFactory
 import com.asadmansoor.crumbs.ui.dashboard.DashboardViewModelFactory
 import com.asadmansoor.crumbs.ui.epic.viewmodel.EpicDetailViewModelFactory
 import com.asadmansoor.crumbs.ui.epic.viewmodel.EpicViewModelFactory
@@ -31,12 +36,26 @@ class CrumbsApplication : Application(), KodeinAware {
         bind() from singleton { CrumbsDatabase(instance()) }
         bind() from singleton { instance<CrumbsDatabase>().userDao() }
         bind() from singleton { instance<CrumbsDatabase>().currentEpicDao() }
+        bind() from singleton { instance<CrumbsDatabase>().completedEpicDao() }
 
-        bind<LocalCurrentEpicDataSource>() with singleton { LocalCurrentEpicDataSourceImpl(instance()) }
         bind<LocalUserDataSource>() with singleton { LocalUserDataSourceImpl(instance()) }
+        bind<LocalCurrentEpicDataSource>() with singleton { LocalCurrentEpicDataSourceImpl(instance()) }
+        bind<LocalCompletedEpicDataSource>() with singleton { LocalCompletedEpicDataSourceImpl(instance()) }
 
         bind<UserRepository>() with singleton {
             UserRepositoryImpl(
+                instance()
+            )
+        }
+
+        bind<CurrentEpicRepository>() with singleton {
+            CurrentEpicRepositoryImpl(
+                instance()
+            )
+        }
+
+        bind<CompletedEpicRepository>() with singleton {
+            CompletedEpicRepositoryImpl(
                 instance()
             )
         }
@@ -53,12 +72,6 @@ class CrumbsApplication : Application(), KodeinAware {
             )
         }
 
-        bind<CurrentEpicRepository>() with singleton {
-            CurrentEpicRepositoryImpl(
-                instance()
-            )
-        }
-
         bind() from provider { DashboardViewModelFactory(instance()) }
 
         bind() from provider {
@@ -69,6 +82,12 @@ class CrumbsApplication : Application(), KodeinAware {
 
         bind() from provider {
             EpicDetailViewModelFactory(
+                instance()
+            )
+        }
+
+        bind() from provider {
+            CompletedEpicViewModelFactory(
                 instance()
             )
         }
