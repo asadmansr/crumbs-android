@@ -75,5 +75,9 @@
         android:id="@+id/completedEpicDetailFragment"
         android:name="com.asadmansoor.crumbs.ui.completed.detail.view.CompletedEpicDetailFragment"
         android:label="fragment_completed_epic_detail"
-        tools:layout="@layout/fragment_completed_epic_detail" />
+        tools:layout="@layout/fragment_completed_epic_detail" >
+        <argument
+            android:name="completedKey"
+            app:argType="integer" />
+    </fragment>
 </navigation>

@@ -7,6 +7,8 @@ interface LocalCompletedEpicDataSource {
 
     suspend fun getCompletedEpics(): List<CompletedEpic>
 
+    suspend fun getEpicById(id: Int): CompletedEpic
+
     suspend fun completeEpic(epic: CurrentEpic)
 
     suspend fun deleteCompletedEpic(id: Int)

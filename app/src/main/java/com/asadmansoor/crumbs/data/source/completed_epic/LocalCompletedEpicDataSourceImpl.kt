@@ -27,6 +27,40 @@ class LocalCompletedEpicDataSourceImpl(
             )
         }
 
+    override suspend fun getEpicById(id: Int): CompletedEpic {
+        val epic = completedEpicDao.getEpicById(id)
+        val completedEpic: CompletedEpic
+        if (epic != null) {
+            completedEpic = CompletedEpic(
+                id = epic.id,
+                createdAt = epic.createdAt,
+                createdAtString = getDateTime(epic.createdAt),
+                lastUpdated = epic.lastUpdated,
+                lastUpdatedString = getDateTime(epic.lastUpdated),
+                key = epic.key,
+                title = epic.title,
+                description = epic.description,
+                status = epic.status,
+                statusString = getStatusString(epic.status)
+            )
+        } else {
+            completedEpic = CompletedEpic(
+                id = -1,
+                createdAt = -1,
+                createdAtString = "",
+                lastUpdated = -1,
+                lastUpdatedString = "",
+                key = -1,
+                title = "",
+                description = "",
+                status = -1,
+                statusString = ""
+            )
+        }
+
+        return completedEpic
+    }
+
     override suspend fun completeEpic(epic: CurrentEpic) {
         val epicEntity = CompletedEpicEntity(
             createdAt = epic.createdAt,

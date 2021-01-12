@@ -14,6 +14,7 @@ import com.asadmansoor.crumbs.data.source.current_epic.LocalCurrentEpicDataSourc
 import com.asadmansoor.crumbs.data.source.current_epic.LocalCurrentEpicDataSourceImpl
 import com.asadmansoor.crumbs.data.source.user.LocalUserDataSource
 import com.asadmansoor.crumbs.data.source.user.LocalUserDataSourceImpl
+import com.asadmansoor.crumbs.ui.completed.detail.viewmodel.CompletedEpicDetailViewModelFactory
 import com.asadmansoor.crumbs.ui.completed.list.viewmodel.CompletedEpicViewModelFactory
 import com.asadmansoor.crumbs.ui.dashboard.DashboardViewModelFactory
 import com.asadmansoor.crumbs.ui.epic.viewmodel.EpicDetailViewModelFactory
@@ -93,6 +94,12 @@ class CrumbsApplication : Application(), KodeinAware {
 
         bind() from provider {
             CompletedEpicViewModelFactory(
+                instance()
+            )
+        }
+
+        bind() from provider {
+            CompletedEpicDetailViewModelFactory(
                 instance()
             )
         }

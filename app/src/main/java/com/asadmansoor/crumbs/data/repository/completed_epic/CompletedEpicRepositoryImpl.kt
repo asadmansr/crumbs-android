@@ -7,7 +7,12 @@ class CompletedEpicRepositoryImpl(
     private val localCompletedEpicDataSource: LocalCompletedEpicDataSource
 ) : CompletedEpicRepository {
 
-    override suspend fun getCompletedEpics(): List<CompletedEpic> = localCompletedEpicDataSource.getCompletedEpics()
+    override suspend fun getCompletedEpics(): List<CompletedEpic> =
+        localCompletedEpicDataSource.getCompletedEpics()
 
-    override suspend fun deleteCompletedEpic(id: Int) = localCompletedEpicDataSource.deleteCompletedEpic(id)
+    override suspend fun getEpicById(id: Int): CompletedEpic =
+        localCompletedEpicDataSource.getEpicById(id)
+
+    override suspend fun deleteCompletedEpic(id: Int) =
+        localCompletedEpicDataSource.deleteCompletedEpic(id)
 }
