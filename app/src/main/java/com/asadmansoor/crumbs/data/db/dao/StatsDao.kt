@@ -5,14 +5,14 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.asadmansoor.crumbs.data.db.entity.SINGLE_USER_ID
-import com.asadmansoor.crumbs.data.db.entity.UserEntity
+import com.asadmansoor.crumbs.data.db.entity.StatsEntity
 
 @Dao
-interface UserDao {
+interface StatsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUser(userEntity: UserEntity)
+    suspend fun insertStats(statsEntity: StatsEntity)
 
-    @Query("select * from user_table where id = $SINGLE_USER_ID")
-    suspend fun loadUser(): UserEntity
+    @Query("select * from stats_table where id = $SINGLE_USER_ID")
+    suspend fun loadStats(): StatsEntity
 }
