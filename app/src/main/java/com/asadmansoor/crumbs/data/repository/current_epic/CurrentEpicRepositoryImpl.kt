@@ -13,6 +13,9 @@ class CurrentEpicRepositoryImpl(
     override suspend fun getCurrentEpics(): List<CurrentEpic> =
         localCurrentEpicDataSource.getCurrentEpics()
 
+    override suspend fun getCurrentEpicsByFilter(filter: Int): List<CurrentEpic> =
+        localCurrentEpicDataSource.getCurrentEpicsByFilter(filter = filter)
+
     override suspend fun createEpic(name: String, description: String) =
         localCurrentEpicDataSource.createEpic(name = name, description = description)
 

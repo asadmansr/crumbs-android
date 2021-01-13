@@ -6,74 +6,63 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.asadmansoor.crumbs.R
 import com.asadmansoor.crumbs.data.domain.CurrentEpic
-import com.asadmansoor.crumbs.ui.base.ScopedFragment
+import com.asadmansoor.crumbs.databinding.FragmentDashboardBinding
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Item
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import kotlinx.android.synthetic.main.fragment_dashboard.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
 
-class DashboardFragment : ScopedFragment(), KodeinAware {
+class DashboardFragment : Fragment(), KodeinAware, View.OnClickListener {
 
     override val kodein: Kodein by closestKodein()
     private val viewModelFactory: DashboardViewModelFactory by instance()
+
     private lateinit var viewModel: DashboardViewModel
+    private lateinit var binding: FragmentDashboardBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("myapp_state", "onCreateView")
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dashboard, container, false)
+        binding.lifecycleOwner = this
+        viewModel = ViewModelProvider(this, viewModelFactory).get(DashboardViewModel::class.java)
+        binding.viewModel = viewModel
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(DashboardViewModel::class.java)
-        getEpics()
-        Log.d("myapp_state", "onviewcreated")
-
-        floatingActionButton.setOnClickListener {
-            view.findNavController().navigate(R.id.action_dashboardFragment_to_epicFragment)
-        }
-
-        btn_completed_epics.setOnClickListener {
-            view.findNavController().navigate(R.id.action_dashboardFragment_to_completedEpicFragment)
-        }
+        bindUI()
+        loadCurrentEpics()
     }
 
-    private fun getEpics() {
+    private fun bindUI() {
+        binding.fabDashboardCreate.setOnClickListener(this)
+        binding.btnCompletedEpics.setOnClickListener(this)
+        binding.btnFilterAll.setOnClickListener(this)
+        binding.btnFilterNotStarted.setOnClickListener(this)
+        binding.btnFilterPaused.setOnClickListener(this)
+        binding.btnFilterProgress.setOnClickListener(this)
+    }
+
+    private fun loadCurrentEpics() {
         viewModel.getEpics()
         viewModel.epics.observe(viewLifecycleOwner, Observer { epics ->
             Log.d("myapp", "$epics")
-
-            val mList = ArrayList<CurrentEpic>()
-            for (i in epics) {
-                mList.add(i)
-            }
-
-            initRecyclerView(mList.toCurrentItem())
-
-            if ((epics != null) && (epics.isNotEmpty())) {
-                tv_discover_title.visibility = View.GONE
-
-            } else {
-                tv_discover_title.visibility = View.VISIBLE
-            }
+            initRecyclerView(epics.toCurrentItem())
         })
     }
 
@@ -88,7 +77,7 @@ class DashboardFragment : ScopedFragment(), KodeinAware {
             addAll(items)
         }
 
-        recyclerview.apply {
+        binding.rvDashboardEpics.apply {
             layoutManager = LinearLayoutManager(this@DashboardFragment.context)
             adapter = groupAdapter
         }
@@ -97,8 +86,49 @@ class DashboardFragment : ScopedFragment(), KodeinAware {
             Toast.makeText(this@DashboardFragment.context, "clicked", Toast.LENGTH_SHORT).show()
 
             val key = (item as CurrentTaskItem).epicItem.id
-            val action = DashboardFragmentDirections.actionDashboardFragmentToEpicDetailFragment(key)
-            requireView().findNavController().navigate(action)
+            navigateToEpicDetail(key)
         }
+    }
+
+    override fun onClick(view: View?) {
+        when (view?.id) {
+            R.id.fab_dashboard_create -> {
+                navigateToCreateEpic()
+            }
+            R.id.btn_completed_epics -> {
+                navigateToCompletedEpics()
+            }
+            R.id.btn_filter_all -> {
+                filterEpic(-1)
+            }
+            R.id.btn_filter_not_started -> {
+                filterEpic(0)
+            }
+            R.id.btn_filter_paused -> {
+                filterEpic(1)
+            }
+            R.id.btn_filter_progress -> {
+                filterEpic(2)
+            }
+        }
+    }
+
+    private fun filterEpic(filter: Int) {
+        viewModel.getEpicsByFilter(filter)
+    }
+
+    private fun navigateToCreateEpic() {
+        requireView().findNavController().navigate(R.id.action_dashboardFragment_to_epicFragment)
+    }
+
+    private fun navigateToEpicDetail(key: Int) {
+        val action =
+            DashboardFragmentDirections.actionDashboardFragmentToEpicDetailFragment(key)
+        requireView().findNavController().navigate(action)
+    }
+
+    private fun navigateToCompletedEpics() {
+        requireView().findNavController()
+            .navigate(R.id.action_dashboardFragment_to_completedEpicFragment)
     }
 }

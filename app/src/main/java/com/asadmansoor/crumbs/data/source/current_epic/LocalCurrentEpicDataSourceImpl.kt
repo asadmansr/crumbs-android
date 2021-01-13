@@ -26,6 +26,22 @@ class LocalCurrentEpicDataSourceImpl(
             )
         }
 
+    override suspend fun getCurrentEpicsByFilter(filter: Int): List<CurrentEpic> =
+        currentEpicDao.getCurrentEpicsByFilter(filter).map {
+            CurrentEpic(
+                id = it.id,
+                createdAt = it.createdAt,
+                createdAtString = getDateTime(it.createdAt),
+                lastUpdated = it.lastUpdated,
+                lastUpdatedString = getDateTime(it.lastUpdated),
+                key = it.key,
+                title = it.title,
+                description = it.description,
+                status = it.status,
+                statusString = getStatusString(it.status)
+            )
+        }
+
     override suspend fun createEpic(name: String, description: String) {
 
         val timestamp = generateTimestamp()

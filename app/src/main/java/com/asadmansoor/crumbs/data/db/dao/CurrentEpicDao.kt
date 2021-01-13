@@ -15,6 +15,9 @@ interface CurrentEpicDao {
     @Query("select * from current_epic_table")
     fun getCurrentTasks(): List<CurrentEpicEntity>
 
+    @Query("select * from current_epic_table where status = :status")
+    fun getCurrentEpicsByFilter(status: Int): List<CurrentEpicEntity>
+
     @Query("select * from current_epic_table where key = :key")
     fun getCreatedEpic(key: Long): CurrentEpicEntity
 

@@ -18,4 +18,16 @@ class DashboardViewModel(
             epics.postValue(currentEpicRepository.getCurrentEpics())
         }
     }
+
+    fun getEpicsByFilter(filter: Int) {
+        if (filter == -1) {
+            GlobalScope.launch {
+                epics.postValue(currentEpicRepository.getCurrentEpics())
+            }
+        } else {
+            GlobalScope.launch {
+                epics.postValue(currentEpicRepository.getCurrentEpicsByFilter(filter))
+            }
+        }
+    }
 }

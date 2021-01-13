@@ -7,6 +7,8 @@ interface LocalCurrentEpicDataSource {
 
     suspend fun getCurrentEpics(): List<CurrentEpic>
 
+    suspend fun getCurrentEpicsByFilter(filter: Int): List<CurrentEpic>
+
     suspend fun createEpic(name: String, description: String)
 
     suspend fun getCreatedEpic(): CurrentEpicEntity
