@@ -9,6 +9,5 @@ class UserRepositoryImpl(
 
     override suspend fun loadUser(): UserEntity = localUserDataSource.loadUser()
 
-    override suspend fun saveUser(doneTutorial: Boolean) =
-        localUserDataSource.saveUser(doneTutorial)
+    override suspend fun saveUser(name: String) = localUserDataSource.saveUser(name)
 }

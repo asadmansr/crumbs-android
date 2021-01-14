@@ -6,5 +6,5 @@ interface LocalUserDataSource {
 
     suspend fun loadUser(): UserEntity
 
-    suspend fun saveUser(doneTutorial: Boolean)
+    suspend fun saveUser(name: String)
 }

@@ -50,7 +50,7 @@ class SplashFragment : ScopedFragment(), KodeinAware {
     private fun loadUserData() {
         viewModel.user.observe(viewLifecycleOwner, Observer { user ->
             Log.d("myapp", "$user")
-            if ((user != null) && (user.doneTutorial)) {
+            if ((user != null) && (user.tutorialCompleted)) {
                 navigateToDashboard()
             } else {
                 navigateToTutorial()

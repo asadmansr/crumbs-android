@@ -59,8 +59,8 @@
         android:label="fragment_epic_detail"
         tools:layout="@layout/fragment_epic_detail" >
         <argument
-            android:name="epicKey"
-            app:argType="integer" />
+            android:name="epicId"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/completedEpicFragment"
@@ -77,7 +77,7 @@
         android:label="fragment_completed_epic_detail"
         tools:layout="@layout/fragment_completed_epic_detail" >
         <argument
-            android:name="completedKey"
-            app:argType="integer" />
+            android:name="completedEpicId"
+            app:argType="string" />
     </fragment>
 </navigation>

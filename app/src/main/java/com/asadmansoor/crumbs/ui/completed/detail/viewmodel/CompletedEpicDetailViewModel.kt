@@ -13,13 +13,13 @@ class CompletedEpicDetailViewModel(
 
     val epic = MediatorLiveData<CompletedEpic>()
 
-    fun getEpic(id: Int) {
+    fun getEpic(id: String) {
         GlobalScope.launch {
             epic.postValue(completedEpicRepository.getEpicById(id = id))
         }
     }
 
-    fun deleteEpic(id: Int) {
+    fun deleteEpic(id: String) {
         GlobalScope.launch {
             completedEpicRepository.deleteCompletedEpic(id = id)
             epic.postValue(completedEpicRepository.getEpicById(id = id))

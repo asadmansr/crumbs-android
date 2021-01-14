@@ -49,7 +49,7 @@ class CompletedEpicDetailFragment : Fragment(), KodeinAware, View.OnClickListene
                 navigateBack()
             }
             R.id.btn_delete -> {
-                deleteEpic(args.completedKey)
+                deleteEpic(args.completedEpicId)
             }
         }
     }
@@ -58,15 +58,15 @@ class CompletedEpicDetailFragment : Fragment(), KodeinAware, View.OnClickListene
         super.onViewCreated(view, savedInstanceState)
         btn_navigate_back.setOnClickListener(this)
         btn_delete.setOnClickListener(this)
-        bindUI(args.completedKey)
+        bindUI(args.completedEpicId)
     }
 
-    private fun bindUI(id: Int) {
+    private fun bindUI(id: String) {
         viewModel.getEpic(id)
         viewModel.epic.observe(viewLifecycleOwner, Observer { epic ->
             Log.d("myapp_c_epic_detail", "$epic")
             if (epic != null) {
-                if (epic.key == -1L) {
+                if (epic.epicId.isEmpty()) {
                     navigateBack()
                 } else {
                     completedEpic = epic
@@ -77,7 +77,7 @@ class CompletedEpicDetailFragment : Fragment(), KodeinAware, View.OnClickListene
         })
     }
 
-    private fun deleteEpic(id: Int) {
+    private fun deleteEpic(id: String) {
         viewModel.deleteEpic(id)
     }
 

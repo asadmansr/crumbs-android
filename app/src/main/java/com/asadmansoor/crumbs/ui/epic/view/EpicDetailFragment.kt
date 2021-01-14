@@ -18,7 +18,6 @@ import com.asadmansoor.crumbs.data.domain.CurrentEpic
 import com.asadmansoor.crumbs.databinding.FragmentEpicDetailBinding
 import com.asadmansoor.crumbs.ui.epic.viewmodel.EpicDetailViewModel
 import com.asadmansoor.crumbs.ui.epic.viewmodel.EpicDetailViewModelFactory
-import com.google.android.material.dialog.MaterialDialogs
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -52,7 +51,7 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindUI()
-        val loadedId = args.epicKey
+        val loadedId = args.epicId
         loadData(loadedId)
     }
 
@@ -62,16 +61,16 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
                 navigateBack()
             }
             R.id.btn_delete -> {
-                deleteEpic(args.epicKey)
+                deleteEpic(args.epicId)
             }
             R.id.btn_status_paused -> {
-                updateStatus(args.epicKey, 1)
+                updateStatus(args.epicId, 1)
             }
             R.id.btn_status_progress -> {
-                updateStatus(args.epicKey, 2)
+                updateStatus(args.epicId, 2)
             }
             R.id.btn_status_done -> {
-                updateStatus(args.epicKey, 3)
+                updateStatus(args.epicId, 3)
             }
             R.id.btn_complete_epic -> {
                 completeEpic()
@@ -92,12 +91,12 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
         binding.btnAddStory.setOnClickListener(this)
     }
 
-    private fun loadData(id: Int) {
+    private fun loadData(id: String) {
         viewModel.getEpic(id)
         viewModel.epic.observe(viewLifecycleOwner, Observer { epic ->
             Log.d("myapp_epic_detail", "$epic")
             if (epic != null) {
-                if (epic.key == -1L) {
+                if (epic.epicId.isEmpty()) {
                     navigateBack()
                 } else {
                     currentEpic = epic
@@ -113,16 +112,16 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
         })
     }
 
-    private fun deleteEpic(id: Int) {
+    private fun deleteEpic(id: String) {
         viewModel.deleteEpic(id)
     }
 
-    private fun updateStatus(id: Int, status: Int) {
+    private fun updateStatus(id: String, status: Int) {
         viewModel.updateStatus(id, status)
     }
 
     private fun completeEpic() {
-        viewModel.completeEpic(args.epicKey, currentEpic)
+        viewModel.completeEpic(args.epicId, currentEpic)
     }
 
     private fun navigateBack() {

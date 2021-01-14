@@ -51,10 +51,10 @@ class TertiaryTutorialFragment : Fragment(), KodeinAware {
     }
 
     private fun completeUserTutorial() {
-        viewModel.doneUserTutorial()
+        viewModel.doneUserTutorial(name = "Bob")
         viewModel.user.observe(viewLifecycleOwner, Observer { user ->
             Log.d("myapp_tutorial", "$user")
-            if ((user != null) && (user.doneTutorial)) {
+            if ((user != null) && (user.tutorialCompleted)) {
                 navigateToDashboard()
             }
         })

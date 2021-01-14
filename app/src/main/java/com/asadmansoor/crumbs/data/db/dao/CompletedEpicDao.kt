@@ -14,9 +14,9 @@ interface CompletedEpicDao {
     @Query("select * from completed_epic_table")
     fun getCompletedEpic(): List<CompletedEpicEntity>
 
-    @Query("select * from completed_epic_table where id = :id")
-    fun getEpicById(id: Int): CompletedEpicEntity
+    @Query("select * from completed_epic_table where epicId = :id")
+    fun getEpicById(id: String): CompletedEpicEntity
 
-    @Query("DELETE FROM completed_epic_table WHERE id = :id")
-    fun deleteCompletedEpic(id: Int)
+    @Query("DELETE FROM completed_epic_table WHERE epicId = :id")
+    fun deleteCompletedEpic(id: String)
 }

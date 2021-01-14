@@ -78,7 +78,7 @@ class CompletedEpicFragment : Fragment(), KodeinAware {
         groupAdapter.setOnItemClickListener { item, view ->
             Toast.makeText(this@CompletedEpicFragment.context, "clicked", Toast.LENGTH_SHORT).show()
 
-            val key = (item as CompletedEpicItem).epicItem.id
+            val key = (item as CompletedEpicItem).epicItem.epicId
             val action = CompletedEpicFragmentDirections.actionCompletedEpicFragmentToCompletedEpicDetailFragment(key)
             requireView().findNavController().navigate(action)
         }

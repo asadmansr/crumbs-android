@@ -1,55 +1,52 @@
 package com.asadmansoor.crumbs.data.source.current_epic
 
+import com.asadmansoor.crumbs.data.core.GenerateTimeParameter
+import com.asadmansoor.crumbs.data.core.InputTransformer
 import com.asadmansoor.crumbs.data.db.dao.CurrentEpicDao
 import com.asadmansoor.crumbs.data.db.entity.CurrentEpicEntity
 import com.asadmansoor.crumbs.data.domain.CurrentEpic
-import java.text.SimpleDateFormat
-import java.util.*
 
 class LocalCurrentEpicDataSourceImpl(
-    private val currentEpicDao: CurrentEpicDao
+    private val currentEpicDao: CurrentEpicDao,
+    private val generateTimeParameter: GenerateTimeParameter,
+    private val inputTransformer: InputTransformer
 ) : LocalCurrentEpicDataSource {
 
     override suspend fun getCurrentEpics(): List<CurrentEpic> =
         currentEpicDao.getCurrentTasks().map {
             CurrentEpic(
-                id = it.id,
+                epicId = it.epicId,
                 createdAt = it.createdAt,
-                createdAtString = getDateTime(it.createdAt),
+                createdAtString = inputTransformer.convertDateToReadable(it.createdAt),
                 lastUpdated = it.lastUpdated,
-                lastUpdatedString = getDateTime(it.lastUpdated),
-                key = it.key,
+                lastUpdatedString = inputTransformer.convertDateToReadable(it.lastUpdated),
                 title = it.title,
                 description = it.description,
                 status = it.status,
-                statusString = getStatusString(it.status)
+                statusString = inputTransformer.convertStatusToString(it.status)
             )
         }
 
     override suspend fun getCurrentEpicsByFilter(filter: Int): List<CurrentEpic> =
         currentEpicDao.getCurrentEpicsByFilter(filter).map {
             CurrentEpic(
-                id = it.id,
+                epicId = it.epicId,
                 createdAt = it.createdAt,
-                createdAtString = getDateTime(it.createdAt),
+                createdAtString = inputTransformer.convertDateToReadable(it.createdAt),
                 lastUpdated = it.lastUpdated,
-                lastUpdatedString = getDateTime(it.lastUpdated),
-                key = it.key,
+                lastUpdatedString = inputTransformer.convertDateToReadable(it.lastUpdated),
                 title = it.title,
                 description = it.description,
                 status = it.status,
-                statusString = getStatusString(it.status)
+                statusString = inputTransformer.convertStatusToString(it.status)
             )
         }
 
     override suspend fun createEpic(name: String, description: String) {
-
-        val timestamp = generateTimestamp()
-
         val epicEntity = CurrentEpicEntity(
-            createdAt = timestamp,
-            lastUpdated = timestamp,
-            key = generateKey(),
+            epicId = generateTimeParameter.generateEpicId(),
+            createdAt = generateTimeParameter.generateTimestamp(),
+            lastUpdated = generateTimeParameter.generateTimestamp(),
             title = name,
             description = description,
             status = 0
@@ -57,33 +54,28 @@ class LocalCurrentEpicDataSourceImpl(
         currentEpicDao.insert(epicEntity)
     }
 
-    override suspend fun getCreatedEpic(): CurrentEpicEntity =
-        currentEpicDao.getCreatedEpic(generateKey())
-
-    override suspend fun getEpicById(id: Int): CurrentEpic {
-        val epic = currentEpicDao.getEpicById(id)
+    override suspend fun getEpicById(id: String): CurrentEpic {
+        val epic: CurrentEpicEntity? = currentEpicDao.getEpicById(id)
         val currentEpic: CurrentEpic
         if (epic != null) {
             currentEpic = CurrentEpic(
-                id = epic.id,
+                epicId = epic.epicId,
                 createdAt = epic.createdAt,
-                createdAtString = getDateTime(epic.createdAt),
+                createdAtString = inputTransformer.convertDateToReadable(epic.createdAt),
                 lastUpdated = epic.lastUpdated,
-                lastUpdatedString = getDateTime(epic.lastUpdated),
-                key = epic.key,
+                lastUpdatedString = inputTransformer.convertDateToReadable(epic.lastUpdated),
                 title = epic.title,
                 description = epic.description,
                 status = epic.status,
-                statusString = getStatusString(epic.status)
+                statusString = inputTransformer.convertStatusToString(epic.status)
             )
         } else {
             currentEpic = CurrentEpic(
-                id = -1,
+                epicId = "",
                 createdAt = -1,
                 createdAtString = "",
                 lastUpdated = -1,
                 lastUpdatedString = "",
-                key = -1,
                 title = "",
                 description = "",
                 status = -1,
@@ -94,39 +86,10 @@ class LocalCurrentEpicDataSourceImpl(
         return currentEpic
     }
 
-    override suspend fun updateEpicStatus(id: Int, status: Int) =
+    override suspend fun updateEpicStatus(id: String, status: Int) =
         currentEpicDao.updateStatus(id = id, status = status)
 
-    override suspend fun deleteEpic(id: Int) = currentEpicDao.deleteEpic(id)
+    override suspend fun deleteEpic(id: String) = currentEpicDao.deleteEpic(id = id)
 
-    override suspend fun completeEpic(id: Int) {
-        currentEpicDao.deleteEpic(id = id)
-    }
-
-    private fun generateKey(): Long {
-        val sdf = SimpleDateFormat("yyyyMMddhhmmss", Locale.CANADA)
-        val currentDate = sdf.format(Date())
-        return currentDate.toLong()
-    }
-
-    private fun generateTimestamp(): Long {
-        return System.currentTimeMillis() / 1000
-    }
-
-    private fun getDateTime(timestamp: Long): String {
-        if (timestamp == -1L) return ""
-        val sdf = SimpleDateFormat("MMM d, yyyy", Locale.CANADA)
-        val date = (timestamp * 1000)
-        return sdf.format(date)
-    }
-
-    private fun getStatusString(status: Int): String {
-        return when (status) {
-            0 -> "Not Started"
-            1 -> "Paused"
-            2 -> "In Progress"
-            3 -> "Done"
-            else -> "Unknown"
-        }
-    }
+    override suspend fun completeEpic(id: String) = currentEpicDao.deleteEpic(id = id)
 }

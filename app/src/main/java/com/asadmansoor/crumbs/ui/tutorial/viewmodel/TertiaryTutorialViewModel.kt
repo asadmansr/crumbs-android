@@ -17,9 +17,9 @@ class TertiaryTutorialViewModel(
         }
     }
 
-    fun doneUserTutorial() {
+    fun doneUserTutorial(name: String) {
         GlobalScope.launch {
-            userRepository.saveUser(doneTutorial = true)
+            userRepository.saveUser(name = name)
             user.postValue(userRepository.loadUser())
         }
     }

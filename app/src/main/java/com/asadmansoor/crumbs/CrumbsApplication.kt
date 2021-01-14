@@ -1,6 +1,7 @@
 package com.asadmansoor.crumbs
 
 import android.app.Application
+import com.asadmansoor.crumbs.data.core.GenerateTimeParameter
 import com.asadmansoor.crumbs.data.db.CrumbsDatabase
 import com.asadmansoor.crumbs.data.repository.completed_epic.CompletedEpicRepository
 import com.asadmansoor.crumbs.data.repository.completed_epic.CompletedEpicRepositoryImpl
@@ -44,10 +45,25 @@ class CrumbsApplication : Application(), KodeinAware {
         bind() from singleton { instance<CrumbsDatabase>().currentStoryDao() }
         bind() from singleton { instance<CrumbsDatabase>().userDao() }
 
-        bind<LocalUserDataSource>() with singleton { LocalUserDataSourceImpl(instance()) }
-        bind<LocalCurrentEpicDataSource>() with singleton { LocalCurrentEpicDataSourceImpl(instance()) }
+        bind() from singleton { GenerateTimeParameter() }
+
+        bind<LocalUserDataSource>() with singleton {
+            LocalUserDataSourceImpl(
+                instance(),
+                instance()
+            )
+        }
+        bind<LocalCurrentEpicDataSource>() with singleton {
+            LocalCurrentEpicDataSourceImpl(
+                instance(),
+                instance(),
+                instance()
+            )
+        }
         bind<LocalCompletedEpicDataSource>() with singleton {
             LocalCompletedEpicDataSourceImpl(
+                instance(),
+                instance(),
                 instance()
             )
         }

@@ -17,27 +17,27 @@ class EpicDetailViewModel(
     val epic = MediatorLiveData<CurrentEpic>()
     val stories = MediatorLiveData<List<Story>>()
 
-    fun getEpic(id: Int) {
+    fun getEpic(id: String) {
         GlobalScope.launch {
             epic.postValue(currentEpicRepository.getEpicById(id = id))
         }
     }
 
-    fun deleteEpic(id: Int) {
+    fun deleteEpic(id: String) {
         GlobalScope.launch {
             currentEpicRepository.deleteEpic(id)
             epic.postValue(currentEpicRepository.getEpicById(id))
         }
     }
 
-    fun updateStatus(id: Int, status: Int) {
+    fun updateStatus(id: String, status: Int) {
         GlobalScope.launch {
             currentEpicRepository.updateEpicStatus(id = id, status = status)
             epic.postValue(currentEpicRepository.getEpicById(id))
         }
     }
 
-    fun completeEpic(id: Int, currentEpic: CurrentEpic) {
+    fun completeEpic(id: String, currentEpic: CurrentEpic) {
         GlobalScope.launch {
             currentEpicRepository.completeEpic(id = id, epic = currentEpic)
             epic.postValue(currentEpicRepository.getEpicById(id))

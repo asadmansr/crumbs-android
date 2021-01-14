@@ -36,14 +36,14 @@ class EpicViewModel(
 
     val createdEpic = MediatorLiveData<CurrentEpicEntity>().apply {
         GlobalScope.launch {
-            postValue(currentEpicRepository.getCreatedEpic())
+            //postValue(currentEpicRepository.getCreatedEpic())
         }
     }
 
     fun createNewEpic(name: String, description: String) {
         GlobalScope.launch {
             currentEpicRepository.createEpic(name = name, description = description)
-            createdEpic.postValue(currentEpicRepository.getCreatedEpic())
+            //createdEpic.postValue(currentEpicRepository.getCreatedEpic())
         }
     }
 
