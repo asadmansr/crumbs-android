@@ -11,11 +11,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.input
 import com.asadmansoor.crumbs.R
 import com.asadmansoor.crumbs.data.domain.CurrentEpic
 import com.asadmansoor.crumbs.databinding.FragmentEpicDetailBinding
 import com.asadmansoor.crumbs.ui.epic.viewmodel.EpicDetailViewModel
 import com.asadmansoor.crumbs.ui.epic.viewmodel.EpicDetailViewModelFactory
+import com.google.android.material.dialog.MaterialDialogs
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -73,6 +76,9 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
             R.id.btn_complete_epic -> {
                 completeEpic()
             }
+            R.id.btn_add_story -> {
+                showCreateStoryDialog()
+            }
         }
     }
 
@@ -83,6 +89,7 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
         binding.btnStatusPaused.setOnClickListener(this)
         binding.btnStatusDone.setOnClickListener(this)
         binding.btnCompleteEpic.setOnClickListener(this)
+        binding.btnAddStory.setOnClickListener(this)
     }
 
     private fun loadData(id: Int) {
@@ -120,5 +127,19 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
 
     private fun navigateBack() {
         requireView().findNavController().navigateUp()
+    }
+
+    private fun showCreateStoryDialog() {
+        MaterialDialog(requireContext()).show {
+            title(text = "Your Title")
+            message(text = "Your Message")
+            cornerRadius(16f)
+            input(maxLength = 32) { dialog, text ->
+                // Text submitted with the action button
+                Log.d("myapp_dialog", text.toString())
+            }
+            positiveButton(R.string.btn_create)
+            negativeButton(R.string.btn_cancel)
+        }
     }
 }

@@ -6,6 +6,8 @@ import com.asadmansoor.crumbs.data.repository.completed_epic.CompletedEpicReposi
 import com.asadmansoor.crumbs.data.repository.completed_epic.CompletedEpicRepositoryImpl
 import com.asadmansoor.crumbs.data.repository.current_epic.CurrentEpicRepository
 import com.asadmansoor.crumbs.data.repository.current_epic.CurrentEpicRepositoryImpl
+import com.asadmansoor.crumbs.data.repository.stories.StoriesRepository
+import com.asadmansoor.crumbs.data.repository.stories.StoriesRepositoryImpl
 import com.asadmansoor.crumbs.data.repository.user.UserRepository
 import com.asadmansoor.crumbs.data.repository.user.UserRepositoryImpl
 import com.asadmansoor.crumbs.data.source.completed_epic.LocalCompletedEpicDataSource
@@ -35,9 +37,12 @@ class CrumbsApplication : Application(), KodeinAware {
         import(androidXModule(this@CrumbsApplication))
 
         bind() from singleton { CrumbsDatabase(instance()) }
-        bind() from singleton { instance<CrumbsDatabase>().userDao() }
-        bind() from singleton { instance<CrumbsDatabase>().currentEpicDao() }
+        bind() from singleton { instance<CrumbsDatabase>().analyticsDao() }
         bind() from singleton { instance<CrumbsDatabase>().completedEpicDao() }
+        bind() from singleton { instance<CrumbsDatabase>().completedStoryDao() }
+        bind() from singleton { instance<CrumbsDatabase>().currentEpicDao() }
+        bind() from singleton { instance<CrumbsDatabase>().currentStoryDao() }
+        bind() from singleton { instance<CrumbsDatabase>().userDao() }
 
         bind<LocalUserDataSource>() with singleton { LocalUserDataSourceImpl(instance()) }
         bind<LocalCurrentEpicDataSource>() with singleton { LocalCurrentEpicDataSourceImpl(instance()) }
@@ -66,6 +71,12 @@ class CrumbsApplication : Application(), KodeinAware {
             )
         }
 
+        bind<StoriesRepository>() with singleton {
+            StoriesRepositoryImpl(
+
+            )
+        }
+
         bind() from provider {
             SplashViewModelFactory(
                 instance()
@@ -88,6 +99,7 @@ class CrumbsApplication : Application(), KodeinAware {
 
         bind() from provider {
             EpicDetailViewModelFactory(
+                instance(),
                 instance()
             )
         }

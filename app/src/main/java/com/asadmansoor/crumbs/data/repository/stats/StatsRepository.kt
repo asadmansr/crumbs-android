@@ -1,8 +1,8 @@
 package com.asadmansoor.crumbs.data.repository.stats
 
-import com.asadmansoor.crumbs.data.db.entity.StatsEntity
+import com.asadmansoor.crumbs.data.db.entity.AnalyticsEntity
 
 interface StatsRepository {
 
-    suspend fun getStats(): StatsEntity
+    suspend fun getStats(): AnalyticsEntity
 }

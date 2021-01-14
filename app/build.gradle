@@ -75,6 +75,8 @@ dependencies {
 
     implementation Libs.Groupie.groupie
     implementation Libs.Groupie.androidExtension
+
+    implementation Libs.MaterialDialog.input
 }
 
 dependencies {

@@ -1,9 +1,9 @@
 package com.asadmansoor.crumbs.data.repository.stats
 
-import com.asadmansoor.crumbs.data.db.entity.StatsEntity
+import com.asadmansoor.crumbs.data.db.entity.AnalyticsEntity
 
 class StatsRepositoryImpl() : StatsRepository {
-    override suspend fun getStats(): StatsEntity {
+    override suspend fun getStats(): AnalyticsEntity {
         TODO("Not yet implemented")
     }
 }

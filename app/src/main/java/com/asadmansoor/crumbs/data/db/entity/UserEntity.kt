@@ -9,5 +9,8 @@ const val SINGLE_USER_ID = 0
 data class UserEntity(
     @PrimaryKey(autoGenerate = false)
     val id: Int = SINGLE_USER_ID,
-    val doneTutorial: Boolean
+    val uid: String,
+    val name: String,
+    val accountCreated: Long,
+    val tutorialCompleted: Boolean
 )

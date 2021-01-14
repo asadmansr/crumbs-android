@@ -3,15 +3,19 @@ package com.asadmansoor.crumbs.ui.epic.viewmodel
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import com.asadmansoor.crumbs.data.domain.CurrentEpic
+import com.asadmansoor.crumbs.data.domain.Story
 import com.asadmansoor.crumbs.data.repository.current_epic.CurrentEpicRepository
+import com.asadmansoor.crumbs.data.repository.stories.StoriesRepository
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class EpicDetailViewModel(
-    private val currentEpicRepository: CurrentEpicRepository
+    private val currentEpicRepository: CurrentEpicRepository,
+    private val storiesRepository: StoriesRepository
 ) : ViewModel() {
 
     val epic = MediatorLiveData<CurrentEpic>()
+    val stories = MediatorLiveData<List<Story>>()
 
     fun getEpic(id: Int) {
         GlobalScope.launch {
@@ -38,5 +42,9 @@ class EpicDetailViewModel(
             currentEpicRepository.completeEpic(id = id, epic = currentEpic)
             epic.postValue(currentEpicRepository.getEpicById(id))
         }
+    }
+
+    fun getStories() {
+        
     }
 }

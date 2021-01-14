@@ -33,4 +33,6 @@
     <string name="title_updated">Last Updated</string>
     <string name="title_status">Status</string>
     <string name="title_change_status">Change Status</string>
+
+    <string name="btn_cancel">Cancel</string>
 </resources>

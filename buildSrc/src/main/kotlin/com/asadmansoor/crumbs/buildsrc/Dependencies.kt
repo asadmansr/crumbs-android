@@ -64,6 +64,10 @@ object Libs {
         const val roomKtx = "androidx.room:room-ktx:$version"
     }
 
+    object MaterialDialog {
+        const val input = "com.afollestad.material-dialogs:input:3.3.0"
+    }
+
     object Test {
         const val junit = "junit:junit:4.12"
         const val androidXJunit = "androidx.test.ext:junit:1.1.2"

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <import type="android.view.View"/>
         <variable
@@ -8,9 +10,6 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark"
@@ -202,6 +201,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_status_value" />
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -221,34 +221,34 @@
                 android:id="@+id/btn_status_paused"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Paused"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Paused"
                 android:textAllCaps="false"
-                android:textSize="12sp"
                 android:textColor="@color/colorWhite"
-                android:backgroundTint="@color/colorPrimary" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/btn_status_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="In Progress"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="In Progress"
                 android:textAllCaps="false"
-                android:textSize="12sp"
                 android:textColor="@color/colorWhite"
-                android:backgroundTint="@color/colorPrimary" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/btn_status_done"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Done"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Done"
                 android:textAllCaps="false"
-                android:textSize="12sp"
                 android:textColor="@color/colorWhite"
-                android:backgroundTint="@color/colorPrimary" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -265,5 +265,21 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:contentDescription="TODO" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_add_story"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/round_add_white_36"
+            android:visibility="@{viewModel.epic.status != 3 ? View.VISIBLE : View.GONE}"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="TODO" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

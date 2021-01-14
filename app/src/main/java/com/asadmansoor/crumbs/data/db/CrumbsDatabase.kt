@@ -4,23 +4,29 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.asadmansoor.crumbs.data.db.dao.CompletedEpicDao
-import com.asadmansoor.crumbs.data.db.dao.CurrentEpicDao
-import com.asadmansoor.crumbs.data.db.dao.UserDao
-import com.asadmansoor.crumbs.data.db.entity.CompletedEpicEntity
-import com.asadmansoor.crumbs.data.db.entity.CurrentEpicEntity
-import com.asadmansoor.crumbs.data.db.entity.UserEntity
+import com.asadmansoor.crumbs.data.db.dao.*
+import com.asadmansoor.crumbs.data.db.entity.*
 
 @Database(
-    entities = [UserEntity::class, CurrentEpicEntity::class, CompletedEpicEntity::class],
+    entities = [
+        AnalyticsEntity::class,
+        CompletedEpicEntity::class,
+        CompletedStoryEntity::class,
+        CurrentEpicEntity::class,
+        CurrentStoryEntity::class,
+        UserEntity::class
+    ],
     version = 1,
     exportSchema = false
 )
 abstract class CrumbsDatabase : RoomDatabase() {
 
-    abstract fun userDao(): UserDao
-    abstract fun currentEpicDao(): CurrentEpicDao
+    abstract fun analyticsDao(): AnalyticsDao
     abstract fun completedEpicDao(): CompletedEpicDao
+    abstract fun completedStoryDao(): CompletedStoryDao
+    abstract fun currentEpicDao(): CurrentEpicDao
+    abstract fun currentStoryDao(): CurrentStoryDao
+    abstract fun userDao(): UserDao
 
     companion object {
         @Volatile

@@ -5,14 +5,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "completed_epic_table")
 data class CompletedEpicEntity(
+    @PrimaryKey(autoGenerate = false)
+    val epicId: String,
     val createdAt: Long,
     val lastUpdated: Long,
     val completedAt: Long,
-    val key: Long,
     val title: String,
     val description: String,
     val status: Int
-) {
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
-}
+)
