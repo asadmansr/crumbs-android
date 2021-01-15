@@ -2,6 +2,7 @@ package com.asadmansoor.crumbs
 
 import android.app.Application
 import com.asadmansoor.crumbs.data.core.GenerateTimeParameter
+import com.asadmansoor.crumbs.data.core.InputTransformer
 import com.asadmansoor.crumbs.data.db.CrumbsDatabase
 import com.asadmansoor.crumbs.data.repository.completed_epic.CompletedEpicRepository
 import com.asadmansoor.crumbs.data.repository.completed_epic.CompletedEpicRepositoryImpl
@@ -46,6 +47,7 @@ class CrumbsApplication : Application(), KodeinAware {
         bind() from singleton { instance<CrumbsDatabase>().userDao() }
 
         bind() from singleton { GenerateTimeParameter() }
+        bind() from singleton { InputTransformer() }
 
         bind<LocalUserDataSource>() with singleton {
             LocalUserDataSourceImpl(

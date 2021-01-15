@@ -34,5 +34,7 @@
     <string name="title_status">Status</string>
     <string name="title_change_status">Change Status</string>
 
+    <string name="get_started">Let\'s get started</string>
+
     <string name="btn_cancel">Cancel</string>
 </resources>

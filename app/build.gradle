@@ -77,6 +77,7 @@ dependencies {
     implementation Libs.Groupie.androidExtension
 
     implementation Libs.MaterialDialog.input
+    implementation Libs.MaterialDialog.sheet
 }
 
 dependencies {

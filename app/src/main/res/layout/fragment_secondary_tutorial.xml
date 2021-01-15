@@ -5,21 +5,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorWhite"
     tools:context=".ui.tutorial.view.SecondaryTutorialFragment">
 
     <TextView
-        android:id="@+id/tv_discover_title"
+        android:id="@+id/tv_secondary_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginLeft="36dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="36dp"
         android:layout_marginRight="36dp"
-        android:text="Some text"
-        android:textColor="@color/colorWhite"
-        android:textSize="22sp"
+        android:text="Stories"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="28sp"
         android:textStyle="bold"
         android:gravity="center"
         app:fontFamily="@font/nunito"
@@ -27,28 +27,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tv_secondary_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:fontFamily="@font/nunito"
+        android:text="are small tasks that will help you achieve your epic."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_secondary_title" />
+
     <ImageView
         android:id="@+id/iv_discover"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
         android:layout_marginTop="64dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginRight="64dp"
         android:layout_marginBottom="64dp"
         android:importantForAccessibility="no"
-        android:src="@drawable/learn"
+        android:src="@drawable/reading"
         app:layout_constraintBottom_toTopOf="@+id/rl_secondary_footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_discover_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_secondary_description" />
 
     <RelativeLayout
         android:id="@+id/rl_secondary_footer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -62,8 +77,9 @@
             android:layout_margin="4dp"
             android:background="@android:color/transparent"
             android:text="@string/btn_back"
+            app:fontFamily="@font/nunito"
             android:textAllCaps="false"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
 
         <Button
@@ -75,8 +91,9 @@
             android:layout_margin="4dp"
             android:background="@android:color/transparent"
             android:text="@string/btn_next"
+            app:fontFamily="@font/nunito"
             android:textAllCaps="false"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

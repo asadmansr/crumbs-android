@@ -66,6 +66,7 @@ object Libs {
 
     object MaterialDialog {
         const val input = "com.afollestad.material-dialogs:input:3.3.0"
+        const val sheet = "com.afollestad.material-dialogs:bottomsheets:3.2.1"
     }
 
     object Test {
