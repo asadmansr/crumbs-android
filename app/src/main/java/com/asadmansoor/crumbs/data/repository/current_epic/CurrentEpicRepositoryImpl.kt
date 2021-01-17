@@ -21,6 +21,9 @@ class CurrentEpicRepositoryImpl(
     override suspend fun getEpicById(id: String): CurrentEpic =
         localCurrentEpicDataSource.getEpicById(id = id)
 
+    override suspend fun getEpicByNameDescription(name: String, description: String): CurrentEpic =
+        localCurrentEpicDataSource.getEpicByNameDescription(name, description)
+
     override suspend fun updateEpicStatus(id: String, status: Int) =
         localCurrentEpicDataSource.updateEpicStatus(id = id, status = status)
 

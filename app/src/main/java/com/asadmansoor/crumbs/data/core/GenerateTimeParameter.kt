@@ -26,4 +26,10 @@ class GenerateTimeParameter {
         dateString = dateFormatter.format(date)
         return "epic-$dateString"
     }
+
+    fun generateStoryId(): String {
+        date = Date()
+        dateString = dateFormatter.format(date)
+        return "stor-$dateString"
+    }
 }

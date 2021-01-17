@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.asadmansoor.crumbs.data.db.entity.CurrentEpicEntity
 import com.asadmansoor.crumbs.data.db.entity.UserEntity
+import com.asadmansoor.crumbs.data.domain.CurrentEpic
 import com.asadmansoor.crumbs.data.repository.current_epic.CurrentEpicRepository
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -15,7 +16,6 @@ class EpicViewModel(
 ) : ViewModel() {
 
     val epicName = MutableLiveData<String>("")
-
     val epicDescription = MutableLiveData<String>("")
 
     val nameValid = MediatorLiveData<Boolean>().apply {
@@ -34,16 +34,12 @@ class EpicViewModel(
         }
     }
 
-    val createdEpic = MediatorLiveData<CurrentEpicEntity>().apply {
-        GlobalScope.launch {
-            //postValue(currentEpicRepository.getCreatedEpic())
-        }
-    }
+    val createdEpic = MediatorLiveData<CurrentEpic>()
 
     fun createNewEpic(name: String, description: String) {
         GlobalScope.launch {
             currentEpicRepository.createEpic(name = name, description = description)
-            //createdEpic.postValue(currentEpicRepository.getCreatedEpic())
+            createdEpic.postValue(currentEpicRepository.getEpicByNameDescription(name, description))
         }
     }
 

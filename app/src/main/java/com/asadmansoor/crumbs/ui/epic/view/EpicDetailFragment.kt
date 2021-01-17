@@ -5,19 +5,27 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import com.asadmansoor.crumbs.R
+import com.asadmansoor.crumbs.data.db.entity.CurrentStoryEntity
 import com.asadmansoor.crumbs.data.domain.CurrentEpic
+import com.asadmansoor.crumbs.data.domain.Story
 import com.asadmansoor.crumbs.databinding.FragmentEpicDetailBinding
+import com.asadmansoor.crumbs.ui.dashboard.CurrentTaskItem
+import com.asadmansoor.crumbs.ui.epic.CurrentStoryItem
 import com.asadmansoor.crumbs.ui.epic.viewmodel.EpicDetailViewModel
 import com.asadmansoor.crumbs.ui.epic.viewmodel.EpicDetailViewModelFactory
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -34,6 +42,7 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
     private lateinit var binding: FragmentEpicDetailBinding
 
     private lateinit var currentEpic: CurrentEpic
+    private var numOfStories: Int = 0
 
 
     override fun onCreateView(
@@ -110,6 +119,21 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
                 navigateBack()
             }
         })
+
+        viewModel.getStories(id)
+        viewModel.stories.observe(viewLifecycleOwner, Observer { stories ->
+            Log.d("myapp_epic_d_stories", "$stories")
+            if (stories != null){
+                if (stories.isEmpty() && numOfStories != 0){
+                    viewModel.getStories(id)
+                } else {
+                    if (numOfStories == 0){
+                        numOfStories = stories.size
+                    }
+                    initRecyclerView(stories.toCurrentItem())
+                }
+            }
+        })
     }
 
     private fun deleteEpic(id: String) {
@@ -136,9 +160,59 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
             input(maxLength = 32) { dialog, text ->
                 // Text submitted with the action button
                 Log.d("myapp_dialog", text.toString())
+                viewModel.addStory(text.toString(), args.epicId)
+                numOfStories++
             }
             positiveButton(R.string.btn_create)
             negativeButton(R.string.btn_cancel)
+        }
+    }
+
+    private fun List<Story>.toCurrentItem(): List<CurrentStoryItem> {
+        return this.map {
+            CurrentStoryItem(it)
+        }
+    }
+
+    private fun initRecyclerView(items: List<CurrentStoryItem>) {
+        val groupAdapter = GroupAdapter<GroupieViewHolder>().apply {
+            addAll(items)
+        }
+
+        binding.rvStories.apply {
+            layoutManager = LinearLayoutManager(this@EpicDetailFragment.context)
+            adapter = groupAdapter
+        }
+
+        groupAdapter.setOnItemClickListener { item, view ->
+            Toast.makeText(this@EpicDetailFragment.context, "clicked", Toast.LENGTH_SHORT).show()
+
+            val mitem = (item as CurrentStoryItem).storyItem
+            val currentStoryEntity = CurrentStoryEntity(
+                title = mitem.title,
+                completed = mitem.completed,
+                epicId = mitem.epicId,
+                storyId = mitem.storyId,
+                createdAt = mitem.createdAt,
+                lastUpdated = mitem.lastUpdated
+            )
+
+            val storyId = (item as CurrentStoryItem).storyItem.storyId
+            val status = (item as CurrentStoryItem).storyItem.completed
+
+            MaterialDialog(requireContext()).show {
+                title(text = "hi")
+                message(text = "message")
+                cornerRadius(16f)
+                positiveButton(text = "Update") {
+                    viewModel.updateStory(storyId, !status)
+                }
+                neutralButton(text = "Cancel")
+                negativeButton(text = "Delete") {
+                    viewModel.deleteStory(currentStoryEntity, storyId)
+                    numOfStories--
+                }
+            }
         }
     }
 }

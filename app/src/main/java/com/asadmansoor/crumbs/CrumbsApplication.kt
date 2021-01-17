@@ -16,6 +16,8 @@ import com.asadmansoor.crumbs.data.source.completed_epic.LocalCompletedEpicDataS
 import com.asadmansoor.crumbs.data.source.completed_epic.LocalCompletedEpicDataSourceImpl
 import com.asadmansoor.crumbs.data.source.current_epic.LocalCurrentEpicDataSource
 import com.asadmansoor.crumbs.data.source.current_epic.LocalCurrentEpicDataSourceImpl
+import com.asadmansoor.crumbs.data.source.stories.LocalCurrentStoryDataSource
+import com.asadmansoor.crumbs.data.source.stories.LocalCurrentStoryDataSourceImpl
 import com.asadmansoor.crumbs.data.source.user.LocalUserDataSource
 import com.asadmansoor.crumbs.data.source.user.LocalUserDataSourceImpl
 import com.asadmansoor.crumbs.ui.completed.detail.viewmodel.CompletedEpicDetailViewModelFactory
@@ -69,6 +71,13 @@ class CrumbsApplication : Application(), KodeinAware {
                 instance()
             )
         }
+        bind<LocalCurrentStoryDataSource>() with singleton {
+            LocalCurrentStoryDataSourceImpl(
+                instance(),
+                instance(),
+                instance()
+            )
+        }
 
         bind<UserRepository>() with singleton {
             UserRepositoryImpl(
@@ -91,7 +100,7 @@ class CrumbsApplication : Application(), KodeinAware {
 
         bind<StoriesRepository>() with singleton {
             StoriesRepositoryImpl(
-
+                instance()
             )
         }
 

@@ -86,6 +86,38 @@ class LocalCurrentEpicDataSourceImpl(
         return currentEpic
     }
 
+    override suspend fun getEpicByNameDescription(name: String, description: String): CurrentEpic {
+        val epic: CurrentEpicEntity? = currentEpicDao.getEpicByNameDescription(name, description)
+        val currentEpic: CurrentEpic
+        if (epic != null) {
+            currentEpic = CurrentEpic(
+                epicId = epic.epicId,
+                createdAt = epic.createdAt,
+                createdAtString = inputTransformer.convertDateToReadable(epic.createdAt),
+                lastUpdated = epic.lastUpdated,
+                lastUpdatedString = inputTransformer.convertDateToReadable(epic.lastUpdated),
+                title = epic.title,
+                description = epic.description,
+                status = epic.status,
+                statusString = inputTransformer.convertStatusToString(epic.status)
+            )
+        } else {
+            currentEpic = CurrentEpic(
+                epicId = "",
+                createdAt = -1,
+                createdAtString = "",
+                lastUpdated = -1,
+                lastUpdatedString = "",
+                title = "",
+                description = "",
+                status = -1,
+                statusString = ""
+            )
+        }
+
+        return currentEpic
+    }
+
     override suspend fun updateEpicStatus(id: String, status: Int) =
         currentEpicDao.updateStatus(id = id, status = status)
 

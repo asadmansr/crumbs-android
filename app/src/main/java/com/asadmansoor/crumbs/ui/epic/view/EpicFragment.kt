@@ -76,7 +76,7 @@ class EpicFragment : ScopedFragment(), KodeinAware, View.OnClickListener {
         viewModel.createNewEpic(name = name, description = description)
         viewModel.createdEpic.observe(viewLifecycleOwner, Observer { epic ->
             Log.d("myapp_epic", "$epic")
-            if (epic != null) {
+            if (epic != null || epic!!.title.isNotEmpty()) {
                 navigateBack()
             }
         })

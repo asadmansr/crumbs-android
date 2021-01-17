@@ -2,6 +2,7 @@ package com.asadmansoor.crumbs.ui.epic.viewmodel
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
+import com.asadmansoor.crumbs.data.db.entity.CurrentStoryEntity
 import com.asadmansoor.crumbs.data.domain.CurrentEpic
 import com.asadmansoor.crumbs.data.domain.Story
 import com.asadmansoor.crumbs.data.repository.current_epic.CurrentEpicRepository
@@ -44,7 +45,30 @@ class EpicDetailViewModel(
         }
     }
 
-    fun getStories() {
-        
+    fun getStories(epicId: String) {
+        GlobalScope.launch {
+            stories.postValue(storiesRepository.getStoriesByEpicId(epicId))
+        }
+    }
+
+    fun addStory(title: String, epicId: String) {
+        GlobalScope.launch {
+            storiesRepository.addStory(title, epicId)
+            stories.postValue(storiesRepository.getStoriesByEpicId(epicId))
+        }
+    }
+
+    fun deleteStory(currentStoryEntity: CurrentStoryEntity, epicId: String) {
+        GlobalScope.launch {
+            storiesRepository.deleteStory(currentStoryEntity)
+            stories.postValue(storiesRepository.getStoriesByEpicId(epicId))
+        }
+    }
+
+    fun updateStory(epicId: String, completed: Boolean) {
+        GlobalScope.launch {
+            storiesRepository.updateStoryStatus(epicId, completed)
+            stories.postValue(storiesRepository.getStoriesByEpicId(epicId))
+        }
     }
 }

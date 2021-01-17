@@ -1,9 +1,9 @@
-package com.asadmansoor.crumbs.data.repository.stories
+package com.asadmansoor.crumbs.data.source.stories
 
 import com.asadmansoor.crumbs.data.db.entity.CurrentStoryEntity
 import com.asadmansoor.crumbs.data.domain.Story
 
-interface StoriesRepository {
+interface LocalCurrentStoryDataSource {
 
     suspend fun addStory(title: String, epicId: String)
 

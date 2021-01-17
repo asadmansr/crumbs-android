@@ -24,7 +24,7 @@
     <string name="filter_paused">Paused</string>
     <string name="filter_in_progress">In Progress</string>
 
-    <string name="text_no_tasks_added">No tasks added</string>
+    <string name="text_no_epic_added">Tap on + to create an epic</string>
     <string name="text_today">Today</string>
 
     <string name="dialog_ok">OK</string>

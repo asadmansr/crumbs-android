@@ -1,17 +1,21 @@
 package com.asadmansoor.crumbs.data.repository.stories
 
+import com.asadmansoor.crumbs.data.db.entity.CurrentStoryEntity
 import com.asadmansoor.crumbs.data.domain.Story
+import com.asadmansoor.crumbs.data.source.stories.LocalCurrentStoryDataSource
 
-class StoriesRepositoryImpl() : StoriesRepository {
-    override suspend fun getStoriesByEpicId(id: String): List<Story> {
-        TODO("Not yet implemented")
-    }
+class StoriesRepositoryImpl(
+    private val localCurrentStoryDataSource: LocalCurrentStoryDataSource
+) : StoriesRepository {
 
-    override suspend fun deleteStory(id: String) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun addStory(title: String, epicId: String) =
+        localCurrentStoryDataSource.addStory(title, epicId)
 
-    override suspend fun updateStoryStatus(id: String) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getStoriesByEpicId(id: String): List<Story> =
+        localCurrentStoryDataSource.getStoriesByEpicId(id)
+
+    override suspend fun deleteStory(currentStoryEntity: CurrentStoryEntity) = localCurrentStoryDataSource.deleteStory(currentStoryEntity)
+
+    override suspend fun updateStoryStatus(id: String, completed: Boolean) =
+        localCurrentStoryDataSource.updateStoryStatus(id, completed)
 }

@@ -21,6 +21,9 @@ interface CurrentEpicDao {
     @Query("select * from current_epic_table where epicId = :id")
     fun getEpicById(id: String): CurrentEpicEntity
 
+    @Query("select * from current_epic_table where title = :name AND description = :description")
+    fun getEpicByNameDescription(name: String, description: String): CurrentEpicEntity
+
     @Query("DELETE FROM current_epic_table WHERE epicId = :id")
     fun deleteEpic(id: String)
 
