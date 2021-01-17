@@ -15,4 +15,28 @@ interface AnalyticsDao {
 
     @Query("select * from analytics_table where id = $SINGLE_USER_ID")
     suspend fun loadAnalytics(): AnalyticsEntity
+
+    @Query("UPDATE analytics_table SET currentEpics = currentEpics + 1 WHERE id = $SINGLE_USER_ID")
+    suspend fun incrementCurrentEpic()
+
+    @Query("UPDATE analytics_table SET currentEpics = currentEpics - 1 WHERE id = $SINGLE_USER_ID")
+    suspend fun decrementCurrentEpic()
+
+    @Query("UPDATE analytics_table SET completedEpics = completedEpics + 1 WHERE id = $SINGLE_USER_ID")
+    suspend fun incrementCompletedEpic()
+
+    @Query("UPDATE analytics_table SET completedEpics = completedEpics - 1 WHERE id = $SINGLE_USER_ID")
+    suspend fun decrementCompletedEpic()
+
+    @Query("UPDATE analytics_table SET currentStories = currentStories + 1 WHERE id = $SINGLE_USER_ID")
+    suspend fun incrementCurrentStory()
+
+    @Query("UPDATE analytics_table SET currentStories = currentStories - 1 WHERE id = $SINGLE_USER_ID")
+    suspend fun decrementCurrentStory()
+
+    @Query("UPDATE analytics_table SET completedStories = completedStories + 1 WHERE id = $SINGLE_USER_ID")
+    suspend fun incrementCompletedStory()
+
+    @Query("UPDATE analytics_table SET completedStories = completedStories - 1 WHERE id = $SINGLE_USER_ID")
+    suspend fun decrementCompletedStory()
 }
