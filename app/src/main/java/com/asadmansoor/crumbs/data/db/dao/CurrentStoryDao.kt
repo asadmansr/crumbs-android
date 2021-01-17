@@ -13,10 +13,14 @@ interface CurrentStoryDao {
     @Query("select * from current_story_table where epicId = :epicId")
     fun getStoriesByEpic(epicId: String): List<CurrentStoryEntity>
 
-//    @Query("DELETE FROM current_story_table WHERE storyId = :id")
-//    fun deleteStory(id: String)
     @Delete
     fun deleteStory(currentStoryEntity: CurrentStoryEntity)
+
+    @Query("DELETE from current_story_table WHERE storyId = :id")
+    fun deleteStoryById(id: String)
+
+    @Query("DELETE from current_story_table WHERE epicId = :epicId")
+    fun deleteAllStoriesOfEpic(epicId: String)
 
     @Query("UPDATE current_story_table SET completed = :status WHERE storyId = :id")
     fun updateStory(id: String, status: Boolean)

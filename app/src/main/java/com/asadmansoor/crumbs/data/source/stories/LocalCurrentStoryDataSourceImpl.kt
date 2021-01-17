@@ -40,6 +40,14 @@ class LocalCurrentStoryDataSourceImpl(
 
     override suspend fun deleteStory(currentStoryEntity: CurrentStoryEntity) = currentStoryDao.deleteStory(currentStoryEntity)
 
+    override suspend fun deleteStoryById(id: String) = currentStoryDao.deleteStoryById(id)
+
+    override suspend fun deleteAllStoriesOfEpic(id: String) = currentStoryDao.deleteAllStoriesOfEpic(id)
+
     override suspend fun updateStoryStatus(id: String, completed: Boolean) =
         currentStoryDao.updateStory(id, completed)
+
+    override suspend fun completeStories(list: List<Story>) {
+        TODO("Not yet implemented")
+    }
 }

@@ -20,7 +20,6 @@ import com.asadmansoor.crumbs.data.db.entity.CurrentStoryEntity
 import com.asadmansoor.crumbs.data.domain.CurrentEpic
 import com.asadmansoor.crumbs.data.domain.Story
 import com.asadmansoor.crumbs.databinding.FragmentEpicDetailBinding
-import com.asadmansoor.crumbs.ui.dashboard.CurrentTaskItem
 import com.asadmansoor.crumbs.ui.epic.CurrentStoryItem
 import com.asadmansoor.crumbs.ui.epic.viewmodel.EpicDetailViewModel
 import com.asadmansoor.crumbs.ui.epic.viewmodel.EpicDetailViewModelFactory
@@ -42,7 +41,10 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
     private lateinit var binding: FragmentEpicDetailBinding
 
     private lateinit var currentEpic: CurrentEpic
+    private lateinit var currentStories: List<Story>
+
     private var numOfStories: Int = 0
+    private var allStoriesCompleted = true
 
 
     override fun onCreateView(
@@ -82,7 +84,16 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
                 updateStatus(args.epicId, 3)
             }
             R.id.btn_complete_epic -> {
-                completeEpic()
+                if (allStoriesCompleted) {
+                    completeEpic()
+                } else {
+                    Toast.makeText(
+                        this@EpicDetailFragment.context,
+                        "All Stories are not completed",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                }
             }
             R.id.btn_add_story -> {
                 showCreateStoryDialog()
@@ -123,12 +134,16 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
         viewModel.getStories(id)
         viewModel.stories.observe(viewLifecycleOwner, Observer { stories ->
             Log.d("myapp_epic_d_stories", "$stories")
-            if (stories != null){
-                if (stories.isEmpty() && numOfStories != 0){
+            if (stories != null) {
+                currentStories = stories
+                if (stories.isEmpty() && numOfStories != 0) {
                     viewModel.getStories(id)
                 } else {
-                    if (numOfStories == 0){
+                    if (numOfStories == 0) {
                         numOfStories = stories.size
+                    }
+                    for (i in stories) {
+                        if (!i.completed) allStoriesCompleted = false
                     }
                     initRecyclerView(stories.toCurrentItem())
                 }
@@ -145,7 +160,7 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
     }
 
     private fun completeEpic() {
-        viewModel.completeEpic(args.epicId, currentEpic)
+        viewModel.completeEpic(args.epicId, currentEpic, currentStories)
     }
 
     private fun navigateBack() {
@@ -197,8 +212,8 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
                 lastUpdated = mitem.lastUpdated
             )
 
-            val storyId = (item as CurrentStoryItem).storyItem.storyId
-            val status = (item as CurrentStoryItem).storyItem.completed
+            val storyId = item.storyItem.storyId
+            val status = item.storyItem.completed
 
             MaterialDialog(requireContext()).show {
                 title(text = "hi")

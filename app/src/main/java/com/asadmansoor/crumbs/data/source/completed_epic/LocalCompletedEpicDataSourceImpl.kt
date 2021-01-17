@@ -67,7 +67,7 @@ class LocalCompletedEpicDataSourceImpl(
 
     override suspend fun completeEpic(epic: CurrentEpic) {
         val epicEntity = CompletedEpicEntity(
-            epicId = "",
+            epicId = epic.epicId,
             createdAt = epic.createdAt,
             lastUpdated = epic.lastUpdated,
             completedAt = generateTimeParameter.generateTimestamp(),

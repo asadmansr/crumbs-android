@@ -11,5 +11,11 @@ interface LocalCurrentStoryDataSource {
 
     suspend fun deleteStory(currentStoryEntity: CurrentStoryEntity)
 
+    suspend fun deleteStoryById(id: String)
+
+    suspend fun deleteAllStoriesOfEpic(id: String)
+
     suspend fun updateStoryStatus(id: String, completed: Boolean)
+
+    suspend fun completeStories(list: List<Story>)
 }

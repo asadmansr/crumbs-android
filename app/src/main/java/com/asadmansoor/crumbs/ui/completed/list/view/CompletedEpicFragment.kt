@@ -13,16 +13,12 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.asadmansoor.crumbs.R
 import com.asadmansoor.crumbs.data.domain.CompletedEpic
-import com.asadmansoor.crumbs.data.domain.CurrentEpic
 import com.asadmansoor.crumbs.ui.completed.list.CompletedEpicItem
 import com.asadmansoor.crumbs.ui.completed.list.viewmodel.CompletedEpicViewModel
 import com.asadmansoor.crumbs.ui.completed.list.viewmodel.CompletedEpicViewModelFactory
-import com.asadmansoor.crumbs.ui.dashboard.CurrentTaskItem
-import com.asadmansoor.crumbs.ui.dashboard.DashboardFragmentDirections
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_completed_epic.*
-import kotlinx.android.synthetic.main.fragment_dashboard.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -79,7 +75,10 @@ class CompletedEpicFragment : Fragment(), KodeinAware {
             Toast.makeText(this@CompletedEpicFragment.context, "clicked", Toast.LENGTH_SHORT).show()
 
             val key = (item as CompletedEpicItem).epicItem.epicId
-            val action = CompletedEpicFragmentDirections.actionCompletedEpicFragmentToCompletedEpicDetailFragment(key)
+            val action =
+                CompletedEpicFragmentDirections.actionCompletedEpicFragmentToCompletedEpicDetailFragment(
+                    key
+                )
             requireView().findNavController().navigate(action)
         }
     }

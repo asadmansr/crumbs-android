@@ -11,5 +11,9 @@ interface StoriesRepository {
 
     suspend fun deleteStory(currentStoryEntity: CurrentStoryEntity)
 
+    suspend fun deleteAllStoriesOfEpic(id: String)
+
     suspend fun updateStoryStatus(id: String, completed: Boolean)
+
+    suspend fun completeStories(list: List<Story>)
 }

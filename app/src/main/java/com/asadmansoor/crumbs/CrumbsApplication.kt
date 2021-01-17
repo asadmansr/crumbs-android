@@ -6,6 +6,8 @@ import com.asadmansoor.crumbs.data.core.InputTransformer
 import com.asadmansoor.crumbs.data.db.CrumbsDatabase
 import com.asadmansoor.crumbs.data.repository.completed_epic.CompletedEpicRepository
 import com.asadmansoor.crumbs.data.repository.completed_epic.CompletedEpicRepositoryImpl
+import com.asadmansoor.crumbs.data.repository.completed_story.CompletedStoriesRepository
+import com.asadmansoor.crumbs.data.repository.completed_story.CompletedStoriesRepositoryImpl
 import com.asadmansoor.crumbs.data.repository.current_epic.CurrentEpicRepository
 import com.asadmansoor.crumbs.data.repository.current_epic.CurrentEpicRepositoryImpl
 import com.asadmansoor.crumbs.data.repository.stories.StoriesRepository
@@ -14,6 +16,8 @@ import com.asadmansoor.crumbs.data.repository.user.UserRepository
 import com.asadmansoor.crumbs.data.repository.user.UserRepositoryImpl
 import com.asadmansoor.crumbs.data.source.completed_epic.LocalCompletedEpicDataSource
 import com.asadmansoor.crumbs.data.source.completed_epic.LocalCompletedEpicDataSourceImpl
+import com.asadmansoor.crumbs.data.source.completed_stories.LocalCompletedStoryDataSource
+import com.asadmansoor.crumbs.data.source.completed_stories.LocalCompletedStoryDataSourceImpl
 import com.asadmansoor.crumbs.data.source.current_epic.LocalCurrentEpicDataSource
 import com.asadmansoor.crumbs.data.source.current_epic.LocalCurrentEpicDataSourceImpl
 import com.asadmansoor.crumbs.data.source.stories.LocalCurrentStoryDataSource
@@ -78,6 +82,13 @@ class CrumbsApplication : Application(), KodeinAware {
                 instance()
             )
         }
+        bind<LocalCompletedStoryDataSource>() with singleton {
+            LocalCompletedStoryDataSourceImpl(
+                instance(),
+                instance(),
+                instance()
+            )
+        }
 
         bind<UserRepository>() with singleton {
             UserRepositoryImpl(
@@ -100,6 +111,12 @@ class CrumbsApplication : Application(), KodeinAware {
 
         bind<StoriesRepository>() with singleton {
             StoriesRepositoryImpl(
+                instance(),
+                instance()
+            )
+        }
+        bind<CompletedStoriesRepository>() with singleton {
+            CompletedStoriesRepositoryImpl(
                 instance()
             )
         }
@@ -139,6 +156,7 @@ class CrumbsApplication : Application(), KodeinAware {
 
         bind() from provider {
             CompletedEpicDetailViewModelFactory(
+                instance(),
                 instance()
             )
         }

@@ -75,6 +75,12 @@ class CompletedEpicDetailFragment : Fragment(), KodeinAware, View.OnClickListene
                 navigateBack()
             }
         })
+
+        viewModel.getStories(id)
+        viewModel.stories.observe(viewLifecycleOwner, Observer { stories ->
+            Log.d("myapp_c_stories", "$stories")
+
+        })
     }
 
     private fun deleteEpic(id: String) {

@@ -27,6 +27,7 @@ class EpicDetailViewModel(
     fun deleteEpic(id: String) {
         GlobalScope.launch {
             currentEpicRepository.deleteEpic(id)
+            storiesRepository.deleteAllStoriesOfEpic(id)
             epic.postValue(currentEpicRepository.getEpicById(id))
         }
     }
@@ -38,9 +39,10 @@ class EpicDetailViewModel(
         }
     }
 
-    fun completeEpic(id: String, currentEpic: CurrentEpic) {
+    fun completeEpic(id: String, currentEpic: CurrentEpic, currentStories: List<Story>) {
         GlobalScope.launch {
             currentEpicRepository.completeEpic(id = id, epic = currentEpic)
+            storiesRepository.completeStories(currentStories)
             epic.postValue(currentEpicRepository.getEpicById(id))
         }
     }
