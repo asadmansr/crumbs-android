@@ -3,6 +3,13 @@
     <string name="app_title">Crumbs</string>
     <string name="app_description">Your personal roadmap</string>
 
+    <string name="tutorial_epic_title">Epics</string>
+    <string name="tutorial_epic_description">are long-term goals you wish to achieve. They could take days, weeks or months.</string>
+    <string name="tutorial_stories_title">Stories</string>
+    <string name="tutorial_stories_description">are small tasks that will help you achieve your epic.</string>
+    <string name="tutorial_roadmap_title">Roadmap</string>
+    <string name="tutorial_roadmap_description">your very own way of navigating through life</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

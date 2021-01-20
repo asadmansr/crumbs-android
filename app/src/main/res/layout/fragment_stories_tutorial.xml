@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    tools:context=".ui.tutorial.view.TertiaryTutorialFragment">
+    tools:context=".ui.tutorial.view.StoriesTutorialFragment">
 
     <TextView
-        android:id="@+id/tv_tertiary_title"
+        android:id="@+id/tv_stories_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -17,8 +17,8 @@
         android:layout_marginTop="48dp"
         android:layout_marginEnd="36dp"
         android:layout_marginRight="36dp"
-        android:text="Roadmap"
-        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/tutorial_stories_title"
+        android:textColor="@color/colorPrimary"
         android:textSize="28sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_secondary_description"
+        android:id="@+id/tv_stories_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -36,40 +36,41 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="36dp"
         android:layout_marginRight="36dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold"
         android:gravity="center"
         app:fontFamily="@font/nunito"
-        android:text="your very own way of navigating through life"
+        android:text="@string/tutorial_stories_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_tertiary_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_stories_title" />
 
     <ImageView
-        android:id="@+id/iv_discover"
+        android:id="@+id/iv_stories"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:layout_marginBottom="64dp"
         android:importantForAccessibility="no"
-        android:src="@drawable/sleek"
-        app:layout_constraintBottom_toTopOf="@+id/rl_tertiary_footer"
+        android:src="@drawable/reading"
+        app:layout_constraintBottom_toTopOf="@+id/rl_stories_footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_secondary_description" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_stories_description" />
 
     <RelativeLayout
-        android:id="@+id/rl_tertiary_footer"
+        android:id="@+id/rl_stories_footer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/btn_tertiary_back"
+            android:id="@+id/btn_stories_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -83,18 +84,18 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btn_tertiary_finish"
+            android:id="@+id/btn_stories_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_margin="4dp"
             android:background="@android:color/transparent"
-            android:text="@string/btn_finish"
+            android:text="@string/btn_next"
             app:fontFamily="@font/nunito"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="RelativeOverlap" />
     </RelativeLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
