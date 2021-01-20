@@ -23,7 +23,6 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/baseline_arrow_back_white_24"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_detail_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="@string/todo" />
@@ -36,7 +35,6 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/baseline_delete_forever_white_24"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_detail_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="@string/todo" />
@@ -84,7 +82,7 @@
             android:layout_marginTop="36dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="Properties"
+            android:text="@string/title_properties"
             android:textColor="@color/colorWhite"
             android:textSize="16sp"
             app:fontFamily="@font/nunito"
@@ -152,7 +150,7 @@
             android:layout_marginTop="36dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="Stories"
+            android:text="@string/title_stories"
             android:textColor="@color/colorWhite"
             android:textSize="16sp"
             app:fontFamily="@font/nunito"
@@ -160,6 +158,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rl" />
+
+        <TextView
+            android:id="@+id/tv_stories_empty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/text_no_stories_added"
+            android:textColor="@color/colorWhite"
+            app:fontFamily="@font/nunito"
+            android:layout_marginTop="24dp"
+            android:visibility="@{viewModel.stories.size() == 0 ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toBottomOf="@+id/tv_stories_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_complete_epic"

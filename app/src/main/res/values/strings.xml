@@ -17,6 +17,9 @@
     <string name="btn_next">Next</string>
     <string name="btn_finish">Finish</string>
     <string name="btn_create">Create</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_mark_complete">Mark as complete</string>
+    <string name="btn_mark_incomplete">Mark as incomplete</string>
 
     <string name="epic_title_name">Epic Name</string>
     <string name="epic_title_description">Epic Description</string>
@@ -31,8 +34,10 @@
     <string name="filter_not_started">Not started</string>
     <string name="filter_paused">Paused</string>
     <string name="filter_in_progress">In Progress</string>
+    <string name="filter_completed">Completed</string>
 
     <string name="text_no_epic_added">Create an epic to get started</string>
+    <string name="text_no_stories_added">No stories for this epic has been added</string>
     <string name="text_today">Today</string>
 
     <string name="dialog_ok">OK</string>
@@ -41,6 +46,9 @@
     <string name="title_updated">Last Updated</string>
     <string name="title_status">Status</string>
     <string name="title_change_status">Change Status</string>
+
+    <string name="title_properties">Properties</string>
+    <string name="title_stories">Stories</string>
 
     <string name="get_started">Let\'s get started</string>
 

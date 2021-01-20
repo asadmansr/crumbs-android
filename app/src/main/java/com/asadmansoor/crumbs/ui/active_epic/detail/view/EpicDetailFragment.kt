@@ -83,15 +83,6 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
             R.id.btn_delete -> {
                 deleteEpic(args.epicId)
             }
-//            R.id.btn_status_paused -> {
-//                updateStatus(args.epicId, 1)
-//            }
-//            R.id.btn_status_progress -> {
-//                updateStatus(args.epicId, 2)
-//            }
-//            R.id.btn_status_done -> {
-//                updateStatus(args.epicId, 3)
-//            }
             R.id.btn_complete_epic -> {
                 if (allStoriesCompleted) {
                     completeEpic()
@@ -107,17 +98,18 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
             R.id.btn_add_story -> {
                 showCreateStoryDialog()
             }
+            R.id.tv_status_value -> {
+                showStatusViewDialog(args.epicId)
+            }
         }
     }
 
     private fun bindUI() {
         binding.btnNavigateBack.setOnClickListener(this)
         binding.btnDelete.setOnClickListener(this)
-        //binding.btnStatusProgress.setOnClickListener(this)
-        //binding.btnStatusPaused.setOnClickListener(this)
-        //binding.btnStatusDone.setOnClickListener(this)
         binding.btnCompleteEpic.setOnClickListener(this)
         binding.btnAddStory.setOnClickListener(this)
+        binding.tvStatusValue.setOnClickListener(this)
     }
 
     private fun loadData(id: String) {
@@ -132,9 +124,6 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
                     binding.tvEpicTitle.text = epic.title
                     binding.tvEpicDescription.text = epic.description
                     binding.tvStatusValue.text = epic.statusString
-                    //binding.tvCreatedValue.text = epic.createdAtString
-                    //binding.tvUpdatedValue.text = epic.lastUpdatedString
-                    //binding.tvStatusValue.text = epic.statusString
                 }
             } else {
                 navigateBack()
@@ -163,10 +152,6 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
 
     private fun deleteEpic(id: String) {
         viewModel.deleteEpic(id)
-    }
-
-    private fun updateStatus(id: String, status: Int) {
-        viewModel.updateStatus(id, status)
     }
 
     private fun completeEpic() {
@@ -225,49 +210,63 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
             val storyId = item.storyItem.storyId
             val status = item.storyItem.completed
 
-            showCustomViewDialog(BottomSheet(LayoutMode.WRAP_CONTENT))
-//            MaterialDialog(requireContext()).show {
-//                title(text = "hi")
-//                message(text = "message")
-//                cornerRadius(16f)
-//                positiveButton(text = "Update") {
-//                    viewModel.updateStory(storyId, !status)
-//                }
-//                neutralButton(text = "Cancel")
-//                negativeButton(text = "Delete") {
-//                    viewModel.deleteStory(currentStoryEntity, storyId)
-//                    numOfStories--
-//                }
-//            }
+            showCustomViewDialog(storyId, status, currentStoryEntity)
         }
     }
 
-    private fun showCustomViewDialog(dialogBehavior: DialogBehavior = ModalDialog) {
-        val dialog = MaterialDialog(requireContext(), dialogBehavior).show {
-            //title(R.string.get_started)
+    private fun showCustomViewDialog(storyId: String, status: Boolean, entity: CurrentStoryEntity) {
+        val dialog = MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             customView(R.layout.sheet_stories, scrollable = true, horizontalPadding = true)
-            //positiveButton(R.string.get_started) { dialog -> }
-            //negativeButton(android.R.string.cancel)
-
         }
 
         val customView = dialog.getCustomView()
-        val one: Button = customView.findViewById(R.id.one)
-        val two: Button = customView.findViewById(R.id.two)
-        val three: Button = customView.findViewById(R.id.three)
+        val completeBtn: Button = customView.findViewById(R.id.btn_sheet_complete)
+        val deleteBtn: Button = customView.findViewById(R.id.btn_sheet_delete)
+        val cancelBtn: Button = customView.findViewById(R.id.btn_sheet_cancel)
 
-        one.setOnClickListener{
-            Log.d("myapp_sheet", "one")
+        completeBtn.setOnClickListener{
+            viewModel.updateStory(storyId, !status)
             dialog.dismiss()
         }
 
-        two.setOnClickListener {
-            Log.d("myapp_sheet", "two")
+        deleteBtn.setOnClickListener {
+            viewModel.deleteStory(entity, storyId)
+            numOfStories--
             dialog.dismiss()
         }
 
-        three.setOnClickListener {
-            Log.d("myapp_sheet", "three")
+        cancelBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+    }
+
+    private fun showStatusViewDialog(epicId: String) {
+        val dialog = MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+            customView(R.layout.sheet_epic, scrollable = true, horizontalPadding = true)
+        }
+
+        val customView = dialog.getCustomView()
+        val pausedBtn: Button = customView.findViewById(R.id.btn_sheet_paused)
+        val progressBtn: Button = customView.findViewById(R.id.btn_sheet_progress)
+        val completeBtn: Button = customView.findViewById(R.id.btn_sheet_complete)
+        val cancelBtn: Button = customView.findViewById(R.id.btn_sheet_cancel)
+
+        pausedBtn.setOnClickListener {
+            viewModel.updateStatus(args.epicId, 1)
+            dialog.dismiss()
+        }
+
+        progressBtn.setOnClickListener {
+            viewModel.updateStatus(args.epicId, 2)
+            dialog.dismiss()
+        }
+
+        completeBtn.setOnClickListener{
+            viewModel.updateStatus(args.epicId, 3)
+            dialog.dismiss()
+        }
+
+        cancelBtn.setOnClickListener {
             dialog.dismiss()
         }
     }
