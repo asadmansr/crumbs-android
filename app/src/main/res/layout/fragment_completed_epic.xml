@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".ui.completed.list.view.CompletedEpicFragment">
+    tools:context=".ui.completed_epic.list.view.CompletedEpicFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_completed_epic"

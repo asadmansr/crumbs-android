@@ -14,8 +14,8 @@ import com.asadmansoor.crumbs.data.source.current_epic.LocalCurrentEpicDataSourc
 import com.asadmansoor.crumbs.data.source.current_epic.LocalCurrentEpicDataSourceImpl
 import com.asadmansoor.crumbs.data.source.user.LocalUserDataSource
 import com.asadmansoor.crumbs.data.source.user.LocalUserDataSourceImpl
-import com.asadmansoor.crumbs.ui.dashboard.DashboardViewModelFactory
-import com.asadmansoor.crumbs.ui.epic.viewmodel.EpicViewModelFactory
+import com.asadmansoor.crumbs.ui.dashboard.viewmodel.DashboardViewModelFactory
+import com.asadmansoor.crumbs.ui.active_epic.create.viewmodel.EpicViewModelFactory
 import com.asadmansoor.crumbs.ui.splash.viewmodel.SplashViewModel
 import com.asadmansoor.crumbs.ui.splash.viewmodel.SplashViewModelFactory
 import com.asadmansoor.crumbs.ui.tutorial.viewmodel.TertiaryTutorialViewModelFactory
@@ -76,7 +76,11 @@ class SplashViewModelTest: KodeinAware {
                 instance()
             )
         }
-        bind() from provider { DashboardViewModelFactory(instance()) }
+        bind() from provider {
+            DashboardViewModelFactory(
+                instance()
+            )
+        }
         bind() from provider {
             EpicViewModelFactory(
                 instance()

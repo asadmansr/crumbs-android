@@ -18,20 +18,21 @@
     <string name="btn_finish">Finish</string>
     <string name="btn_create">Create</string>
 
-    <string name="epic_title_name">Enter Epic Name</string>
-    <string name="epic_title_description">Enter Description</string>
+    <string name="epic_title_name">Epic Name</string>
+    <string name="epic_title_description">Epic Description</string>
     <string name="epic_title_epic">New Epic</string>
     <string name="epic_content_starter">This is a placeholder text for now. This is a placeholder text for now. This is a placeholder text for now.</string>
     <string name="todo">TODO</string>
-    <string name="complete_the_adventures_of_reading_the_book">Complete the adventures of reading the book...</string>
-    <string name="e_g_finish_reading_book">E.g. Finish reading book</string>
+
+    <string name="example_create_epic_description">Example: Complete the python course.</string>
+    <string name="example_create_epic_title">Example: Learn how to code.</string>
 
     <string name="filter_all">All</string>
     <string name="filter_not_started">Not started</string>
     <string name="filter_paused">Paused</string>
     <string name="filter_in_progress">In Progress</string>
 
-    <string name="text_no_epic_added">Tap on + to create an epic</string>
+    <string name="text_no_epic_added">Create an epic to get started</string>
     <string name="text_today">Today</string>
 
     <string name="dialog_ok">OK</string>

@@ -18,8 +18,9 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorWhite"
         android:textSize="12sp"
-        android:maxLines="1"
+        app:fontFamily="@font/nunito"
         android:layout_toRightOf="@id/item_story_completed"
+        android:layout_toEndOf="@id/item_story_completed"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
@@ -34,5 +35,6 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_centerVertical="true"
-        app:srcCompat="@drawable/baseline_radio_button_unchecked_white_24" />
+        app:srcCompat="@drawable/baseline_radio_button_unchecked_white_24"
+        android:contentDescription="TODO" />
 </RelativeLayout>

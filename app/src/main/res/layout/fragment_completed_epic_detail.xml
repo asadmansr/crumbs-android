@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".ui.completed.detail.view.CompletedEpicDetailFragment">
+    tools:context=".ui.completed_epic.detail.view.CompletedEpicDetailFragment">
 
     <ImageButton
         android:id="@+id/btn_navigate_back"

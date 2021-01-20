@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.asadmansoor.crumbs.ui.dashboard.DashboardFragment"
+        android:name="com.asadmansoor.crumbs.ui.dashboard.view.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" >
         <action
@@ -50,12 +50,12 @@
     </fragment>
     <fragment
         android:id="@+id/epicFragment"
-        android:name="com.asadmansoor.crumbs.ui.epic.view.EpicFragment"
+        android:name="com.asadmansoor.crumbs.ui.active_epic.create.view.EpicFragment"
         android:label="fragment_epic"
         tools:layout="@layout/fragment_epic" />
     <fragment
         android:id="@+id/epicDetailFragment"
-        android:name="com.asadmansoor.crumbs.ui.epic.view.EpicDetailFragment"
+        android:name="com.asadmansoor.crumbs.ui.active_epic.detail.view.EpicDetailFragment"
         android:label="fragment_epic_detail"
         tools:layout="@layout/fragment_epic_detail" >
         <argument
@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/completedEpicFragment"
-        android:name="com.asadmansoor.crumbs.ui.completed.list.view.CompletedEpicFragment"
+        android:name="com.asadmansoor.crumbs.ui.completed_epic.list.view.CompletedEpicFragment"
         android:label="fragment_completed_epic"
         tools:layout="@layout/fragment_completed_epic" >
         <action
@@ -73,7 +73,7 @@
     </fragment>
     <fragment
         android:id="@+id/completedEpicDetailFragment"
-        android:name="com.asadmansoor.crumbs.ui.completed.detail.view.CompletedEpicDetailFragment"
+        android:name="com.asadmansoor.crumbs.ui.completed_epic.detail.view.CompletedEpicDetailFragment"
         android:label="fragment_completed_epic_detail"
         tools:layout="@layout/fragment_completed_epic_detail" >
         <argument

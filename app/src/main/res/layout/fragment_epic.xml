@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.asadmansoor.crumbs.ui.epic.viewmodel.EpicViewModel" />
+            type="com.asadmansoor.crumbs.ui.active_epic.create.viewmodel.EpicViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,8 +12,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark"
-        tools:context=".ui.epic.view.EpicFragment">
+        android:background="@color/colorPrimary"
+        tools:context=".ui.active_epic.create.view.EpicFragment">
 
         <ImageButton
             android:id="@+id/btn_navigate_back"
@@ -57,7 +57,7 @@
             android:layout_marginLeft="24dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="36dp"
             android:text="@string/epic_content_starter"
             android:textColor="@color/colorWhite"
             app:fontFamily="@font/nunito"
@@ -73,7 +73,7 @@
             android:layout_marginLeft="24dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="36dp"
             android:text="@string/epic_title_name"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
@@ -93,7 +93,8 @@
             android:ems="10"
             android:textSize="14sp"
             android:inputType="textPersonName"
-            android:hint="@string/e_g_finish_reading_book"
+            android:hint="@string/example_create_epic_title"
+            android:backgroundTint="@color/colorWhite"
             android:textColorHint="@color/colorGrey"
             android:textColor="@color/colorWhite"
             android:text="@={viewModel.epicName}"
@@ -129,7 +130,8 @@
             android:layout_marginRight="24dp"
             android:ems="10"
             android:textSize="14sp"
-            android:hint="@string/complete_the_adventures_of_reading_the_book"
+            android:backgroundTint="@color/colorWhite"
+            android:hint="@string/example_create_epic_description"
             android:textColorHint="@color/colorGrey"
             android:textColor="@color/colorWhite"
             android:gravity="start|top"

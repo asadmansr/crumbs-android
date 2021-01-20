@@ -6,14 +6,14 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.asadmansoor.crumbs.ui.epic.viewmodel.EpicDetailViewModel" />
+            type="com.asadmansoor.crumbs.ui.active_epic.detail.viewmodel.EpicDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark"
-        tools:context=".ui.epic.view.EpicDetailFragment">
+        android:background="@color/colorPrimary"
+        tools:context=".ui.active_epic.detail.view.EpicDetailFragment">
 
         <ImageButton
             android:id="@+id/btn_navigate_back"
@@ -42,20 +42,6 @@
             android:contentDescription="@string/todo" />
 
         <TextView
-            android:id="@+id/tv_detail_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/title_detail"
-            android:textColor="@color/colorWhite"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:fontFamily="@font/nunito"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/tv_epic_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -71,7 +57,7 @@
             app:fontFamily="@font/nunito"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_detail_title" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_navigate_back" />
 
         <TextView
             android:id="@+id/tv_epic_description"
@@ -90,165 +76,72 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_epic_title" />
 
         <TextView
-            android:id="@+id/tv_created_title"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_epic_properties"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="36dp"
-            android:text="@string/title_created"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="Properties"
             android:textColor="@color/colorWhite"
-            android:textSize="12sp"
-            android:textStyle="bold"
+            android:textSize="16sp"
             app:fontFamily="@font/nunito"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_epic_description" />
 
-        <TextView
-            android:id="@+id/tv_created_value"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:textColor="@color/colorWhite"
-            android:textSize="12sp"
-            app:fontFamily="@font/nunito"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_created_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_epic_description" />
-
-        <TextView
-            android:id="@+id/tv_updated_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/title_updated"
-            android:textColor="@color/colorWhite"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:fontFamily="@font/nunito"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_created_title" />
-
-        <TextView
-            android:id="@+id/tv_updated_value"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:textColor="@color/colorWhite"
-            android:textSize="12sp"
-            app:fontFamily="@font/nunito"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_updated_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_created_value" />
-
-        <TextView
-            android:id="@+id/tv_status_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/title_status"
-            android:textColor="@color/colorWhite"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:fontFamily="@font/nunito"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_updated_title" />
-
-        <TextView
-            android:id="@+id/tv_status_value"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:textColor="@color/colorWhite"
-            android:textSize="12sp"
-            app:fontFamily="@font/nunito"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_status_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_updated_value" />
-
-        <TextView
-            android:id="@+id/tv_change_status_title"
+        <RelativeLayout
+            android:id="@+id/rl"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:text="@string/title_change_status"
-            android:textColor="@color/colorWhite"
-            android:textSize="14sp"
-            app:fontFamily="@font/nunito"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_status_value" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
-            android:orientation="horizontal"
-            android:weightSum="3"
+            android:background="@drawable/drawable_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_change_status_title">
+            app:layout_constraintTop_toBottomOf="@+id/tv_epic_properties" >
 
-            <Button
-                android:id="@+id/btn_status_paused"
+            <TextView
+                android:id="@+id/tv_status_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Paused"
-                android:textAllCaps="false"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/title_status"
                 android:textColor="@color/colorWhite"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/nunito"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
-            <Button
-                android:id="@+id/btn_status_progress"
+            <TextView
+                android:id="@+id/tv_status_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="In Progress"
-                android:textAllCaps="false"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:textColor="@color/colorWhite"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/btn_status_done"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Done"
-                android:textAllCaps="false"
-                android:textColor="@color/colorWhite"
-                android:textSize="12sp" />
-        </LinearLayout>
+                android:textSize="12sp"
+                android:layout_toRightOf="@id/tv_status_title"
+                android:layout_toEndOf="@id/tv_status_title"
+                android:gravity="end"
+                app:fontFamily="@font/nunito"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_stories_title"
@@ -261,12 +154,12 @@
             android:layout_marginRight="16dp"
             android:text="Stories"
             android:textColor="@color/colorWhite"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:fontFamily="@font/nunito"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/rl" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_complete_epic"
@@ -307,6 +200,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_stories_title" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -24,11 +24,11 @@ import com.asadmansoor.crumbs.data.source.stories.LocalCurrentStoryDataSource
 import com.asadmansoor.crumbs.data.source.stories.LocalCurrentStoryDataSourceImpl
 import com.asadmansoor.crumbs.data.source.user.LocalUserDataSource
 import com.asadmansoor.crumbs.data.source.user.LocalUserDataSourceImpl
-import com.asadmansoor.crumbs.ui.completed.detail.viewmodel.CompletedEpicDetailViewModelFactory
-import com.asadmansoor.crumbs.ui.completed.list.viewmodel.CompletedEpicViewModelFactory
-import com.asadmansoor.crumbs.ui.dashboard.DashboardViewModelFactory
-import com.asadmansoor.crumbs.ui.epic.viewmodel.EpicDetailViewModelFactory
-import com.asadmansoor.crumbs.ui.epic.viewmodel.EpicViewModelFactory
+import com.asadmansoor.crumbs.ui.completed_epic.detail.viewmodel.CompletedEpicDetailViewModelFactory
+import com.asadmansoor.crumbs.ui.completed_epic.list.viewmodel.CompletedEpicViewModelFactory
+import com.asadmansoor.crumbs.ui.dashboard.viewmodel.DashboardViewModelFactory
+import com.asadmansoor.crumbs.ui.active_epic.detail.viewmodel.EpicDetailViewModelFactory
+import com.asadmansoor.crumbs.ui.active_epic.create.viewmodel.EpicViewModelFactory
 import com.asadmansoor.crumbs.ui.splash.viewmodel.SplashViewModelFactory
 import com.asadmansoor.crumbs.ui.tutorial.viewmodel.TertiaryTutorialViewModelFactory
 import org.kodein.di.Kodein
@@ -133,7 +133,11 @@ class CrumbsApplication : Application(), KodeinAware {
             )
         }
 
-        bind() from provider { DashboardViewModelFactory(instance()) }
+        bind() from provider {
+            DashboardViewModelFactory(
+                instance()
+            )
+        }
 
         bind() from provider {
             EpicViewModelFactory(

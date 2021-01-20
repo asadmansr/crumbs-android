@@ -6,11 +6,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.asadmansoor.crumbs.R
-import com.asadmansoor.crumbs.ui.base.ScopedFragment
 import com.asadmansoor.crumbs.ui.splash.viewmodel.SplashViewModel
 import com.asadmansoor.crumbs.ui.splash.viewmodel.SplashViewModelFactory
 import org.kodein.di.Kodein
@@ -19,7 +19,7 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
 
-class SplashFragment : ScopedFragment(), KodeinAware {
+class SplashFragment : Fragment(), KodeinAware {
 
     private val splashDelay: Long = 3000
 
