@@ -7,7 +7,7 @@ import com.asadmansoor.crumbs.data.repository.user.UserRepository
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class TertiaryTutorialViewModel(
+class RoadmapTutorialViewModel(
     private val userRepository: UserRepository
 ) : ViewModel() {
 

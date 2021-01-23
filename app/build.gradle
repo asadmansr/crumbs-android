@@ -78,6 +78,8 @@ dependencies {
 
     implementation Libs.MaterialDialog.input
     implementation Libs.MaterialDialog.sheet
+
+    implementation Libs.Logging.timber
 }
 
 dependencies {

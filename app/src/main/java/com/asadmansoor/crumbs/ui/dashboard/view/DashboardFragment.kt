@@ -1,11 +1,9 @@
 package com.asadmansoor.crumbs.ui.dashboard.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,16 +13,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.asadmansoor.crumbs.R
 import com.asadmansoor.crumbs.data.domain.CurrentEpic
 import com.asadmansoor.crumbs.databinding.FragmentDashboardBinding
-import com.asadmansoor.crumbs.ui.dashboard.view.DashboardFragmentDirections
+import com.asadmansoor.crumbs.ui.dashboard.item.CurrentEpicItem
 import com.asadmansoor.crumbs.ui.dashboard.viewmodel.DashboardViewModel
 import com.asadmansoor.crumbs.ui.dashboard.viewmodel.DashboardViewModelFactory
-import com.asadmansoor.crumbs.ui.dashboard.item.CurrentTaskItem
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import timber.log.Timber
 
 
 class DashboardFragment : Fragment(), KodeinAware, View.OnClickListener {
@@ -65,18 +63,18 @@ class DashboardFragment : Fragment(), KodeinAware, View.OnClickListener {
     private fun loadCurrentEpics() {
         viewModel.getEpics()
         viewModel.epics.observe(viewLifecycleOwner, Observer { epics ->
-            Log.d("myapp", "$epics")
-            initRecyclerView(epics.toCurrentItem())
+            Timber.d("Current epics: $epics")
+            initRecyclerView(epics.toCurrentEpicItem())
         })
     }
 
-    private fun List<CurrentEpic>.toCurrentItem(): List<CurrentTaskItem> {
+    private fun List<CurrentEpic>.toCurrentEpicItem(): List<CurrentEpicItem> {
         return this.map {
-            CurrentTaskItem(it)
+            CurrentEpicItem(it)
         }
     }
 
-    private fun initRecyclerView(items: List<CurrentTaskItem>) {
+    private fun initRecyclerView(items: List<CurrentEpicItem>) {
         val groupAdapter = GroupAdapter<GroupieViewHolder>().apply {
             addAll(items)
         }
@@ -87,9 +85,7 @@ class DashboardFragment : Fragment(), KodeinAware, View.OnClickListener {
         }
 
         groupAdapter.setOnItemClickListener { item, view ->
-            Toast.makeText(this@DashboardFragment.context, "clicked", Toast.LENGTH_SHORT).show()
-
-            val key = (item as CurrentTaskItem).epicItem.epicId
+            val key = (item as CurrentEpicItem).epicItem.epicId
             navigateToEpicDetail(key)
         }
     }

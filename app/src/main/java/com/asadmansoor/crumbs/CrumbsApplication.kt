@@ -24,13 +24,13 @@ import com.asadmansoor.crumbs.data.source.stories.LocalCurrentStoryDataSource
 import com.asadmansoor.crumbs.data.source.stories.LocalCurrentStoryDataSourceImpl
 import com.asadmansoor.crumbs.data.source.user.LocalUserDataSource
 import com.asadmansoor.crumbs.data.source.user.LocalUserDataSourceImpl
+import com.asadmansoor.crumbs.ui.active_epic.create.viewmodel.EpicViewModelFactory
+import com.asadmansoor.crumbs.ui.active_epic.detail.viewmodel.EpicDetailViewModelFactory
 import com.asadmansoor.crumbs.ui.completed_epic.detail.viewmodel.CompletedEpicDetailViewModelFactory
 import com.asadmansoor.crumbs.ui.completed_epic.list.viewmodel.CompletedEpicViewModelFactory
 import com.asadmansoor.crumbs.ui.dashboard.viewmodel.DashboardViewModelFactory
-import com.asadmansoor.crumbs.ui.active_epic.detail.viewmodel.EpicDetailViewModelFactory
-import com.asadmansoor.crumbs.ui.active_epic.create.viewmodel.EpicViewModelFactory
 import com.asadmansoor.crumbs.ui.splash.viewmodel.SplashViewModelFactory
-import com.asadmansoor.crumbs.ui.tutorial.viewmodel.TertiaryTutorialViewModelFactory
+import com.asadmansoor.crumbs.ui.tutorial.viewmodel.RoadmapTutorialViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -38,6 +38,9 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
+import timber.log.Timber
+import timber.log.Timber.DebugTree
+
 
 class CrumbsApplication : Application(), KodeinAware {
 
@@ -128,7 +131,7 @@ class CrumbsApplication : Application(), KodeinAware {
         }
 
         bind() from provider {
-            TertiaryTutorialViewModelFactory(
+            RoadmapTutorialViewModelFactory(
                 instance()
             )
         }
@@ -163,6 +166,13 @@ class CrumbsApplication : Application(), KodeinAware {
                 instance(),
                 instance()
             )
+        }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        if (BuildConfig.DEBUG) {
+            Timber.plant(DebugTree())
         }
     }
 }

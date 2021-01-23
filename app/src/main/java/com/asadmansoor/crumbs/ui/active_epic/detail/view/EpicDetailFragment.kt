@@ -164,8 +164,8 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
 
     private fun showCreateStoryDialog() {
         MaterialDialog(requireContext()).show {
-            title(text = "Your Title")
-            message(text = "Your Message")
+            title(R.string.dialog_create_story)
+            message(R.string.dialog_story_descriptions)
             cornerRadius(16f)
             input(maxLength = 32) { dialog, text ->
                 // Text submitted with the action button

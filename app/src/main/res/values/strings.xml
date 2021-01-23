@@ -25,7 +25,7 @@
     <string name="epic_title_description">Epic Description</string>
     <string name="epic_title_epic">New Epic</string>
     <string name="epic_title_completed">Completed Epics</string>
-    <string name="epic_content_starter">This is a placeholder text for now. This is a placeholder text for now. This is a placeholder text for now.</string>
+    <string name="epic_content_starter">Epics are long term goals which can take days, weeks or months to complete. Epics should be specific and achievable.</string>
     <string name="todo">TODO</string>
 
     <string name="example_create_epic_description">Example: Complete the python course.</string>
@@ -37,7 +37,7 @@
     <string name="filter_in_progress">In Progress</string>
     <string name="filter_completed">Completed</string>
 
-    <string name="text_no_epic_added">Create an epic to get started</string>
+    <string name="text_no_epic_added">No epics found … \nCreate one to get started</string>
     <string name="text_no_stories_added">No stories for this epic has been added</string>
     <string name="text_today">Today</string>
 
@@ -54,4 +54,17 @@
     <string name="get_started">Let\'s get started</string>
 
     <string name="btn_cancel">Cancel</string>
+
+    <string name="sheet_description">What shall we call you? Note: All of your data is stored on your device only and not on our servers.</string>
+    <string name="sheet_enter_name">Enter your name or nickname</string>
+
+    <string name="dialog_create_story">Create a story</string>
+    <string name="dialog_story_descriptions">Stories are small tasks to help complete your epic. They are specific and actionable items of work.</string>
+
+    <string name="content_dashboard_add">Create a new epic</string>
+    <string name="content_dashboard_completed">Access completed epics</string>
+    <string name="content_back_button">Navigate to previous screen</string>
+    <string name="content_delete_epic">Delete epic</string>
+    <string name="content_add_story">Add a story to the epic</string>
+    <string name="content_complete_epic">Complete epic</string>
 </resources>

@@ -12,7 +12,7 @@ class GenerateTimeParameter {
     fun generateUid(name: String): String {
         date = Date()
         dateString = dateFormatter.format(date)
-        return "$name-$dateString"
+        return "${formatName(name)}-$dateString"
     }
 
     fun generateTimestamp(): Long {
@@ -31,5 +31,13 @@ class GenerateTimeParameter {
         date = Date()
         dateString = dateFormatter.format(date)
         return "stor-$dateString"
+    }
+
+    private fun formatName(name: String): String {
+        if (name.length > 8) {
+            return name.substring(0,8).toLowerCase(Locale.ROOT)
+        }
+
+        return name.toLowerCase(Locale.ROOT)
     }
 }

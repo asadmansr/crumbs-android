@@ -1,6 +1,5 @@
 package com.asadmansoor.crumbs.ui.active_epic.create.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,7 +18,6 @@ class EpicViewModel(
     val nameValid = MediatorLiveData<Boolean>().apply {
         addSource(epicName) {
             val valid = isInputValid(it)
-            Log.d("myapp", "name: " + valid.toString())
             value = valid
         }
     }
@@ -27,7 +25,6 @@ class EpicViewModel(
     val descriptionValid = MediatorLiveData<Boolean>().apply {
         addSource(epicDescription) {
             val valid = isInputValid(it)
-            Log.d("myapp", "desc: " + valid.toString())
             value = valid
         }
     }

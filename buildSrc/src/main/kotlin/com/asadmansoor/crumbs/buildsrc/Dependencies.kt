@@ -2,7 +2,7 @@ package com.asadmansoor.crumbs.buildsrc
 
 object Build {
     const val compileSdkVersion = 29
-    const val minSdkVersion = 16
+    const val minSdkVersion = 21
     const val targetSdkVersion = 29
 }
 
@@ -67,6 +67,10 @@ object Libs {
     object MaterialDialog {
         const val input = "com.afollestad.material-dialogs:input:3.3.0"
         const val sheet = "com.afollestad.material-dialogs:bottomsheets:3.2.1"
+    }
+
+    object Logging {
+        const val timber = "com.jakewharton.timber:timber:4.7.1"
     }
 
     object Test {

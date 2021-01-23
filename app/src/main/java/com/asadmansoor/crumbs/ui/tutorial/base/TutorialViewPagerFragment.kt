@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.asadmansoor.crumbs.R
 import com.asadmansoor.crumbs.ui.tutorial.view.EpicsTutorialFragment
-import com.asadmansoor.crumbs.ui.tutorial.view.StoriesTutorialFragment
 import com.asadmansoor.crumbs.ui.tutorial.view.RoadmapTutorialFragment
+import com.asadmansoor.crumbs.ui.tutorial.view.StoriesTutorialFragment
 import kotlinx.android.synthetic.main.fragment_tutorial_view_pager.view.*
 
 
@@ -27,7 +27,7 @@ class TutorialViewPagerFragment : Fragment() {
             RoadmapTutorialFragment()
         )
 
-        val adapter: TutorialViewPagerAdapter =
+        val adapter =
             TutorialViewPagerAdapter(
                 fragmentList,
                 requireActivity().supportFragmentManager,

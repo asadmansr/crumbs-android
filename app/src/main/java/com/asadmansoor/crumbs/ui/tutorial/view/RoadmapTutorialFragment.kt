@@ -1,7 +1,6 @@
 package com.asadmansoor.crumbs.ui.tutorial.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,27 +10,27 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.afollestad.materialdialogs.DialogBehavior
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.ModalDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.asadmansoor.crumbs.R
-import com.asadmansoor.crumbs.ui.tutorial.viewmodel.TertiaryTutorialViewModel
-import com.asadmansoor.crumbs.ui.tutorial.viewmodel.TertiaryTutorialViewModelFactory
+import com.asadmansoor.crumbs.ui.tutorial.viewmodel.RoadmapTutorialViewModel
+import com.asadmansoor.crumbs.ui.tutorial.viewmodel.RoadmapTutorialViewModelFactory
 import kotlinx.android.synthetic.main.fragment_roadmap_tutorial.view.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import timber.log.Timber
 
 
 class RoadmapTutorialFragment : Fragment(), KodeinAware {
 
     override val kodein: Kodein by closestKodein()
-    private val viewModelFactory: TertiaryTutorialViewModelFactory by instance()
-    private lateinit var viewModel: TertiaryTutorialViewModel
+    private val viewModelFactory: RoadmapTutorialViewModelFactory by instance()
+    private lateinit var viewModel: RoadmapTutorialViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +43,7 @@ class RoadmapTutorialFragment : Fragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel =
-            ViewModelProvider(this, viewModelFactory).get(TertiaryTutorialViewModel::class.java)
+            ViewModelProvider(this, viewModelFactory).get(RoadmapTutorialViewModel::class.java)
 
         val viewPager: ViewPager2? = activity?.findViewById<ViewPager2>(R.id.viewPager)
 
@@ -53,23 +52,24 @@ class RoadmapTutorialFragment : Fragment(), KodeinAware {
         }
 
         view.btn_roadmap_finish.setOnClickListener {
-            //completeUserTutorial()
-            showCustomViewDialog(BottomSheet())
+            showCustomViewDialog()
         }
     }
 
-    private fun showCustomViewDialog(dialogBehavior: DialogBehavior = ModalDialog) {
-        val dialog = MaterialDialog(requireContext(), dialogBehavior).show {
+    private fun showCustomViewDialog() {
+        MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             title(R.string.get_started)
+
             customView(R.layout.sheet_tutorial, scrollable = true, horizontalPadding = true)
+
             positiveButton(R.string.get_started) { dialog ->
                 val input: EditText = dialog.getCustomView().findViewById(R.id.sheet_tutorial_name)
                 val nameString = input.text.toString()
-                Log.d("myapp_sheet", nameString)
                 if (nameString.isNotEmpty() || nameString.isNotBlank()) {
                     completeUserTutorial(nameString)
                 }
             }
+
             negativeButton(android.R.string.cancel)
         }
     }
@@ -77,7 +77,7 @@ class RoadmapTutorialFragment : Fragment(), KodeinAware {
     private fun completeUserTutorial(name: String) {
         viewModel.doneUserTutorial(name = name)
         viewModel.user.observe(viewLifecycleOwner, Observer { user ->
-            Log.d("myapp_tutorial", "$user")
+            Timber.d("New user added: $user")
             if ((user != null) && (user.tutorialCompleted)) {
                 navigateToDashboard()
             }

@@ -7,7 +7,7 @@ import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_current_epics.*
 
 
-class CurrentTaskItem(
+class CurrentEpicItem(
     val epicItem: CurrentEpic
 ) : Item() {
 

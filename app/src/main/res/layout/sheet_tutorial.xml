@@ -9,16 +9,15 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="All of your data is stored on the device only"
+        android:text="@string/sheet_description"
         android:textColor="?android:textColorSecondary"
         android:textSize="14sp" />
-
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
-        android:text="Enter your name or nickname"
+        android:text="@string/sheet_enter_name"
         android:textColor="?android:textColorSecondary"
         android:textSize="14sp" />
 
@@ -27,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:inputType="text"
+        android:inputType="textPersonName|textCapWords"
         android:textColor="?android:textColorPrimary"
         android:textSize="18sp"
         tools:ignore="Autofill,HardcodedText,LabelFor" />

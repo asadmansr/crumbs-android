@@ -1,11 +1,9 @@
 package com.asadmansoor.crumbs.ui.active_epic.create.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -19,6 +17,7 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import timber.log.Timber
 
 class EpicFragment : Fragment(), KodeinAware, View.OnClickListener {
 
@@ -54,7 +53,6 @@ class EpicFragment : Fragment(), KodeinAware, View.OnClickListener {
         when (view?.id) {
             R.id.btn_create_epic -> {
                 createEpic()
-                Toast.makeText(requireContext(), "hi", Toast.LENGTH_LONG).show()
             }
             R.id.btn_navigate_back -> {
                 navigateBack()
@@ -72,7 +70,7 @@ class EpicFragment : Fragment(), KodeinAware, View.OnClickListener {
 
         viewModel.createNewEpic(name = name, description = description)
         viewModel.createdEpic.observe(viewLifecycleOwner, Observer { epic ->
-            Log.d("myapp_epic", "$epic")
+            Timber.d("Created epic: $epic")
             if (epic != null || epic!!.title.isNotEmpty()) {
                 navigateBack()
             }

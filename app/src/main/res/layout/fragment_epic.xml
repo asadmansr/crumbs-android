@@ -26,7 +26,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/tv_epic_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/todo" />
+            android:contentDescription="@string/content_back_button" />
 
         <TextView
             android:id="@+id/tv_epic_title"
@@ -92,7 +92,7 @@
             android:layout_marginRight="24dp"
             android:ems="10"
             android:textSize="14sp"
-            android:inputType="textPersonName"
+            android:inputType="text|textCapSentences"
             android:hint="@string/example_create_epic_title"
             android:backgroundTint="@color/colorWhite"
             android:textColorHint="@color/colorGrey"
@@ -135,7 +135,7 @@
             android:textColorHint="@color/colorGrey"
             android:textColor="@color/colorWhite"
             android:gravity="start|top"
-            android:inputType="textMultiLine"
+            android:inputType="textMultiLine|textCapSentences"
             android:text="@={viewModel.epicDescription}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

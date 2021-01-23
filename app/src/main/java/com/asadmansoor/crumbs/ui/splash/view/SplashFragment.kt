@@ -2,7 +2,6 @@ package com.asadmansoor.crumbs.ui.splash.view
 
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,15 +16,17 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import timber.log.Timber
 
 
 class SplashFragment : Fragment(), KodeinAware {
 
-    private val splashDelay: Long = 3000
-
     override val kodein: Kodein by closestKodein()
     private val viewModelFactory: SplashViewModelFactory by instance()
+
+    private val splashDelay: Long = 3000
     private lateinit var viewModel: SplashViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,7 +50,7 @@ class SplashFragment : Fragment(), KodeinAware {
 
     private fun loadUserData() {
         viewModel.user.observe(viewLifecycleOwner, Observer { user ->
-            Log.d("myapp", "$user")
+            Timber.d("User: $user")
             if ((user != null) && (user.tutorialCompleted)) {
                 navigateToDashboard()
             } else {
