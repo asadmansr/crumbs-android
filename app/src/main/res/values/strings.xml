@@ -24,6 +24,7 @@
     <string name="epic_title_name">Epic Name</string>
     <string name="epic_title_description">Epic Description</string>
     <string name="epic_title_epic">New Epic</string>
+    <string name="epic_title_completed">Completed Epics</string>
     <string name="epic_content_starter">This is a placeholder text for now. This is a placeholder text for now. This is a placeholder text for now.</string>
     <string name="todo">TODO</string>
 

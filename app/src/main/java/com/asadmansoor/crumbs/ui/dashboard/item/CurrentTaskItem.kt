@@ -4,7 +4,7 @@ import com.asadmansoor.crumbs.R
 import com.asadmansoor.crumbs.data.domain.CurrentEpic
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
-import kotlinx.android.synthetic.main.item_current_tasks.*
+import kotlinx.android.synthetic.main.item_current_epics.*
 
 
 class CurrentTaskItem(
@@ -19,5 +19,5 @@ class CurrentTaskItem(
         }
     }
 
-    override fun getLayout() = R.layout.item_current_tasks
+    override fun getLayout() = R.layout.item_current_epics
 }

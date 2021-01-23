@@ -25,7 +25,7 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
 
-class CompletedEpicFragment : Fragment(), KodeinAware {
+class CompletedEpicFragment : Fragment(), KodeinAware, View.OnClickListener {
 
     override val kodein: Kodein by closestKodein()
     private val viewModelFactory: CompletedEpicViewModelFactory by instance()
@@ -43,6 +43,7 @@ class CompletedEpicFragment : Fragment(), KodeinAware {
         super.onViewCreated(view, savedInstanceState)
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(CompletedEpicViewModel::class.java)
+        btn_navigate_back.setOnClickListener(this)
         getCompletedEpics()
     }
 
@@ -81,5 +82,17 @@ class CompletedEpicFragment : Fragment(), KodeinAware {
                 )
             requireView().findNavController().navigate(action)
         }
+    }
+
+    override fun onClick(view: View?) {
+        when (view?.id) {
+            R.id.btn_navigate_back -> {
+                navigateBack()
+            }
+        }
+    }
+
+    private fun navigateBack() {
+        requireView().findNavController().navigateUp()
     }
 }
