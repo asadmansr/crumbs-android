@@ -36,5 +36,5 @@
         android:layout_marginStart="16dp"
         android:layout_centerVertical="true"
         app:srcCompat="@drawable/baseline_radio_button_unchecked_white_24"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/content_completed_story" />
 </RelativeLayout>

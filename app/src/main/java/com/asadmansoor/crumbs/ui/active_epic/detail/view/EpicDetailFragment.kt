@@ -1,12 +1,10 @@
 package com.asadmansoor.crumbs.ui.active_epic.detail.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -15,10 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.afollestad.materialdialogs.DialogBehavior
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.ModalDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
@@ -29,7 +25,6 @@ import com.asadmansoor.crumbs.data.domain.CurrentEpic
 import com.asadmansoor.crumbs.data.domain.Story
 import com.asadmansoor.crumbs.databinding.FragmentEpicDetailBinding
 import com.asadmansoor.crumbs.ui.active_epic.detail.item.CurrentStoryItem
-import com.asadmansoor.crumbs.ui.active_epic.detail.view.EpicDetailFragmentArgs
 import com.asadmansoor.crumbs.ui.active_epic.detail.viewmodel.EpicDetailViewModel
 import com.asadmansoor.crumbs.ui.active_epic.detail.viewmodel.EpicDetailViewModelFactory
 import com.xwray.groupie.GroupAdapter
@@ -38,6 +33,7 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import timber.log.Timber
 
 
 class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
@@ -92,7 +88,6 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
                         "All Stories are not completed",
                         Toast.LENGTH_SHORT
                     ).show()
-
                 }
             }
             R.id.btn_add_story -> {
@@ -114,8 +109,10 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
 
     private fun loadData(id: String) {
         viewModel.getEpic(id)
+        viewModel.getStories(id)
+
         viewModel.epic.observe(viewLifecycleOwner, Observer { epic ->
-            Log.d("myapp_epic_detail", "$epic")
+            Timber.d("Loaded epic: $epic")
             if (epic != null) {
                 if (epic.epicId.isEmpty()) {
                     navigateBack()
@@ -130,9 +127,8 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
             }
         })
 
-        viewModel.getStories(id)
         viewModel.stories.observe(viewLifecycleOwner, Observer { stories ->
-            Log.d("myapp_epic_d_stories", "$stories")
+            Timber.d("Loaded stories: $stories")
             if (stories != null) {
                 currentStories = stories
                 if (stories.isEmpty() && numOfStories != 0) {
@@ -168,8 +164,6 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
             message(R.string.dialog_story_descriptions)
             cornerRadius(16f)
             input(maxLength = 32) { dialog, text ->
-                // Text submitted with the action button
-                Log.d("myapp_dialog", text.toString())
                 viewModel.addStory(text.toString(), args.epicId)
                 numOfStories++
             }
@@ -224,7 +218,7 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
         val deleteBtn: Button = customView.findViewById(R.id.btn_sheet_delete)
         val cancelBtn: Button = customView.findViewById(R.id.btn_sheet_cancel)
 
-        completeBtn.setOnClickListener{
+        completeBtn.setOnClickListener {
             viewModel.updateStory(storyId, !status)
             dialog.dismiss()
         }
@@ -252,17 +246,17 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
         val cancelBtn: Button = customView.findViewById(R.id.btn_sheet_cancel)
 
         pausedBtn.setOnClickListener {
-            viewModel.updateStatus(args.epicId, 1)
+            viewModel.updateStatus(epicId, 1)
             dialog.dismiss()
         }
 
         progressBtn.setOnClickListener {
-            viewModel.updateStatus(args.epicId, 2)
+            viewModel.updateStatus(epicId, 2)
             dialog.dismiss()
         }
 
-        completeBtn.setOnClickListener{
-            viewModel.updateStatus(args.epicId, 3)
+        completeBtn.setOnClickListener {
+            viewModel.updateStatus(epicId, 3)
             dialog.dismiss()
         }
 

@@ -19,7 +19,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_completed_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/todo" />
+        android:contentDescription="@string/content_back_button" />
 
     <TextView
         android:id="@+id/tv_completed_title"

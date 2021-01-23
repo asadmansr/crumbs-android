@@ -1,4 +1,4 @@
-package com.asadmansoor.crumbs.ui.completed_epic.list
+package com.asadmansoor.crumbs.ui.completed_epic.list.item
 
 import com.asadmansoor.crumbs.R
 import com.asadmansoor.crumbs.data.domain.CompletedEpic

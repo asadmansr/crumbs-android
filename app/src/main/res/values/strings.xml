@@ -10,9 +10,6 @@
     <string name="tutorial_roadmap_title">Roadmap</string>
     <string name="tutorial_roadmap_description">your very own way of navigating through life</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="btn_back">Back</string>
     <string name="btn_next">Next</string>
     <string name="btn_finish">Finish</string>
@@ -26,7 +23,6 @@
     <string name="epic_title_epic">New Epic</string>
     <string name="epic_title_completed">Completed Epics</string>
     <string name="epic_content_starter">Epics are long term goals which can take days, weeks or months to complete. Epics should be specific and achievable.</string>
-    <string name="todo">TODO</string>
 
     <string name="example_create_epic_description">Example: Complete the python course.</string>
     <string name="example_create_epic_title">Example: Learn how to code.</string>
@@ -47,6 +43,8 @@
     <string name="title_updated">Last Updated</string>
     <string name="title_status">Status</string>
     <string name="title_change_status">Change Status</string>
+    <string name="title_created_at">Created At</string>
+    <string name="title_completed_at">Completed At</string>
 
     <string name="title_properties">Properties</string>
     <string name="title_stories">Stories</string>
@@ -67,4 +65,5 @@
     <string name="content_delete_epic">Delete epic</string>
     <string name="content_add_story">Add a story to the epic</string>
     <string name="content_complete_epic">Complete epic</string>
+    <string name="content_completed_story">Indicates whether story is complete or not</string>
 </resources>

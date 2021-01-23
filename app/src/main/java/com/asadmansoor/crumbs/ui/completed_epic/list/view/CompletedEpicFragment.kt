@@ -1,11 +1,9 @@
 package com.asadmansoor.crumbs.ui.completed_epic.list.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,7 +11,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.asadmansoor.crumbs.R
 import com.asadmansoor.crumbs.data.domain.CompletedEpic
-import com.asadmansoor.crumbs.ui.completed_epic.list.CompletedEpicItem
+import com.asadmansoor.crumbs.ui.completed_epic.list.item.CompletedEpicItem
 import com.asadmansoor.crumbs.ui.completed_epic.list.viewmodel.CompletedEpicViewModel
 import com.asadmansoor.crumbs.ui.completed_epic.list.viewmodel.CompletedEpicViewModelFactory
 import com.xwray.groupie.GroupAdapter
@@ -23,6 +21,7 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import timber.log.Timber
 
 
 class CompletedEpicFragment : Fragment(), KodeinAware, View.OnClickListener {
@@ -50,8 +49,7 @@ class CompletedEpicFragment : Fragment(), KodeinAware, View.OnClickListener {
     private fun getCompletedEpics() {
         viewModel.getEpics()
         viewModel.epics.observe(viewLifecycleOwner, Observer { epics ->
-            Log.d("myapp_completed", "$epics")
-
+            Timber.d("Loaded completed epics: $epics")
             initRecyclerView(epics.toCompletedItem())
         })
     }
@@ -73,8 +71,6 @@ class CompletedEpicFragment : Fragment(), KodeinAware, View.OnClickListener {
         }
 
         groupAdapter.setOnItemClickListener { item, view ->
-            Toast.makeText(this@CompletedEpicFragment.context, "clicked", Toast.LENGTH_SHORT).show()
-
             val key = (item as CompletedEpicItem).epicItem.epicId
             val action =
                 CompletedEpicFragmentDirections.actionCompletedEpicFragmentToCompletedEpicDetailFragment(
