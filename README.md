@@ -4,7 +4,7 @@ Crumbs is an Android application that allows you to track your goals like a kanb
 
 Crumbs is built with modern Android tech stack and MVVM architecture. It will include a CI/CD pipeline and be published on the Google Play store.
 
-<img src="./assets/promo.png" alt="promo" width="800"/>
+<img src="./contents/promo.png" alt="promo" width="800"/>
 
 </br>
 
