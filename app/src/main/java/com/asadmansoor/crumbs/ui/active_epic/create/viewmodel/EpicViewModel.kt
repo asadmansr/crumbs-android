@@ -17,14 +17,14 @@ class EpicViewModel(
 
     val nameValid = MediatorLiveData<Boolean>().apply {
         addSource(epicName) {
-            val valid = isInputValid(it)
+            val valid = isNameValid(it)
             value = valid
         }
     }
 
     val descriptionValid = MediatorLiveData<Boolean>().apply {
         addSource(epicDescription) {
-            val valid = isInputValid(it)
+            val valid = isDescriptionValid(it)
             value = valid
         }
     }
@@ -38,7 +38,11 @@ class EpicViewModel(
         }
     }
 
-    private fun isInputValid(input: String): Boolean {
-        return input.isNotEmpty()
+    private fun isNameValid(input: String): Boolean {
+        return input.isNotEmpty() && input.length <= 16
+    }
+
+    private fun isDescriptionValid(input: String): Boolean {
+        return input.isNotEmpty() && input.length <= 36
     }
 }
