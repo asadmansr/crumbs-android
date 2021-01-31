@@ -100,15 +100,19 @@ class DashboardFragment : Fragment(), KodeinAware, View.OnClickListener {
             }
             R.id.btn_filter_all -> {
                 filterEpic(-1)
+                binding.tvDashboardTitle.text = getString(R.string.filter_all)
             }
             R.id.btn_filter_not_started -> {
                 filterEpic(0)
+                binding.tvDashboardTitle.text = getString(R.string.filter_not_started)
             }
             R.id.btn_filter_paused -> {
                 filterEpic(1)
+                binding.tvDashboardTitle.text = getString(R.string.filter_paused)
             }
             R.id.btn_filter_progress -> {
                 filterEpic(2)
+                binding.tvDashboardTitle.text = getString(R.string.filter_in_progress)
             }
         }
     }

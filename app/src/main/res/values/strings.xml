@@ -33,7 +33,8 @@
     <string name="filter_in_progress">In Progress</string>
     <string name="filter_completed">Completed</string>
 
-    <string name="text_no_epic_added">No epics found … \nCreate one to get started</string>
+    <string name="text_no_epic_added">No epics found… \nCreate one to get started</string>
+    <string name="text_no_completed_epic_added">No completed epics found…</string>
     <string name="text_no_stories_added">No stories for this epic has been added</string>
     <string name="text_today">Today</string>
 

@@ -1,6 +1,7 @@
 package com.asadmansoor.crumbs.ui.active_epic.detail.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -130,6 +131,7 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
         viewModel.stories.observe(viewLifecycleOwner, Observer { stories ->
             Timber.d("Loaded stories: $stories")
             if (stories != null) {
+                Timber.d("number of stories: $numOfStories")
                 currentStories = stories
                 if (stories.isEmpty() && numOfStories != 0) {
                     viewModel.getStories(id)
@@ -137,6 +139,7 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
                     if (numOfStories == 0) {
                         numOfStories = stories.size
                     }
+                    allStoriesCompleted = true
                     for (i in stories) {
                         if (!i.completed) allStoriesCompleted = false
                     }
@@ -189,8 +192,6 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
         }
 
         groupAdapter.setOnItemClickListener { item, view ->
-            Toast.makeText(this@EpicDetailFragment.context, "clicked", Toast.LENGTH_SHORT).show()
-
             val mitem = (item as CurrentStoryItem).storyItem
             val currentStoryEntity = CurrentStoryEntity(
                 title = mitem.title,

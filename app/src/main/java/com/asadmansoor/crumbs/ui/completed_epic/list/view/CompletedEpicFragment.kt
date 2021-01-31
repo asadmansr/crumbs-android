@@ -50,6 +50,11 @@ class CompletedEpicFragment : Fragment(), KodeinAware, View.OnClickListener {
         viewModel.getEpics()
         viewModel.epics.observe(viewLifecycleOwner, Observer { epics ->
             Timber.d("Loaded completed epics: $epics")
+            if (epics.isEmpty()){
+                tv_completed_empty.visibility = View.VISIBLE
+            } else {
+                tv_completed_empty.visibility = View.GONE
+            }
             initRecyclerView(epics.toCompletedItem())
         })
     }
