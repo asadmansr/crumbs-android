@@ -16,7 +16,6 @@
     <string name="btn_create">Create</string>
     <string name="btn_delete">Delete</string>
     <string name="btn_mark_complete">Mark as complete</string>
-    <string name="btn_mark_incomplete">Mark as incomplete</string>
 
     <string name="epic_title_name">Epic Name</string>
     <string name="epic_title_description">Epic Description</string>
@@ -36,14 +35,8 @@
     <string name="text_no_epic_added">No epics found… \nCreate one to get started</string>
     <string name="text_no_completed_epic_added">No completed epics found…</string>
     <string name="text_no_stories_added">No stories for this epic has been added</string>
-    <string name="text_today">Today</string>
 
-    <string name="dialog_ok">OK</string>
-    <string name="title_detail">Detail</string>
-    <string name="title_created">Created</string>
-    <string name="title_updated">Last Updated</string>
     <string name="title_status">Status</string>
-    <string name="title_change_status">Change Status</string>
     <string name="title_created_at">Created At</string>
     <string name="title_completed_at">Completed At</string>
 
