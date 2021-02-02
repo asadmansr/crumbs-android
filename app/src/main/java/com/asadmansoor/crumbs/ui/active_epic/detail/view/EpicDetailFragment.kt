@@ -166,7 +166,7 @@ class EpicDetailFragment : Fragment(), KodeinAware, View.OnClickListener {
             title(R.string.dialog_create_story)
             message(R.string.dialog_story_descriptions)
             cornerRadius(16f)
-            input(maxLength = 32) { dialog, text ->
+            input(maxLength = 64) { dialog, text ->
                 viewModel.addStory(text.toString(), args.epicId)
                 numOfStories++
             }

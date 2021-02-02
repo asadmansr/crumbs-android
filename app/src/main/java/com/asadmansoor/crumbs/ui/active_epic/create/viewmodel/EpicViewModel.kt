@@ -8,9 +8,13 @@ import com.asadmansoor.crumbs.data.repository.current_epic.CurrentEpicRepository
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+private const val MAX_NAME_INPUT = 64
+private const val MAX_DESC_INPUT = 128
+
 class EpicViewModel(
     private val currentEpicRepository: CurrentEpicRepository
 ) : ViewModel() {
+
 
     val epicName = MutableLiveData<String>("")
     val epicDescription = MutableLiveData<String>("")
@@ -39,10 +43,10 @@ class EpicViewModel(
     }
 
     private fun isNameValid(input: String): Boolean {
-        return input.isNotEmpty() && input.length <= 16
+        return input.isNotEmpty() && input.length <= MAX_NAME_INPUT
     }
 
     private fun isDescriptionValid(input: String): Boolean {
-        return input.isNotEmpty() && input.length <= 36
+        return input.isNotEmpty() && input.length <= MAX_DESC_INPUT
     }
 }

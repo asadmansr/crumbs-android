@@ -60,6 +60,6 @@
     <string name="content_add_story">Add a story to the epic</string>
     <string name="content_complete_epic">Complete epic</string>
     <string name="content_completed_story">Indicates whether story is complete or not</string>
-    <string name="warning_epic_name">Name cannot be empty or exceed 16 characters</string>
-    <string name="warning_epic_description">Description cannot be empty or exceed 36 characters</string>
+    <string name="warning_epic_name">Name cannot be empty or exceed 64 characters</string>
+    <string name="warning_epic_description">Description cannot be empty or exceed 128 characters</string>
 </resources>
