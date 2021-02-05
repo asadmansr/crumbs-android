@@ -9,7 +9,6 @@ import com.asadmansoor.crumbs.data.db.entity.*
 
 @Database(
     entities = [
-        AnalyticsEntity::class,
         CompletedEpicEntity::class,
         CompletedStoryEntity::class,
         CurrentEpicEntity::class,
@@ -21,7 +20,6 @@ import com.asadmansoor.crumbs.data.db.entity.*
 )
 abstract class CrumbsDatabase : RoomDatabase() {
 
-    abstract fun analyticsDao(): AnalyticsDao
     abstract fun completedEpicDao(): CompletedEpicDao
     abstract fun completedStoryDao(): CompletedStoryDao
     abstract fun currentEpicDao(): CurrentEpicDao

@@ -48,7 +48,6 @@ class CrumbsApplication : Application(), KodeinAware {
         import(androidXModule(this@CrumbsApplication))
 
         bind() from singleton { CrumbsDatabase(instance()) }
-        bind() from singleton { instance<CrumbsDatabase>().analyticsDao() }
         bind() from singleton { instance<CrumbsDatabase>().completedEpicDao() }
         bind() from singleton { instance<CrumbsDatabase>().completedStoryDao() }
         bind() from singleton { instance<CrumbsDatabase>().currentEpicDao() }

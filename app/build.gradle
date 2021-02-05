@@ -88,6 +88,7 @@ dependencies {
     testImplementation Libs.Test.mockito
     testImplementation Libs.Test.core
     testImplementation Libs.Test.coreKtx
+    testImplementation Libs.Coroutines.test
 }
 
 dependencies {
@@ -97,4 +98,5 @@ dependencies {
     androidTestImplementation Libs.AndroidTest.mockito
     androidTestImplementation Libs.AndroidTest.dexMockito
     androidTestImplementation Libs.AndroidTest.room
+    androidTestImplementation Libs.Coroutines.test
 }
