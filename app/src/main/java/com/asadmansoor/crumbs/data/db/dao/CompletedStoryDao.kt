@@ -16,6 +16,6 @@ interface CompletedStoryDao {
     @Query("select * from completed_story_table where epicId = :epicId")
     fun getStoriesByEpic(epicId: String): List<CompletedStoryEntity>
 
-    @Query("DELETE from current_story_table WHERE epicId = :epicId")
+    @Query("DELETE from completed_story_table WHERE epicId = :epicId")
     fun deleteAllStoriesOfEpic(epicId: String)
 }
