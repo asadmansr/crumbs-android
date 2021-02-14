@@ -19,7 +19,7 @@ class CurrentEpicDaoTest : CrumbsDatabaseTest() {
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Test
-    fun insertEpicTest() = runBlockingTest {
+    fun insertEpic_isAdded() = runBlockingTest {
         val currentEpic = CurrentEpicEntity(
             epicId = "epic-210206140000",
             createdAt = 0L,
@@ -32,11 +32,11 @@ class CurrentEpicDaoTest : CrumbsDatabaseTest() {
 
         val currentEpicsList = currentEpicDao.getCurrentTasks()
         assertEquals(1, currentEpicsList.size)
-        assertEquals(currentEpic, currentEpicsList[0])
+        assertEquals(currentEpic, currentEpicsList.first())
     }
 
     @Test
-    fun getEpicByIdTest() = runBlockingTest {
+    fun getEpicById_isRetrievedCorrectly() = runBlockingTest {
         val epicId = "epic-210206150000"
         val currentEpic = CurrentEpicEntity(
             epicId = epicId,
@@ -53,7 +53,7 @@ class CurrentEpicDaoTest : CrumbsDatabaseTest() {
     }
 
     @Test
-    fun getEpicByNameAndDescriptionTest() = runBlockingTest {
+    fun getEpicByNameAndDescription_isRetrievedCorrectly() = runBlockingTest {
         val epicId = "epic-210206160000"
         val currentEpic = CurrentEpicEntity(
             epicId = epicId,
@@ -71,7 +71,7 @@ class CurrentEpicDaoTest : CrumbsDatabaseTest() {
     }
 
     @Test
-    fun deleteEpicTest() = runBlockingTest {
+    fun deleteEpic_isDeleted() = runBlockingTest {
         val epicId = "epic-210206141000"
         val currentEpic = CurrentEpicEntity(
             epicId = epicId,
@@ -82,10 +82,9 @@ class CurrentEpicDaoTest : CrumbsDatabaseTest() {
             status = 0
         )
         currentEpicDao.insert(currentEpic)
-        var currentEpicsList = currentEpicDao.getCurrentTasks()
 
+        var currentEpicsList = currentEpicDao.getCurrentTasks()
         assertEquals(1, currentEpicsList.size)
-        assertEquals(currentEpic, currentEpicsList[0])
 
         currentEpicDao.deleteEpic(epicId)
         currentEpicsList = currentEpicDao.getCurrentTasks()
@@ -93,7 +92,7 @@ class CurrentEpicDaoTest : CrumbsDatabaseTest() {
     }
 
     @Test
-    fun updateEpicTest() = runBlockingTest {
+    fun updateEpicByStatus_isUpdated() = runBlockingTest {
         val epicId = "epic-210206142000"
         val currentEpic = CurrentEpicEntity(
             epicId = epicId,
@@ -108,19 +107,19 @@ class CurrentEpicDaoTest : CrumbsDatabaseTest() {
 
         var currentEpicsList = currentEpicDao.getCurrentTasks()
         assertEquals(1, currentEpicsList.size)
-        assertEquals(1, currentEpicsList[0].status)
+        assertEquals(1, currentEpicsList.first().status)
 
         currentEpicDao.updateStatus(epicId, 2)
         currentEpicsList = currentEpicDao.getCurrentTasks()
-        assertEquals(2, currentEpicsList[0].status)
+        assertEquals(2, currentEpicsList.first().status)
 
         currentEpicDao.updateStatus(epicId, 3)
         currentEpicsList = currentEpicDao.getCurrentTasks()
-        assertEquals(3, currentEpicsList[0].status)
+        assertEquals(3, currentEpicsList.first().status)
     }
 
     @Test
-    fun updateEpicFilterTest() = runBlockingTest {
+    fun getEpicsByStatus_isFilteredCorrectly() = runBlockingTest {
         val epicIdNotStarted = "epic-210206143000"
         val epicIdInProgress = "epic-210206144000"
         val epicIdPaused = "epic-210206145000"
@@ -140,7 +139,7 @@ class CurrentEpicDaoTest : CrumbsDatabaseTest() {
             lastUpdated = 0L,
             title = "This is my first epic",
             description = "This is my description for my epic.",
-            status = 0
+            status = 2
         )
 
         val pausedEpic = CurrentEpicEntity(
@@ -149,15 +148,12 @@ class CurrentEpicDaoTest : CrumbsDatabaseTest() {
             lastUpdated = 0L,
             title = "This is my first epic",
             description = "This is my description for my epic.",
-            status = 0
+            status = 1
         )
 
         currentEpicDao.insert(notStartedEpic)
         currentEpicDao.insert(inProgressEpic)
         currentEpicDao.insert(pausedEpic)
-
-        currentEpicDao.updateStatus(epicIdPaused, 1)
-        currentEpicDao.updateStatus(epicIdInProgress, 2)
 
         val allEpics = currentEpicDao.getCurrentTasks()
         val notStartedEpics = currentEpicDao.getCurrentEpicsByFilter(0)

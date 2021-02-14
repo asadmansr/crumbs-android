@@ -19,65 +19,65 @@ class CompletedStoryDaoTest : CrumbsDatabaseTest() {
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Test
-    fun insertStoryTest() = runBlockingTest {
+    fun addMultipleStoriesToCompletedEpic_isAdded() = runBlockingTest {
         val epicId = "epic-210204160000"
 
-        val primaryEntity = CompletedStoryEntity(
+        val firstStory = CompletedStoryEntity(
             storyId = "stor-210206150000",
             epicId = epicId,
             createdAt = 0L,
             lastUpdated = 0L,
             completedAt = 0L,
-            title = "Title for my second story",
+            title = "Title for my first story",
             completed = false
         )
 
-        val secondaryEntity = CompletedStoryEntity(
+        val secondStory = CompletedStoryEntity(
             storyId = "stor-210206140000",
             epicId = epicId,
             completedAt = 0L,
             createdAt = 0L,
             lastUpdated = 0L,
-            title = "This is for another epic",
+            title = "Title for second story",
             completed = false
         )
 
-        completedStoryDao.insertStory(primaryEntity)
-        completedStoryDao.insertStory(secondaryEntity)
+        completedStoryDao.insertStory(firstStory)
+        completedStoryDao.insertStory(secondStory)
 
         val stories = completedStoryDao.getStoriesByEpic(epicId)
 
         Assert.assertEquals(2, stories.size)
-        Assert.assertEquals(primaryEntity, stories[0])
-        Assert.assertEquals(secondaryEntity, stories[1])
+        Assert.assertEquals(firstStory, stories[0])
+        Assert.assertEquals(secondStory, stories[1])
     }
 
     @Test
-    fun deleteAllStoriesTest() = runBlockingTest {
+    fun deleteAllStoriesInACompletedEpic_isDeleted() = runBlockingTest {
         val epicId = "epic-210204160000"
 
-        val primaryEntity = CompletedStoryEntity(
+        val firstStory = CompletedStoryEntity(
             storyId = "stor-210206150000",
             epicId = epicId,
             createdAt = 0L,
             lastUpdated = 0L,
             completedAt = 0L,
-            title = "Title for my second story",
+            title = "Title for my first story",
             completed = false
         )
 
-        val secondaryEntity = CompletedStoryEntity(
+        val secondStory = CompletedStoryEntity(
             storyId = "stor-210206140000",
             epicId = epicId,
             completedAt = 0L,
             createdAt = 0L,
             lastUpdated = 0L,
-            title = "This is for another epic",
+            title = "Title for second story",
             completed = false
         )
 
-        completedStoryDao.insertStory(primaryEntity)
-        completedStoryDao.insertStory(secondaryEntity)
+        completedStoryDao.insertStory(firstStory)
+        completedStoryDao.insertStory(secondStory)
 
         var stories = completedStoryDao.getStoriesByEpic(epicId)
         Assert.assertEquals(2, stories.size)

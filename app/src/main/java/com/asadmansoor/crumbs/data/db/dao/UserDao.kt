@@ -13,6 +13,6 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(userEntity: UserEntity)
 
-    @Query("select * from user_table where id = $SINGLE_USER_ID")
+    @Query("SELECT * FROM user_table WHERE id = $SINGLE_USER_ID")
     suspend fun loadUser(): UserEntity
 }

@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.asadmansoor.crumbs.data.db.entity.CompletedStoryEntity
-import com.asadmansoor.crumbs.data.db.entity.CurrentStoryEntity
 
 @Dao
 interface CompletedStoryDao {
@@ -13,9 +12,9 @@ interface CompletedStoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertStory(completedStory: CompletedStoryEntity)
 
-    @Query("select * from completed_story_table where epicId = :epicId")
+    @Query("SELECT * FROM completed_story_table WHERE epicId = :epicId")
     fun getStoriesByEpic(epicId: String): List<CompletedStoryEntity>
 
-    @Query("DELETE from completed_story_table WHERE epicId = :epicId")
+    @Query("DELETE FROM completed_story_table WHERE epicId = :epicId")
     fun deleteAllStoriesOfEpic(epicId: String)
 }

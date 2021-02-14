@@ -11,10 +11,10 @@ interface CompletedEpicDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(currentEpic: CompletedEpicEntity)
 
-    @Query("select * from completed_epic_table")
+    @Query("SELECT * FROM completed_epic_table")
     fun getCompletedEpic(): List<CompletedEpicEntity>
 
-    @Query("select * from completed_epic_table where epicId = :id")
+    @Query("SELECT * FROM completed_epic_table WHERE epicId = :id")
     fun getEpicById(id: String): CompletedEpicEntity
 
     @Query("DELETE FROM completed_epic_table WHERE epicId = :id")

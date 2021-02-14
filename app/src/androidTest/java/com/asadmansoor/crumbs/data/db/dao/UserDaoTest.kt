@@ -20,7 +20,7 @@ open class UserDaoTest : CrumbsDatabaseTest() {
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Test
-    fun insertNewUserTest() = runBlockingTest {
+    fun newUserAdded_isSaved() = runBlockingTest {
         val user = UserEntity(
             uid = "u0",
             name = "Test user",
@@ -34,7 +34,7 @@ open class UserDaoTest : CrumbsDatabaseTest() {
     }
 
     @Test
-    fun updateUserTest() = runBlockingTest {
+    fun userCompletedTutorial_isUpdated() = runBlockingTest {
         val user = UserEntity(
             uid = "u100",
             name = "New user",

@@ -19,8 +19,8 @@ class CompletedEpicDaoTest : CrumbsDatabaseTest() {
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Test
-    fun insertEpicTest() = runBlockingTest {
-        val currentEpic = CompletedEpicEntity(
+    fun addCompletedEpic_isAdded() = runBlockingTest {
+        val completedEpic = CompletedEpicEntity(
             epicId = "epic-210206140000",
             createdAt = 0L,
             lastUpdated = 0L,
@@ -29,17 +29,17 @@ class CompletedEpicDaoTest : CrumbsDatabaseTest() {
             description = "This is my description for my epic.",
             status = 3
         )
-        completedEpicDao.insert(currentEpic)
+        completedEpicDao.insert(completedEpic)
 
         val currentEpicsList = completedEpicDao.getCompletedEpic()
         Assert.assertEquals(1, currentEpicsList.size)
-        Assert.assertEquals(currentEpic, currentEpicsList[0])
+        Assert.assertEquals(completedEpic, currentEpicsList.first())
     }
 
     @Test
-    fun getEpicByIdTest() = runBlockingTest {
+    fun getCompletedEpicById_isRetrievedCorrectly() = runBlockingTest {
         val epicId = "epic-210206150000"
-        val currentEpic = CompletedEpicEntity(
+        val completedEpic = CompletedEpicEntity(
             epicId = epicId,
             createdAt = 0L,
             lastUpdated = 0L,
@@ -48,17 +48,16 @@ class CompletedEpicDaoTest : CrumbsDatabaseTest() {
             description = "This is my description for my epic.",
             status = 3
         )
-        completedEpicDao.insert(currentEpic)
+        completedEpicDao.insert(completedEpic)
 
         val epic = completedEpicDao.getEpicById(epicId)
-        Assert.assertEquals(currentEpic, epic)
+        Assert.assertEquals(completedEpic, epic)
     }
 
-
     @Test
-    fun deleteEpicTest() = runBlockingTest {
+    fun deleteCompletedEpic_isDeleted() = runBlockingTest {
         val epicId = "epic-210206150000"
-        val currentEpic = CompletedEpicEntity(
+        val completedEpic = CompletedEpicEntity(
             epicId = epicId,
             createdAt = 0L,
             lastUpdated = 0L,
@@ -67,11 +66,11 @@ class CompletedEpicDaoTest : CrumbsDatabaseTest() {
             description = "This is my description for my epic.",
             status = 3
         )
-        completedEpicDao.insert(currentEpic)
+        completedEpicDao.insert(completedEpic)
 
         var currentEpicsList = completedEpicDao.getCompletedEpic()
         Assert.assertEquals(1, currentEpicsList.size)
-        Assert.assertEquals(currentEpic, currentEpicsList[0])
+        Assert.assertEquals(completedEpic, currentEpicsList.first())
 
         completedEpicDao.deleteCompletedEpic(epicId)
         currentEpicsList = completedEpicDao.getCompletedEpic()

@@ -12,16 +12,16 @@ interface CurrentEpicDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(currentEpic: CurrentEpicEntity)
 
-    @Query("select * from current_epic_table")
+    @Query("SELECT * FROM current_epic_table")
     fun getCurrentTasks(): List<CurrentEpicEntity>
 
-    @Query("select * from current_epic_table where status = :status")
+    @Query("SELECT * FROM current_epic_table WHERE status = :status")
     fun getCurrentEpicsByFilter(status: Int): List<CurrentEpicEntity>
 
-    @Query("select * from current_epic_table where epicId = :id")
+    @Query("SELECT * FROM current_epic_table WHERE epicId = :id")
     fun getEpicById(id: String): CurrentEpicEntity
 
-    @Query("select * from current_epic_table where title = :name AND description = :description")
+    @Query("SELECT * FROM current_epic_table WHERE title = :name AND description = :description")
     fun getEpicByNameDescription(name: String, description: String): CurrentEpicEntity
 
     @Query("DELETE FROM current_epic_table WHERE epicId = :id")
