@@ -1,0 +1,23 @@
+name: pipeline
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Compile and build Android project
+        run: chmod +x ./gradlew && ./gradlew compileDebugSources assembleDebug
+
+  lint:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Perform Android lint on project
+        run: chmod +x ./gradlew && ./gradlew lintDebug
