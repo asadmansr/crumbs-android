@@ -1,6 +1,6 @@
 package com.asadmansoor.crumbs.ui.active_epic.detail.viewmodel
 
-import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.asadmansoor.crumbs.data.db.entity.CurrentStoryEntity
 import com.asadmansoor.crumbs.data.domain.CurrentEpic
@@ -15,8 +15,8 @@ class EpicDetailViewModel(
     private val storiesRepository: StoriesRepository
 ) : ViewModel() {
 
-    val epic = MediatorLiveData<CurrentEpic>()
-    val stories = MediatorLiveData<List<Story>>()
+    val epic = MutableLiveData<CurrentEpic>()
+    val stories = MutableLiveData<List<Story>>()
 
     fun getEpic(id: String) {
         GlobalScope.launch {

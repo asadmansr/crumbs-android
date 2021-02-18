@@ -1,6 +1,6 @@
 package com.asadmansoor.crumbs.ui.tutorial.viewmodel
 
-import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.asadmansoor.crumbs.data.db.entity.UserEntity
 import com.asadmansoor.crumbs.data.repository.user.UserRepository
@@ -11,7 +11,7 @@ class RoadmapTutorialViewModel(
     private val userRepository: UserRepository
 ) : ViewModel() {
 
-    val user = MediatorLiveData<UserEntity>().apply {
+    val user = MutableLiveData<UserEntity>().apply {
         GlobalScope.launch {
             postValue(userRepository.loadUser())
         }

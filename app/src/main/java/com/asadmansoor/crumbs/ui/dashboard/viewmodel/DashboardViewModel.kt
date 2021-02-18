@@ -1,6 +1,6 @@
 package com.asadmansoor.crumbs.ui.dashboard.viewmodel
 
-import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.asadmansoor.crumbs.data.domain.CurrentEpic
 import com.asadmansoor.crumbs.data.repository.current_epic.CurrentEpicRepository
@@ -11,7 +11,7 @@ class DashboardViewModel(
     private val currentEpicRepository: CurrentEpicRepository
 ) : ViewModel() {
 
-    val epics = MediatorLiveData<List<CurrentEpic>>()
+    val epics = MutableLiveData<List<CurrentEpic>>()
 
     fun getEpics() {
         GlobalScope.launch {

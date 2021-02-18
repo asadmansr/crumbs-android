@@ -1,9 +1,11 @@
 package com.asadmansoor.crumbs
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.asadmansoor.crumbs.data.core.GenerateTimeParameter
+import com.asadmansoor.crumbs.data.core.InputTransformer
 import com.asadmansoor.crumbs.data.db.CrumbsDatabase
 import com.asadmansoor.crumbs.data.db.entity.UserEntity
 import com.asadmansoor.crumbs.data.repository.current_epic.CurrentEpicRepository
@@ -14,11 +16,11 @@ import com.asadmansoor.crumbs.data.source.current_epic.LocalCurrentEpicDataSourc
 import com.asadmansoor.crumbs.data.source.current_epic.LocalCurrentEpicDataSourceImpl
 import com.asadmansoor.crumbs.data.source.user.LocalUserDataSource
 import com.asadmansoor.crumbs.data.source.user.LocalUserDataSourceImpl
-import com.asadmansoor.crumbs.ui.dashboard.viewmodel.DashboardViewModelFactory
 import com.asadmansoor.crumbs.ui.active_epic.create.viewmodel.EpicViewModelFactory
+import com.asadmansoor.crumbs.ui.dashboard.viewmodel.DashboardViewModelFactory
 import com.asadmansoor.crumbs.ui.splash.viewmodel.SplashViewModel
 import com.asadmansoor.crumbs.ui.splash.viewmodel.SplashViewModelFactory
-import com.asadmansoor.crumbs.ui.tutorial.viewmodel.TertiaryTutorialViewModelFactory
+import com.asadmansoor.crumbs.ui.tutorial.viewmodel.RoadmapTutorialViewModel
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -36,13 +38,13 @@ import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
 @RunWith(AndroidJUnit4::class)
-class SplashViewModelTest: KodeinAware {
+class SplashViewModelTest : KodeinAware {
 
     @Mock
     private lateinit var viewModel: SplashViewModel
 
     @Mock
-    private lateinit var userData: MediatorLiveData<UserEntity>
+    private lateinit var userData: MutableLiveData<UserEntity>
 
     @Mock
     private lateinit var observer: Observer<UserEntity>
@@ -54,8 +56,23 @@ class SplashViewModelTest: KodeinAware {
         bind() from singleton { CrumbsDatabase(instance()) }
         bind() from singleton { instance<CrumbsDatabase>().userDao() }
         bind() from singleton { instance<CrumbsDatabase>().currentEpicDao() }
-        bind<LocalCurrentEpicDataSource>() with singleton { LocalCurrentEpicDataSourceImpl(instance()) }
-        bind<LocalUserDataSource>() with singleton { LocalUserDataSourceImpl(instance()) }
+
+        bind() from singleton { GenerateTimeParameter() }
+        bind() from singleton { InputTransformer() }
+
+        bind<LocalCurrentEpicDataSource>() with singleton {
+            LocalCurrentEpicDataSourceImpl(
+                instance(),
+                instance(),
+                instance()
+            )
+        }
+        bind<LocalUserDataSource>() with singleton {
+            LocalUserDataSourceImpl(
+                instance(),
+                instance()
+            )
+        }
         bind<UserRepository>() with singleton {
             UserRepositoryImpl(
                 instance()
@@ -67,12 +84,13 @@ class SplashViewModelTest: KodeinAware {
             )
         }
         bind() from provider {
-            TertiaryTutorialViewModelFactory(
+            RoadmapTutorialViewModel(
                 instance()
             )
         }
         bind<CurrentEpicRepository>() with singleton {
             CurrentEpicRepositoryImpl(
+                instance(),
                 instance()
             )
         }
@@ -99,7 +117,12 @@ class SplashViewModelTest: KodeinAware {
 
     @Test
     fun updateUserTutorialTest() {
-        val user = UserEntity(doneTutorial = false)
+        val user = UserEntity(
+            uid = "t",
+            name = "t",
+            accountCreated = 0L,
+            tutorialCompleted = true
+        )
         Assert.assertNotNull(viewModel.user)
         viewModel.user.observeForever(observer)
         verify(observer).onChanged(user)

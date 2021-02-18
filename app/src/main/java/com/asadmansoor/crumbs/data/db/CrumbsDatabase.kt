@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.asadmansoor.crumbs.data.db.dao.*
 import com.asadmansoor.crumbs.data.db.entity.*
 
@@ -15,7 +17,7 @@ import com.asadmansoor.crumbs.data.db.entity.*
         CurrentStoryEntity::class,
         UserEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class CrumbsDatabase : RoomDatabase() {
@@ -27,12 +29,19 @@ abstract class CrumbsDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 
     companion object {
+
         @Volatile
         private var instance: CrumbsDatabase? = null
         private val LOCK = Any()
 
         operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
             instance ?: buildDatabase(context).also { instance = it }
+        }
+
+        private val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("DROP TABLE analytics_table")
+            }
         }
 
         private fun buildDatabase(context: Context): CrumbsDatabase {
@@ -42,7 +51,9 @@ abstract class CrumbsDatabase : RoomDatabase() {
                 context.applicationContext,
                 CrumbsDatabase::class.java,
                 databaseName
-            ).build()
+            )
+                .addMigrations(MIGRATION_1_2)
+                .build()
         }
     }
 }
