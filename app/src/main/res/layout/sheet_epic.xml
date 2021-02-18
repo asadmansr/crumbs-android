@@ -4,59 +4,111 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btn_sheet_paused"
-        android:text="@string/filter_paused"
-        android:textAlignment="textStart"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp"
-        android:textAllCaps="false"
-        android:background="@android:color/transparent"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="start|center_vertical" />
+        android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/btn_sheet_progress"
-        android:text="@string/filter_in_progress"
-        android:textAlignment="textStart"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp"
-        android:textAllCaps="false"
-        android:background="@android:color/transparent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="start|center_vertical" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/baseline_block_black_24"
+            android:contentDescription="@string/content_pause_icon" />
 
-    <Button
-        android:id="@+id/btn_sheet_complete"
-        android:text="@string/filter_completed"
-        android:textAlignment="textStart"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp"
-        android:textAllCaps="false"
-        android:background="@android:color/transparent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="start|center_vertical" />
+        <Button
+            android:id="@+id/btn_sheet_paused"
+            android:text="@string/filter_paused"
+            android:textAlignment="textStart"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            android:textAllCaps="false"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start|center_vertical" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_sheet_cancel"
-        android:text="@string/btn_cancel"
-        android:textAlignment="textStart"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp"
-        android:textAllCaps="false"
-        android:background="@android:color/transparent"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="start|center_vertical" />
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/baseline_autorenew_black_24"
+            android:contentDescription="@string/content_in_progress_icon" />
+
+        <Button
+            android:id="@+id/btn_sheet_progress"
+            android:text="@string/filter_in_progress"
+            android:textAlignment="textStart"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            android:textAllCaps="false"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start|center_vertical" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/baseline_done_black_24"
+            android:contentDescription="@string/content_completed_icon" />
+
+        <Button
+            android:id="@+id/btn_sheet_complete"
+            android:text="@string/filter_completed"
+            android:textAlignment="textStart"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            android:textAllCaps="false"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start|center_vertical" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/baseline_close_black_24"
+            android:contentDescription="@string/content_cancel_icon" />
+
+        <Button
+            android:id="@+id/btn_sheet_cancel"
+            android:text="@string/btn_cancel"
+            android:textAlignment="textStart"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            android:textAllCaps="false"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start|center_vertical" />
+    </LinearLayout>
 </LinearLayout>

@@ -62,4 +62,9 @@
     <string name="content_completed_story">Indicates whether story is complete or not</string>
     <string name="warning_epic_name">Name cannot be empty or exceed 64 characters</string>
     <string name="warning_epic_description">Description cannot be empty or exceed 128 characters</string>
+    <string name="content_pause_icon">Pause Icon</string>
+    <string name="content_cancel_icon">Cancel Icon</string>
+    <string name="content_completed_icon">Completed Icon</string>
+    <string name="content_in_progress_icon">In Progress Icon</string>
+    <string name="content_delete_icon">Delete Icon</string>
 </resources>
